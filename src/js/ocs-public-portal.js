@@ -1,5 +1,31 @@
 var Ocs = { };//Setting namespace
-Ocs.Map = Backbone.Model.extend({
+Ocs.View = { };
+Ocs.View.Map = Backbone.View.extend({
+    options: {
+        initial_zoom: 14,
+        initial_position: new OpenLayers.LonLat(-74.075833,4.598056)  //Currently Bogota
+    },
+    initialize: function() {
+        this.controls = [
+            new OpenLayers.Control.Navigation(),
+            new OpenLayers.Control.PanZoomBar(),
+            new OpenLayers.Control.ScaleLine(),
+            new OpenLayers.Control.LayerSwitcher(),
+            new Ocs.OpenLayers.Control.SinglePointEditingToolbar(this.model.get('markers'))
+        ];
+        this.map = this.model.map;
+    },
+    render: function() {
+        var initial_position = this.options.initial_position;
+        var initial_zoom = this.options.initial_zoom;
+        this.map.setCenter(initial_position.transform( this.model.get('from_projection'), this.model.get('to_projection')), initial_zoom);
+        this.map.addControls(this.controls);
+        this.map.render(this.el);
+    }
+});
+
+Ocs.Model = {};
+Ocs.Model.Map = Backbone.Model.extend({
     urlRoot: '',
     map: new OpenLayers.Map('map_element', { controls:[] }),
     defaults: function() {
@@ -7,30 +33,17 @@ Ocs.Map = Backbone.Model.extend({
             id:  '',
             from_projection: new OpenLayers.Projection("EPSG:4326"),   // Transform from WGS 1984
             to_projection: new OpenLayers.Projection("EPSG:900913"), // to Spherical Mercator Projection
-            initial_position: new OpenLayers.LonLat(-74.075833,4.598056), //Currently Bogota
-            initial_zoom: 14,
-            controls: [
-                new OpenLayers.Control.Navigation(),
-                new OpenLayers.Control.PanZoomBar(),
-                new OpenLayers.Control.ScaleLine(),
-                new OpenLayers.Control.LayerSwitcher(),
-            ],
             layers: [
                 new OpenLayers.Layer.OSM(),
             ],
-            //markers: new OpenLayers.Layer.Markers( "Markers" ),
-            markers: new OpenLayers.Layer.Vector("Pins"),
+            markers: new OpenLayers.Layer.Vector("Markers"),
         };
     },
     initialize: function() {
         var attr = this.attributes;
         this.map.addLayers(attr.layers);
-        this.map.setCenter(attr.initial_position.transform( attr.from_projection, attr.to_projection), attr.initial_zoom );
-        this.map.addControls(attr.controls);
-    },
-    render: function(element) {
-        this.map.render(element);
-    },
+        this.map.addLayer(attr.markers);
+    }
 });
 
 Ocs.OpenLayers = {};
@@ -67,12 +80,12 @@ Ocs.OpenLayers.Control.SinglePointEditingToolbar = OpenLayers.Class( OpenLayers.
     },
 
     /**
-        * Method: draw
-        * calls the default draw, and then activates mouse defaults.
-        *
-        * Returns:
-        * {DOMElement}
-        */
+     * Method: draw
+     * calls the default draw, and then activates mouse defaults.
+     *
+     * Returns:
+     * {DOMElement}
+     */
     draw: function() {
         var div = OpenLayers.Control.Panel.prototype.draw.apply(this, arguments);
         if (this.defaultControl === null) {
@@ -80,7 +93,7 @@ Ocs.OpenLayers.Control.SinglePointEditingToolbar = OpenLayers.Class( OpenLayers.
         }
         return div;
     },
-
+    
     CLASS_NAME: "OpenLayers.Control.EditingToolbar"
 });
 
@@ -95,6 +108,8 @@ Ocs.OpenLayers.Control.DrawOnePointOnly = OpenLayers.Class( OpenLayers.Control.D
     drawFeature: function(geometry) {
         this.layer.removeAllFeatures();
         OpenLayers.Control.DrawFeature.prototype.drawFeature.apply(this, [geometry]);
+        alert(geometry.x);
+        //{"type": "Point", "coordinates": [745960.395951149, 5867509.0212169]}
     },
 
     CLASS_NAME: "OpenLayers.Control.DrawFeature"
