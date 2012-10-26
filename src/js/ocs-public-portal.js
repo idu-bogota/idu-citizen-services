@@ -3,9 +3,14 @@ Ocs.View = { };
 Ocs.View.Map = Backbone.View.extend({
     options: {
         initial_zoom: 14,
-        initial_position: new OpenLayers.LonLat(-74.075833,4.598056)  //Currently Bogota
+        initial_position: new OpenLayers.LonLat(-74.075833,4.598056),  //Currently Bogota
+        controls: []
     },
     initialize: function() {
+        this.map = this.model.map;
+        this.model.on('change:geometry', this.set_geometry, this);
+    },
+    render: function() {
         this.controls = [
             new OpenLayers.Control.Navigation(),
             new OpenLayers.Control.PanZoomBar(),
@@ -13,14 +18,15 @@ Ocs.View.Map = Backbone.View.extend({
             new OpenLayers.Control.LayerSwitcher(),
             new Ocs.OpenLayers.Control.SinglePointEditingToolbar(this.model.get('markers'))
         ];
-        this.map = this.model.map;
-    },
-    render: function() {
         var initial_position = this.options.initial_position;
         var initial_zoom = this.options.initial_zoom;
         this.map.setCenter(initial_position.transform( this.model.get('from_projection'), this.model.get('to_projection')), initial_zoom);
         this.map.addControls(this.controls);
         this.map.render(this.el);
+    },
+    set_geometry: function(model){
+        $('input.geometry.x').attr('value',model.get('geometry').x);
+        $('input.geometry.y').attr('value',model.get('geometry').y);
     }
 });
 
@@ -37,6 +43,7 @@ Ocs.Model.Map = Backbone.Model.extend({
                 new OpenLayers.Layer.OSM(),
             ],
             markers: new OpenLayers.Layer.Vector("Markers"),
+            geometry: new OpenLayers.Geometry()
         };
     },
     initialize: function() {
@@ -108,8 +115,7 @@ Ocs.OpenLayers.Control.DrawOnePointOnly = OpenLayers.Class( OpenLayers.Control.D
     drawFeature: function(geometry) {
         this.layer.removeAllFeatures();
         OpenLayers.Control.DrawFeature.prototype.drawFeature.apply(this, [geometry]);
-        alert(geometry.x);
-        //{"type": "Point", "coordinates": [745960.395951149, 5867509.0212169]}
+        window.main.model.set('geometry',geometry);
     },
 
     CLASS_NAME: "OpenLayers.Control.DrawFeature"

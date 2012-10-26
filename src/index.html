@@ -12,7 +12,7 @@
     <script type='text/javascript'>
         var map;
         function init() {
-            var main = new Ocs.View.Map({
+            window.main = new Ocs.View.Map({
                 model: new Ocs.Model.Map(),
                 initial_zoom: 15,
                 el: $('#map_element')
@@ -29,6 +29,7 @@
 
 <body onload='init();'>
   <div id='map_element' style='width: 500px; height: 500px;'></div>
-  <input id="output" type="text" />
+  <input class="geometry x" type="text" />
+  <input class="geometry y" type="text" />
 </body>
 </html>
