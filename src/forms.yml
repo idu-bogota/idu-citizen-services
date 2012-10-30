@@ -1,0 +1,58 @@
+pqr:
+    action: submit
+    method: post
+    elements:
+        geo_point:
+            type: hidden
+        name:
+            type: text
+            options:
+                label: Nombres
+        lastname:
+            type: text
+            options:
+                label: Apellidos
+        document_type:
+            type: text
+            options:
+                label: Tipo de documento
+        document_number:
+            type: text
+            options:
+                label: Número de documento
+        email:
+            type: text
+            options:
+                label: Correo electrónico
+        phone:
+            type: text
+            options:
+                label: Teléfono
+        twitter:
+            type: text
+            options:
+                label: Twitter
+        facebook:
+            type: text
+            options:
+                label: Facebook
+        address:
+            type: text
+            options:
+                label: Dirección
+        category:
+            type: text
+            options:
+                label: Categoria
+        classification:
+            type: text
+            options:
+                label: Clasificación
+        description:
+            type: textarea
+            options:
+                label: Descripción
+        submit:
+            type: submit
+            options:
+                label: Enviar

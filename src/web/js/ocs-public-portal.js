@@ -25,8 +25,8 @@ Ocs.View.Map = Backbone.View.extend({
         this.map.render(this.el);
     },
     set_geometry: function(model){
-        $('input.geometry.x').attr('value',model.get('geometry').x);
-        $('input.geometry.y').attr('value',model.get('geometry').y);
+        var geoJSON = new OpenLayers.Format.GeoJSON();
+        $('#geo_point').attr('value',geoJSON.write(model.get('geometry')));
     }
 });
 
