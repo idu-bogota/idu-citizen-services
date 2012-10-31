@@ -4,55 +4,219 @@ pqr:
     elements:
         geo_point:
             type: hidden
+            options:
+                filters:
+                    trim:
+                        filter: StringTrim
+                validators:
+                    length:
+                        validator: StringLength
+                        options:
+                            max: 500
         name:
             type: text
             options:
                 label: Nombres
+                class: input-block-level
+                required: false
+                filters:
+                    trim:
+                        filter: StringTrim
+                validators:
+                    length:
+                        validator: StringLength
+                        options:
+                            max: 100
+                    alpha:
+                        validator: Alpha
+                        options: { allowwhitespace: true }
         lastname:
             type: text
             options:
                 label: Apellidos
+                class: input-block-level
+                filters:
+                    trim:
+                        filter: StringTrim
+                validators:
+                    length:
+                        validator: StringLength
+                        options:
+                            max: 100
+                    alpha:
+                        validator: Alpha
+                        options: { allowwhitespace: true }
         document_type:
             type: text
             options:
                 label: Tipo de documento
+                class: input-block-level
         document_number:
             type: text
             options:
                 label: Número de documento
+                class: input-block-level
+                filters:
+                    digits:
+                        filter: Alnum
+                    trim:
+                        filter: StringTrim
+                validators:
+                    length:
+                        validator: StringLength
+                        options:
+                            max: 100
+                    Alnum:
+                        validator: Alnum
         email:
             type: text
             options:
                 label: Correo electrónico
+                class: input-block-level
+                filters:
+                    trim:
+                        filter: StringTrim
+                validators:
+                    length:
+                        validator: StringLength
+                        options:
+                            max: 100
+                    email:
+                        validator: EmailAddress
         phone:
             type: text
             options:
                 label: Teléfono
+                class: input-block-level
+                filters:
+                    trim:
+                        filter: StringTrim
+                validators:
+                    length:
+                        validator: StringLength
+                        options:
+                            max: 100
+                    alnum:
+                        validator: Alnum
+                        options:
+                            allowWhiteSpace: true
         twitter:
             type: text
             options:
                 label: Twitter
+                class: input-block-level
+                filters:
+                    trim:
+                        filter: StringTrim
+                validators:
+                    length:
+                        validator: StringLength
+                        options:
+                            max: 15
+                    regex:
+                        validator: Regex
+                        options:
+                            pattern: '/[a-zA-Z0-9_]{1,15}/'
         facebook:
             type: text
             options:
                 label: Facebook
+                class: input-block-level
+                filters:
+                    trim:
+                        filter: StringTrim
+                validators:
+                    length:
+                        validator: StringLength
+                        options:
+                            max: 20
+                    regex:
+                        validator: Regex
+                        options:
+                            pattern: '/[a-zA-Z0-9_]{1,20}/'
         address:
             type: text
             options:
                 label: Dirección
+                class: input-block-level
+                filters:
+                    trim:
+                        filter: StringTrim
+                validators:
+                    length:
+                        validator: StringLength
+                        options:
+                            max: 100
         category:
-            type: text
+            type: select
             options:
                 label: Categoria
+                class: input-block-level
         classification:
-            type: text
+            type: select
             options:
                 label: Clasificación
+                class: input-block-level
         description:
             type: textarea
             options:
                 label: Descripción
-        submit:
-            type: submit
+                class: input-block-level
+                rows: 5
+                filters:
+                    trim:
+                        filter: StringTrim
+                validators:
+                    length:
+                        validator: StringLength
+                        options:
+                            max: 1000
+        disclaimer:
+            type: textarea
             options:
-                label: Enviar
+                value: Al enviar los datos usted acepta los términos y condiciones del sitio
+                disabled: disabled
+                class: input-block-level
+                rows: 2
+                
+        submit:
+            type: button
+            options:
+                label:
+                type: submit
+                content: 'Enviar'
+                class: btn btn-primary
+    displayGroups:
+        claim:
+            name: claim_details
+            options:
+                legend: Detalles de su reporte de daño
+            elements:
+                - category
+                - classification
+                - description
+                - geo_point
+        contact_data:
+            name: datos_contacto
+            options:
+                legend: Datos de contacto
+            elements:
+                - email
+                - twitter
+                - facebook
+                - phone
+                - address
+        citizen_data:
+            name: datos_personales
+            options:
+                legend: Datos personales
+            elements:
+                - name
+                - lastname
+                - document_type
+                - document_number
+        send:
+            name: send
+            elements:
+                - disclaimer
+                - submit
