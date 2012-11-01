@@ -1,7 +1,7 @@
 <?php
 define ('EXTERNALS_DIR',__DIR__.'/../externals');
 require_once(EXTERNALS_DIR.'/Glue/vendor/glue/glue.php');
-require_once(EXTERNALS_DIR.'/openerp-php-webservice-client/OpenErpOcs.php');
+require_once(EXTERNALS_DIR.'/openerp-php-webservice-client/src/OpenErpOcs.php');
 ini_set('include_path', get_include_path().PATH_SEPARATOR.EXTERNALS_DIR.'/zend/library');
 ini_set('include_path', get_include_path().PATH_SEPARATOR.EXTERNALS_DIR.'/zend-form-decorators-bootstrap');
 require_once 'Zend/Loader/Autoloader.php';

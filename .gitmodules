@@ -4,3 +4,6 @@
 [submodule "externals/Glue"]
 	path = externals/Glue
 	url = https://github.com/aheinze/Glue.git
+[submodule "externals/openerp-php-webservice-client"]
+	path = externals/openerp-php-webservice-client
+	url = https://github.com/idu-bogota/openerp-php-webservice-client.git
