@@ -1,0 +1,6 @@
+[submodule "externals/zend-form-decorators-bootstrap"]
+	path = externals/zend-form-decorators-bootstrap
+	url = https://github.com/Emagister/zend-form-decorators-bootstrap.git
+[submodule "externals/Glue"]
+	path = externals/Glue
+	url = https://github.com/aheinze/Glue.git
