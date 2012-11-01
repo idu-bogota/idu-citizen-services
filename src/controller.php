@@ -1,6 +1,6 @@
 <?php
 define ('EXTERNALS_DIR',__DIR__.'/../externals');
-require_once(EXTERNALS_DIR.'/glue/glue.php');
+require_once(EXTERNALS_DIR.'/Glue/vendor/glue/glue.php');
 require_once(EXTERNALS_DIR.'/openerp-php-webservice-client/OpenErpOcs.php');
 ini_set('include_path', get_include_path().PATH_SEPARATOR.EXTERNALS_DIR.'/zend/library');
 ini_set('include_path', get_include_path().PATH_SEPARATOR.EXTERNALS_DIR.'/zend-form-decorators-bootstrap');
@@ -27,7 +27,7 @@ class PqrForm extends BaseForm {
         $this->getElement('category')->addMultiOptions($options);
 
         $oerp = new OpenErpOcsClassification($c);
-        $items = $oerp->fetch();
+        $items = $oerp->fetch(array(array('is_portal_visible','=',True)));
         $options = array();
         foreach($items as $obj) {
             $atts = $obj->attributes;
@@ -43,7 +43,6 @@ class App extends GlueBase {
     */
     public function index() {
         $form = new PqrForm();
-        
         $data = array(
             "title" => 'Reporte de daño en la malla vial',
             'form' => $form,
