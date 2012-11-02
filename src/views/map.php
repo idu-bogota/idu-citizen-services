@@ -4,7 +4,7 @@
 <div class="span6">
     <fieldset>
         <legend>Ubicación</legend>
-        <div id='map_element' class="map" style='width: 500px; height: 500px;'></div>
+        <div id='map_element' class="map"></div>
     </fieldset>
 </div>
 

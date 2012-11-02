@@ -5,14 +5,16 @@ pqr:
         geo_point:
             type: hidden
             options:
+                required: true
                 filters:
                     trim:
                         filter: StringTrim
                 validators:
-                    length:
-                        validator: StringLength
+                    not_empty:
+                        validator: notEmpty
                         options:
-                            max: 500
+                            messages:
+                                isEmpty: 'Por favor seleccione un punto en el mapa'
         name:
             type: text
             options:
@@ -47,7 +49,7 @@ pqr:
                         validator: Alpha
                         options: { allowwhitespace: true }
         document_type:
-            type: text
+            type: select
             options:
                 label: Tipo de documento
                 class: input-block-level
@@ -83,6 +85,10 @@ pqr:
                             max: 100
                     email:
                         validator: EmailAddress
+                        options:
+                            messages:
+                                emailAddressInvalid: 'El formato del email es incorrecto'
+                                emailAddressInvalidFormat: 'El formato del email es incorrecto'
         phone:
             type: text
             options:
@@ -117,6 +123,9 @@ pqr:
                         validator: Regex
                         options:
                             pattern: '/[a-zA-Z0-9_]{1,15}/'
+                            messages:
+                                regexInvalid: 'Texto ingresado no tiene un formato válido'
+                                regexNotMatch: "'%value%' no es válido como nombre de usuario para una cuenta de Twitter"
         facebook:
             type: text
             options:
@@ -134,6 +143,9 @@ pqr:
                         validator: Regex
                         options:
                             pattern: '/[a-zA-Z0-9_]{1,20}/'
+                            messages:
+                                regexInvalid: 'Texto ingresado no tiene un formato válido'
+                                regexNotMatch: "'%value%' no es válido como nombre de usuario para una cuenta de Facebook"
         address:
             type: text
             options:
@@ -150,16 +162,19 @@ pqr:
         category:
             type: select
             options:
+                required: true
                 label: Categoria
                 class: input-block-level
         classification:
             type: select
             options:
+                required: true
                 label: Clasificación
                 class: input-block-level
         description:
             type: textarea
             options:
+                required: true
                 label: Descripción
                 class: input-block-level
                 rows: 5
@@ -167,12 +182,17 @@ pqr:
                     trim:
                         filter: StringTrim
                 validators:
+                    not_empty:
+                        validator: notEmpty
+                        options:
+                            messages:
+                                isEmpty: 'Por favor ingrese una descripción del reclamo'
                     length:
                         validator: StringLength
                         options:
                             max: 1000
         disclaimer:
-            type: textarea
+            type: note
             options:
                 value: Al enviar los datos usted acepta los términos y condiciones del sitio
                 disabled: disabled
@@ -190,7 +210,7 @@ pqr:
         claim:
             name: claim_details
             options:
-                legend: Detalles de su reporte de daño
+                legend: Detalles de su reporte
             elements:
                 - category
                 - classification
