@@ -9,6 +9,7 @@ Ocs.View.Map = Backbone.View.extend({
     initialize: function() {
         this.map = this.model.map;
         this.model.on('change:geometry', this.set_geometry, this);
+        navigator.geolocation.getCurrentPosition( _.bind(this.set_geolocation, this) );
     },
     render: function() {
         this.controls = [
@@ -18,6 +19,15 @@ Ocs.View.Map = Backbone.View.extend({
             new OpenLayers.Control.LayerSwitcher(),
             new Ocs.OpenLayers.Control.SinglePointEditingToolbar(this.model.get('markers'))
         ];
+        bounds = new OpenLayers.Bounds();
+        bounds.extend(new OpenLayers.LonLat(-74.2317015302732,4.851251346630552).transform(
+            new OpenLayers.Projection("EPSG:4326"), this.map.getProjectionObject())
+        );
+        bounds.extend(new OpenLayers.LonLat(-73.9927488935548,4.476900687054601).transform(
+            new OpenLayers.Projection("EPSG:4326"), this.map.getProjectionObject())
+        );
+        this.map.setOptions({restrictedExtent: bounds });
+
         var initial_position = this.options.initial_position;
         var initial_zoom = this.options.initial_zoom;
         this.map.setCenter(initial_position.transform( this.model.get('from_projection'), this.model.get('to_projection')), initial_zoom);
@@ -27,6 +37,18 @@ Ocs.View.Map = Backbone.View.extend({
     set_geometry: function(model){
         var geoJSON = new OpenLayers.Format.GeoJSON();
         $('#geo_point').attr('value',geoJSON.write(model.get('geometry')));
+    },
+    set_geolocation: function(position) {
+        var lonLat = new OpenLayers.LonLat(position.coords.longitude, position.coords.latitude);
+        lonLat = lonLat.transform(
+            new OpenLayers.Projection("EPSG:4326"), //transform from WGS 1984
+            this.map.getProjectionObject() //to Spherical Mercator Projection
+        );
+        var layer = this.model.get("markers");
+        var point = new OpenLayers.Geometry.Point(lonLat.lon, lonLat.lat);
+        var feature = new OpenLayers.Feature.Vector(point,{icon: "http://www.openlayers.org/dev/img/marker.png"} );
+        layer.addFeatures(feature);
+        this.map.setCenter(lonLat, 18);// Zoom level
     }
 });
 
@@ -100,7 +122,7 @@ Ocs.OpenLayers.Control.SinglePointEditingToolbar = OpenLayers.Class( OpenLayers.
         }
         return div;
     },
-    
+
     CLASS_NAME: "OpenLayers.Control.EditingToolbar"
 });
 
@@ -115,7 +137,9 @@ Ocs.OpenLayers.Control.DrawOnePointOnly = OpenLayers.Class( OpenLayers.Control.D
     drawFeature: function(geometry) {
         this.layer.removeAllFeatures();
         OpenLayers.Control.DrawFeature.prototype.drawFeature.apply(this, [geometry]);
-        window.main.model.set('geometry',geometry);
+        //var p = geometry.transform(this.map.getProjectionObject(), new OpenLayers.Projection("EPSG:4326"));
+        //alert(p.x +','+ p.y +' resol:'+ this.map.getResolution());
+        window.main.model.set('geometry',geometry); //FIXME: Dirty hack shouldn't use a global variable
     },
 
     CLASS_NAME: "OpenLayers.Control.DrawFeature"
