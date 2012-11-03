@@ -5,7 +5,7 @@
  * @author Cinxgler Mariaca
  */
 
-class BaseForm extends Twitter_Bootstrap_Form_Horizontal {
+class BaseForm extends Twitter_Bootstrap_Form {
     protected $openerp_client = null;
     protected function getOpenErpConnection() {
         if(null === $this->openerp_client) {

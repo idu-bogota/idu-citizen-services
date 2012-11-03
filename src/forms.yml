@@ -198,7 +198,11 @@ pqr:
                 disabled: disabled
                 class: input-block-level
                 rows: 2
-                
+        is_anonymous:
+            type: checkbox
+            options:
+                value: anonimo
+                label: Reporte anónimo
         submit:
             type: button
             options:
@@ -209,13 +213,24 @@ pqr:
     displayGroups:
         claim:
             name: claim_details
+            description: description
             options:
                 legend: Detalles de su reporte
             elements:
+                - description
                 - category
                 - classification
-                - description
                 - geo_point
+                - is_anonymous
+        citizen_data:
+            name: datos_personales
+            options:
+                legend: Datos personales
+            elements:
+                - name
+                - lastname
+                - document_type
+                - document_number
         contact_data:
             name: datos_contacto
             options:
@@ -226,15 +241,6 @@ pqr:
                 - facebook
                 - phone
                 - address
-        citizen_data:
-            name: datos_personales
-            options:
-                legend: Datos personales
-            elements:
-                - name
-                - lastname
-                - document_type
-                - document_number
         send:
             name: send
             elements:
