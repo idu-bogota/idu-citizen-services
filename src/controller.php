@@ -12,6 +12,19 @@ $loader->registerNamespace('Twitter');
 
 require_once(__DIR__.'/forms.php');
 
+class myOpenErpConnection {
+    static $openerp_client = null;
+
+    static function getConnection() {
+        if(self::$openerp_client === null) {
+            include(__DIR__.'/config.inc.php');
+            self::$openerp_client = new OpenErpWebServiceClient($openerp_server, $username, $pwd, $dbname);
+        }
+        return self::$openerp_client;
+    }
+
+}
+
 /**
  * Main App Class
  *
@@ -45,7 +58,7 @@ class App extends GlueBase {
     public function submit() {
         $this->index();
     }
-    
+
     /**
         @Post /submit
     */
@@ -74,5 +87,29 @@ class App extends GlueBase {
             $data['warning_message'] = 'El formulario no pudó ser validado correctamente, por favor revise los datos ingresados.';
         }
         echo glue("template")->render("../views/map.php with ../views/layout.php", $data);
+    }
+
+    /**
+        @Get /json
+    */
+    public function json() {
+        header('Content-Type: application/json; charset=utf-8');
+        $pqr = new OpenErpPqr($this->getOpenErpConnection());
+        $items = $pqr->fetch();
+        $features = array();
+        foreach ($items as $i) {
+            if($feature = $i->getGeoJsonFeature(true)) {
+                $features[] = $feature;
+            }
+        }
+        $feature = array(
+          'type' => 'FeatureCollection',
+          'features' => $features,
+        );
+        echo json_encode($feature);
+    }
+
+    protected function getOpenErpConnection() {
+        return myOpenErpConnection::getConnection();
     }
 }

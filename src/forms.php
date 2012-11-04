@@ -6,13 +6,8 @@
  */
 
 class BaseForm extends Twitter_Bootstrap_Form {
-    protected $openerp_client = null;
     protected function getOpenErpConnection() {
-        if(null === $this->openerp_client) {
-            include(__DIR__.'/config.inc.php');
-            $this->openerp_client = new OpenErpWebServiceClient($openerp_server, $username, $pwd, $dbname);
-        }
-        return $this->openerp_client;
+        return myOpenErpConnection::getConnection();
     }
 }
 
