@@ -33,9 +33,9 @@ class myOpenErpConnection {
 
 class App extends GlueBase {
     /**
-        @Get /
+        @Get /new
     */
-    public function index() {
+    public function form() {
         $form = new PqrForm();
         $data = array(
             "title" => 'Reporte sus solicitudes, reclamos y sugerencias al IDU',
@@ -56,13 +56,13 @@ class App extends GlueBase {
         @Get /submit
     */
     public function submit() {
-        $this->index();
+        header('Location: ./new');
     }
 
     /**
         @Post /submit
     */
-    public function submit_post() {
+    public function save_post() {
         $form = new PqrForm();
         $data = array(
             "title" => 'Reporte un daño en la malla vial',
@@ -90,9 +90,9 @@ class App extends GlueBase {
     }
 
     /**
-        @Get /json
+        @Get /list/geojson
     */
-    public function json() {
+    public function list_geojson() {
         header('Content-Type: application/json; charset=utf-8');
         $pqr = new OpenErpPqr($this->getOpenErpConnection());
         $items = $pqr->fetch();
@@ -107,6 +107,16 @@ class App extends GlueBase {
           'features' => $features,
         );
         echo json_encode($feature);
+    }
+
+    /**
+        @Get /
+    */
+    public function list_html() {
+        $data = array(
+            "title" => 'Listado de solicitudes, reclamos y sugerencias al IDU',
+        );
+        echo glue("template")->render("../views/list.php with ../views/layout.php", $data);
     }
 
     protected function getOpenErpConnection() {
