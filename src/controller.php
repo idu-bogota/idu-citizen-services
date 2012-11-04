@@ -103,7 +103,7 @@ class App extends myGlueBase {
     }
 
     /**
-        @Get /list/geojson
+        @Get /list.geojson
     */
     public function list_geojson() {
         header('Content-Type: application/json; charset=utf-8');

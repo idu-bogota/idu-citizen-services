@@ -58,6 +58,19 @@ Ocs.View.FormMap = Ocs.View.BaseMap.extend({
     }
 });
 
+Ocs.View.ListMap = Ocs.View.BaseMap.extend({
+    my_initialize: function() {
+    },
+    controls: function() {
+        return [
+            new OpenLayers.Control.Navigation(),
+            new OpenLayers.Control.PanZoomBar(),
+            new OpenLayers.Control.ScaleLine(),
+            new OpenLayers.Control.LayerSwitcher(),
+        ];
+    }
+});
+
 ////////////// MODEL
 Ocs.Model = {};
 Ocs.Model.Map = Backbone.Model.extend({
@@ -68,17 +81,21 @@ Ocs.Model.Map = Backbone.Model.extend({
             id:  '',
             from_projection: new OpenLayers.Projection("EPSG:4326"),   // Transform from WGS 1984
             to_projection: new OpenLayers.Projection("EPSG:900913"), // to Spherical Mercator Projection
-            layers: [
+            base_layers: [
                 new OpenLayers.Layer.OSM(),
             ],
-            markers: new OpenLayers.Layer.Vector("Markers"),
+            layers: [],
+            markers: null,
             geometry: new OpenLayers.Geometry()
         };
     },
     initialize: function() {
         var attr = this.attributes;
+        this.map.addLayers(attr.base_layers);
         this.map.addLayers(attr.layers);
-        this.map.addLayer(attr.markers);
+        if(attr.markers) {
+            this.map.addLayer(attr.markers);
+        }
     },
     get_lonlat : function(lon, lat) {
         return new OpenLayers.LonLat(lon,lat).transform(
