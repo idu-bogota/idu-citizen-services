@@ -25,13 +25,37 @@ class myOpenErpConnection {
 
 }
 
+class myGlueBase extends GlueBase {
+    public function setFlash($type, $message, $flash_id) {
+        $flash = array(
+            $type.'_message' => $message,
+        );
+        $flash_id = md5("flash_id:".uniqid());
+        glue("session")->write("flash.$flash_id", json_encode($flash));
+        return $flash_id;
+    }
+
+    public function getFlash() {
+        if(isset($_REQUEST['flash_id'])) {
+            $flash_id = $_REQUEST['flash_id'];
+            $flash_data = glue('session')->read("flash.$flash_id");
+            glue('session')->delete("flash.$flash_id");
+            if(!empty($flash_data)) {
+                $data = json_decode($flash_data, true);
+                return $data;
+            }
+        }
+        return array();
+    }
+}
+
 /**
  * Main App Class
  *
  * @author Cinxgler Mariaca
  */
 
-class App extends GlueBase {
+class App extends myGlueBase {
     /**
         @Get /new
     */
@@ -41,14 +65,7 @@ class App extends GlueBase {
             "title" => 'Reporte sus solicitudes, reclamos y sugerencias al IDU',
             'form' => $form,
         );
-        if(isset($_REQUEST['flash_id'])) {
-            $flash_id = $_REQUEST['flash_id'];
-            $flash_data = glue('session')->read("flash.$flash_id");
-            if(!empty($flash_data)) {
-                $data = array_merge($data,json_decode($flash_data, true));
-            }
-            glue('session')->delete("flash.$flash_id");
-        }
+        $data = array_merge($data, $this->getFlash());
         echo glue("template")->render("../views/map.php with ../views/layout.php", $data);
     }
 
@@ -72,11 +89,7 @@ class App extends GlueBase {
             try {
                 $pqr = $form->buildObject();
                 $numero_radicado = $pqr->create();
-                $flash = array(
-                    'success_message' => 'PQR registrada exitosamente con número: '.$numero_radicado,
-                );
-                $flash_id = md5("flash_id:$numero_radicado");
-                glue("session")->write("flash.$flash_id", json_encode($flash));
+                $flash_id = $this->setFlash('success', 'PQR registrada exitosamente con número: '.$numero_radicado);
                 header('Location: ./?flash_id='.$flash_id);
                 return;
             }
@@ -116,6 +129,7 @@ class App extends GlueBase {
         $data = array(
             "title" => 'Listado de solicitudes, reclamos y sugerencias al IDU',
         );
+        $data = array_merge($data, $this->getFlash());
         echo glue("template")->render("../views/list.php with ../views/layout.php", $data);
     }
 
