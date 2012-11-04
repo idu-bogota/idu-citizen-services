@@ -22,7 +22,7 @@
             }
         });
 
-        window.main = new Ocs.View.Map({
+        window.main = new Ocs.View.FormMap({
             model: new Ocs.Model.Map({
               markers: new OpenLayers.Layer.Vector("Markers", {styleMap: styleMap})
             }),

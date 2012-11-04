@@ -1,38 +1,44 @@
 var Ocs = { };//Setting namespace
 Ocs.View = { };
-Ocs.View.Map = Backbone.View.extend({
+Ocs.View.BaseMap = Backbone.View.extend({
     options: {
         initial_zoom: 14,
-        initial_position: new OpenLayers.LonLat(-74.075833,4.598056),  //Currently Bogota
-        controls: []
+        initial_position: [-74.075833, 4.598056],  //Currently Bogota
+        extent_bbox: [[-74.2317015302732, 4.851251346630552],[-73.9927488935548, 4.476900687054601]],//Currently Bogota aprox limits
     },
     initialize: function() {
         this.map = this.model.map;
+        this.my_initialize();
+    },
+    render: function() {
+        var extent_bbox = this.options.extent_bbox;
+        var bounds = new OpenLayers.Bounds();
+        bounds.extend(this.model.get_lonlat(extent_bbox[0][0], extent_bbox[0][1]));
+        bounds.extend(this.model.get_lonlat(extent_bbox[1][0], extent_bbox[1][1]));
+        this.map.setOptions({restrictedExtent: bounds });
+
+        var initial_position = this.options.initial_position;
+        var initial_zoom = this.options.initial_zoom;
+        this.map.setCenter(this.model.get_lonlat(initial_position[0],initial_position[1]), initial_zoom);
+
+        this.map.addControls(this.controls());
+        this.map.render(this.el);
+    }
+});
+
+Ocs.View.FormMap = Ocs.View.BaseMap.extend({
+    my_initialize: function() {
         this.model.on('change:geometry', this.set_geometry, this);
         navigator.geolocation.getCurrentPosition( _.bind(this.set_geolocation, this) );
     },
-    render: function() {
-        this.controls = [
+    controls: function() {
+        return [
             new OpenLayers.Control.Navigation(),
             new OpenLayers.Control.PanZoomBar(),
             new OpenLayers.Control.ScaleLine(),
             new OpenLayers.Control.LayerSwitcher(),
             new Ocs.OpenLayers.Control.SinglePointEditingToolbar(this.model.get('markers'))
         ];
-        bounds = new OpenLayers.Bounds();
-        bounds.extend(new OpenLayers.LonLat(-74.2317015302732,4.851251346630552).transform(
-            new OpenLayers.Projection("EPSG:4326"), this.map.getProjectionObject())
-        );
-        bounds.extend(new OpenLayers.LonLat(-73.9927488935548,4.476900687054601).transform(
-            new OpenLayers.Projection("EPSG:4326"), this.map.getProjectionObject())
-        );
-        this.map.setOptions({restrictedExtent: bounds });
-
-        var initial_position = this.options.initial_position;
-        var initial_zoom = this.options.initial_zoom;
-        this.map.setCenter(initial_position.transform( this.model.get('from_projection'), this.model.get('to_projection')), initial_zoom);
-        this.map.addControls(this.controls);
-        this.map.render(this.el);
     },
     set_geometry: function(model){
         var geoJSON = new OpenLayers.Format.GeoJSON();
@@ -52,6 +58,7 @@ Ocs.View.Map = Backbone.View.extend({
     }
 });
 
+////////////// MODEL
 Ocs.Model = {};
 Ocs.Model.Map = Backbone.Model.extend({
     urlRoot: '',
@@ -72,9 +79,15 @@ Ocs.Model.Map = Backbone.Model.extend({
         var attr = this.attributes;
         this.map.addLayers(attr.layers);
         this.map.addLayer(attr.markers);
+    },
+    get_lonlat : function(lon, lat) {
+        return new OpenLayers.LonLat(lon,lat).transform(
+            this.get('from_projection'), this.get('to_projection')
+        );
     }
 });
 
+////////////// OPENLAYERS Extensions
 Ocs.OpenLayers = {};
 Ocs.OpenLayers.Control = {};
 Ocs.OpenLayers.Control.SinglePointEditingToolbar = OpenLayers.Class( OpenLayers.Control.Panel, {
