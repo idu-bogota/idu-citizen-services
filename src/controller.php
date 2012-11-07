@@ -62,8 +62,9 @@ class App extends myGlueBase {
     public function form() {
         $form = new PqrForm();
         $data = array(
-            "title" => 'Reporte sus solicitudes, reclamos y sugerencias al IDU',
+            "title" => 'Reporte un daño',
             'form' => $form,
+            'menu_item' => 'new',
         );
         $data = array_merge($data, $this->getFlash());
         echo glue("template")->render("../views/map.php with ../views/layout.php", $data);
@@ -84,6 +85,7 @@ class App extends myGlueBase {
         $data = array(
             "title" => 'Reporte un daño en la malla vial',
             'form' => $form,
+            'menu_item' => 'new',
         );
         if ($form->isValid($_POST)) {
             try {
@@ -127,7 +129,8 @@ class App extends myGlueBase {
     */
     public function list_html() {
         $data = array(
-            "title" => 'Listado de solicitudes, reclamos y sugerencias al IDU',
+            "title" => 'Listado de reportes de daño',
+            'menu_item' => 'list',
         );
         $data = array_merge($data, $this->getFlash());
         echo glue("template")->render("../views/list.php with ../views/layout.php", $data);

@@ -16,7 +16,19 @@
 </head>
 <body>
     <div class="container-fluid">
-        <h1><?php echo $title ?></h1>
+        <div class="navbar navbar-inverse">
+            <div class="navbar-inner">
+                <a class="brand" href="http://www.idu.gov.co/">IDU</a>
+                <ul class="nav">
+                    <li <?php echo is_item_active($menu_item, 'list') ?>><a href="./">Inicio</a></li>
+                    <li <?php echo is_item_active($menu_item, 'new') ?>><a href="./new">Reporte un daño</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="page-header">
+            <h1><?php echo $title ?></h1>
+        </div>
+        
         <?php if(isset($warning_message)): ?>
             <div class="alert">
                 <button type="button" class="close" data-dismiss="alert">×</button>
@@ -42,3 +54,9 @@
     </div>
 </body>
 </html>
+<?php
+function is_item_active($selected, $item_id) {
+    if($selected == $item_id) {
+        return 'class = "active"';
+    }
+}
