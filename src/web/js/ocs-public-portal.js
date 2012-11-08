@@ -60,6 +60,41 @@ Ocs.View.FormMap = Ocs.View.BaseMap.extend({
 
 Ocs.View.ListMap = Ocs.View.BaseMap.extend({
     my_initialize: function() {
+        var style = new OpenLayers.Style({
+            pointRadius: "${radius}",
+            fillColor: "#ffcc66",
+            fillOpacity: 0.8,
+            strokeColor: "#cc6633",
+            strokeWidth: 2,
+            strokeOpacity: 0.8
+        }, {
+            context: {
+                radius: function(feature) {
+                    var pix = 2;
+                    if(feature.cluster)
+                        pix = Math.min(feature.attributes.count, 7) + 2;
+                    return pix;
+                }
+            }
+        });
+        var style_map = new OpenLayers.StyleMap({
+            "default": style,
+            "select": {
+                fillColor: "#8aeeef",
+                strokeColor: "#32a8a9"
+            }
+        });
+
+        var list_layer = this.model.get('list_layer');
+        list_layer.styleMap = style_map;
+        list_layer.redraw();
+
+        select_control = new OpenLayers.Control.SelectFeature( list_layer, {
+            onSelect: _.bind(this.on_feature_select, this),
+            onUnselect: _.bind(this.on_feature_unselect, this)
+        });
+        this.model.map.addControl(select_control);
+        select_control.activate();
     },
     controls: function() {
         return [
@@ -68,6 +103,22 @@ Ocs.View.ListMap = Ocs.View.BaseMap.extend({
             new OpenLayers.Control.ScaleLine(),
             new OpenLayers.Control.LayerSwitcher(),
         ];
+    },
+    on_feature_select: function (feature) {
+        selectedFeature = feature;
+        msg = '';
+        if(feature.attributes.count > 1) {
+            msg = 'Número de reportes agrupados:' + feature.attributes.count + ', haga un acercamiento para visualizar los reportes';
+        }
+        else {
+            var data = feature.cluster[0].attributes;
+            msg = 'Tipo de reporte: ' + data.subject + '<br />Descripción: ' +  data.description;
+        }
+        //Crear subview
+        alert(msg);
+    },
+    on_feature_unselect: function (feature) {
+        //Remover subview
     }
 });
 
