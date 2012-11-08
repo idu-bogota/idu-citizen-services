@@ -60,6 +60,10 @@ Ocs.View.FormMap = Ocs.View.BaseMap.extend({
 
 Ocs.View.ListMap = Ocs.View.BaseMap.extend({
     my_initialize: function() {
+        this.report_list_view = new Ocs.View.ReportList({
+            el: $('#report_list')
+        });
+        this.report_list_view.render();
         var style = new OpenLayers.Style({
             pointRadius: "${radius}",
             fillColor: "#ffcc66",
@@ -105,20 +109,54 @@ Ocs.View.ListMap = Ocs.View.BaseMap.extend({
         ];
     },
     on_feature_select: function (feature) {
-        selectedFeature = feature;
-        msg = '';
-        if(feature.attributes.count > 1) {
-            msg = 'Número de reportes agrupados:' + feature.attributes.count + ', haga un acercamiento para visualizar los reportes';
-        }
-        else {
-            var data = feature.cluster[0].attributes;
-            msg = 'Tipo de reporte: ' + data.subject + '<br />Descripción: ' +  data.description;
-        }
-        //Crear subview
-        alert(msg);
+        this.report_list_view.add_feature(feature);
     },
     on_feature_unselect: function (feature) {
-        //Remover subview
+        this.report_list_view.remove_feature(feature);
+    }
+});
+
+Ocs.View.ReportList = Backbone.View.extend(
+    _.extend({}, Mixins.SubviewCollection, {
+    initialize: function() {
+        this.template = _.template($('#list-template').html());
+        this.subview_tmpl = _.template($('#item-template').html());
+    },
+    create_subview_instance: function(model) {
+        var view = new Ocs.View.ReportListItem({
+            model: model, parent_view: this,
+            template: this.subview_tmpl
+        });
+        return view;
+    },
+    add_feature: function(feature) {
+        this.remove_all_subviews();
+        $(this.el).append('<h2>Reportes seleccionados</h2>');
+        _.each(feature.cluster, function(feature) {
+            var model = new Ocs.Model.Report({ feature: feature });
+            var view = this.add_subview(model);
+        }, this); //Add a subview per feature in the cluster
+        $(this.el).addClass('margin-bottom');
+    },
+    remove_feature: function(feature) {
+        //_.each(feature.cluster, this.remove_subview, this); //remove a subview per feature in the cluster
+        this.remove_all_subviews();
+        $(this.el).removeClass('margin-bottom');
+        this.render();
+    },
+    render: function() {
+        $(this.el).html(this.template());
+    }
+}));
+
+Ocs.View.ReportListItem = Backbone.View.extend({
+    className: 'media',
+    initialize: function() {
+        this.template = this.options.template;
+    },
+    render: function() {
+        $(this.el).html(this.template(this.model.toJSON()));
+        return this;
     }
 });
 
@@ -155,6 +193,13 @@ Ocs.Model.Map = Backbone.Model.extend({
     }
 });
 
+Ocs.Model.Report = Backbone.Model.extend({
+    urlRoot: '',
+    initialize: function() {
+        this.id = this.get('feature').id;
+        this.set(this.get('feature').attributes);
+    },
+});
 ////////////// OPENLAYERS Extensions
 Ocs.OpenLayers = {};
 Ocs.OpenLayers.Control = {};
