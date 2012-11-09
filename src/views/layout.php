@@ -9,6 +9,7 @@
     <script type='text/javascript' src='js/backbone-min.js'></script>
     <script type='text/javascript' src='js/bootstrap-min.js'></script>
     <script type='text/javascript' src='js/mixins.js'></script>
+    <script type='text/javascript' src='js/jPaginate.js'></script>
     <script type='text/javascript' src='js/ocs-public-portal.js'></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="css/bootstrap-min.css" rel="stylesheet">

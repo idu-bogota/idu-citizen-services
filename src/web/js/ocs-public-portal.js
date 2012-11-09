@@ -136,6 +136,7 @@ Ocs.View.ReportList = Backbone.View.extend(
             var model = new Ocs.Model.Report({ feature: feature });
             var view = this.add_subview(model);
         }, this); //Add a subview per feature in the cluster
+        $(this.el).jPaginate();
     },
     remove_feature: function(feature) {
         //_.each(feature.cluster, this.remove_subview, this); //remove a subview per feature in the cluster
