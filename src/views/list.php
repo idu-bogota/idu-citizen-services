@@ -2,14 +2,14 @@
     <div id='map_element' class="map span12"></div>
 </div>
 <div class="span6">
-    <div id="report_list">
-    </div>
     <div class="hero-unit">
-        <h1>Reporte</h1>
+        <h1>Participe</h1>
         <p>Realize el reporte de daños en la malla vial y el espacio público de la ciudad, de manera rápida y sencilla.</p>
         <p>
             <a class="btn btn-primary" href="./new">Reportar</a>
         </p>
+    </div>
+    <div id="report_list">
     </div>
 </div>
 <script type='text/javascript'>
@@ -44,17 +44,19 @@
     <a class="pull-left" href="#">
         <img class="media-object" src="http://placehold.it/64x64">
     </a>
-    <div class="media-body">
-        <h4 class="media-heading"><%= subject %></h4>
+    <div class="media-body report-item">
+        <!-- <h4 class="media-heading">Reporte No: <%= claim_id %></h4> -->
         <%= description %>
+        <ul>
+            <li><strong>Reporte No:</strong> <%= claim_id %></li>
+            <li><strong>Categoría:</strong> <%= category %></li>
+            <li><strong>Clasificación: </strong><%= classification %></li>
+        </ul>
     </div>
 </script>
 <script type="text/template" id="list-template">
         <div class="hero-unit">
             <h1>Consulte</h1>
             <p>Haga click sobre los reportes disponibles en el mapa para conocer los detalles del mismo</p>
-            <p>
-                <a class="btn btn-primary" href="./new">Reportar</a>
-            </p>
         </div>
 </script>
