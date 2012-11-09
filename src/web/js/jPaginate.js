@@ -99,12 +99,12 @@ offset = unfortunately calculating heights with javascript isn't always 100% acc
             // create the navigation for the pagination 
             function createPagination(curr) {
                 var start, items = "", end, nav = "";
-                start = "<ul class='"+options.pagination_class+"'>";
+                start = "<div class='"+options.pagination_class+"'><ul>";
                 var previous = "<li><a class='goto_previous' href='#'>"+options.previous+"</a></li>";
                 var next = "<li><a class='goto_next' href='#'>"+options.next+"</a></li>";
-				var previous_inactive = "<li><a class='inactive'>"+options.previous+"</a></li>";
-                var next_inactive = "<li><a class='inactive'>"+options.next+"</a></li>";
-                end = "</ul><br clear='all' />"
+                var previous_inactive = "<li class='disabled'><a>"+options.previous+"</a></li>";
+                var next_inactive = "<li class='disabled'><a>"+options.next+"</a></li>";
+                end = "</ul></div>"
                 var after = number_of_pages - options.after + 1;
                 var pagi_range = paginationCalculator(curr);
 				for (i=1;i<=number_of_pages;i++)
@@ -112,21 +112,21 @@ offset = unfortunately calculating heights with javascript isn't always 100% acc
                     if (options.minimize == true) {
 						var half = Math.ceil(number_of_pages/2)
                     	if (i >= pagi_range.start && i <= pagi_range.end) {
-							if (i == curr) { items += '<li><a class="'+options.active+'" title="'+i+'">'+i+'</a></li>';} 
+                            if (i == curr) { items += '<li class="'+options.active+'"><a title="'+i+'">'+i+'</a></li>';}
                         	else { items += '<li><a href="#" class="goto" title="'+i+'">'+i+'</a></li>';}
 						} else if (curr <= half) {
 							if (i >= (number_of_pages - 2)) {
-								if (i == curr) { items += '<li><a class="'+options.active+'" title="'+i+'">'+i+'</a></li>';} 
+                                if (i == curr) { items += '<li class="'+options.active+'"><a title="'+i+'">'+i+'</a></li>';}
                         		else { items += '<li><a href="#" class="goto" title="'+i+'">'+i+'</a></li>';}
 							} 
 						} else if (curr >= half) {
 							if (i <= 2) {
-								if (i == curr) { items += '<li><a class="'+options.active+'" title="'+i+'">'+i+'</a></li>';} 
+                                if (i == curr) { items += '<li class="'+options.active+'"><a title="'+i+'">'+i+'</a></li>';}
                         		else { items += '<li><a href="#" class="goto" title="'+i+'">'+i+'</a></li>';}
 							}
 						}
                     } else {
-                        if (i == curr) { items += '<li><a class="'+options.active+'" title="'+i+'">'+i+'</a></li>';} 
+                        if (i == curr) { items += '<li class="'+options.active+'"><a title="'+i+'">'+i+'</a></li>';}
                         else { items += '<li><a href="#" class="goto" title="'+i+'">'+i+'</a></li>';}
                     }
                 }
