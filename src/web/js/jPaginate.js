@@ -21,6 +21,14 @@ offset = unfortunately calculating heights with javascript isn't always 100% acc
 
 */
 (function($){
+    array_of_elements = [];
+    numP = 0;
+    nexP = 0;
+    height = 0;
+    max_height = 0;
+    show_per_page = 0;
+    number_of_items = 0;
+    number_of_pages = 0;
     $.fn.jPaginate = function(options) {
         var defaults = {
             items: 4,
@@ -31,29 +39,28 @@ offset = unfortunately calculating heights with javascript isn't always 100% acc
             minimize: false,
             nav_items: 6,
             cookies: true,
-            position: "after",
+            position: "before",
             equal: false,
             offset: 50
         };
         var options = $.extend(defaults, options);
-
         return this.each(function() {
             // object is the selected pagination element list
             obj = $(this);
             // this is how you call the option passed in by plugin of items
-            var show_per_page = options.items;
+            show_per_page = options.items;
             //getting the amount of elements inside parent element
-            var number_of_items = obj.children().size();
+            number_of_items = obj.children().size();
             //calculate the number of pages we are going to have
-            var number_of_pages = Math.ceil(number_of_items/show_per_page);
+            number_of_pages = Math.ceil(number_of_items/show_per_page);
 
             //create the pages of the pagination
-            var array_of_elements = [];
-            var numP = 0;
-            var nexP = show_per_page;
+            array_of_elements = [];
+            numP = 0;
+            nexP = show_per_page;
 
-            var height = 0;
-            var max_height = 0;
+            height = 0;
+            max_height = 0;
             //loop through all pages and assign elements into array
             for (i=1;i<=number_of_pages;i++)
             {
@@ -112,22 +119,22 @@ offset = unfortunately calculating heights with javascript isn't always 100% acc
                     if (options.minimize == true) {
                         var half = Math.ceil(number_of_pages/2)
                         if (i >= pagi_range.start && i <= pagi_range.end) {
-                            if (i == curr) { items += '<li class="'+options.active+'"><a title="'+i+'">'+i+'</a></li>';}
-                            else { items += '<li><a href="#" class="goto" title="'+i+'">'+i+'</a></li>';}
+                            if (i == curr) { items += '<li class="'+options.active+'" title="'+i+'"><a title="'+i+'">'+i+'</a></li>';}
+                            else { items += '<li title="'+i+'"><a href="#" class="goto" title="'+i+'">'+i+'</a></li>';}
                         } else if (curr <= half) {
                             if (i >= (number_of_pages - 2)) {
-                                if (i == curr) { items += '<li class="'+options.active+'"><a title="'+i+'">'+i+'</a></li>';}
-                                else { items += '<li><a href="#" class="goto" title="'+i+'">'+i+'</a></li>';}
+                                if (i == curr) { items += '<li class="'+options.active+'" title="'+i+'"><a title="'+i+'">'+i+'</a></li>';}
+                                else { items += '<li title="'+i+'"><a href="#" class="goto" title="'+i+'">'+i+'</a></li>';}
                             }
                         } else if (curr >= half) {
                             if (i <= 2) {
-                                if (i == curr) { items += '<li class="'+options.active+'"><a title="'+i+'">'+i+'</a></li>';}
-                                else { items += '<li><a href="#" class="goto" title="'+i+'">'+i+'</a></li>';}
+                                if (i == curr) { items += '<li class="'+options.active+'" title="'+i+'"><a title="'+i+'">'+i+'</a></li>';}
+                                else { items += '<li title="'+i+'"><a href="#" class="goto" title="'+i+'">'+i+'</a></li>';}
                             }
                         }
                     } else {
-                        if (i == curr) { items += '<li class="'+options.active+'"><a title="'+i+'">'+i+'</a></li>';}
-                        else { items += '<li><a href="#" class="goto" title="'+i+'">'+i+'</a></li>';}
+                        if (i == curr) { items += '<li class="'+options.active+'" title="'+i+'"><a title="'+i+'">'+i+'</a></li>';}
+                        else { items += '<li title="'+i+'"><a href="#" class="goto" title="'+i+'">'+i+'</a></li>';}
                     }
                 }
                 if (curr != 1 && curr != number_of_pages) {
@@ -186,6 +193,7 @@ offset = unfortunately calculating heights with javascript isn't always 100% acc
                 e.preventDefault();
                 var act = "."+options.active;
                 var newcurr = parseInt($(".pagination").find(".active").attr("title")) + 1;
+                if(isNaN(newcurr)) return false;
                 set_cookie( "current", newcurr);
                 showPage(newcurr);
                 $(".pagination").remove();
@@ -195,6 +203,7 @@ offset = unfortunately calculating heights with javascript isn't always 100% acc
                 e.preventDefault();
                 var act = "."+options.active;
                 var newcurr = parseInt($(".pagination").find(".active").attr("title")) - 1;
+                if (isNaN(newcurr)) return false;
                 set_cookie( "current", newcurr);
                 showPage(newcurr);
                 $(".pagination").remove();

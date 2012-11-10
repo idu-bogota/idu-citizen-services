@@ -130,13 +130,21 @@ Ocs.View.ReportList = Backbone.View.extend(
         return view;
     },
     add_feature: function(feature) {
+        this.render();
         this.remove_all_subviews();
+        $('.pagination').remove();
         $(this.el).append('<h2>Reportes seleccionados</h2>');
         _.each(feature.cluster, function(feature) {
             var model = new Ocs.Model.Report({ feature: feature });
             var view = this.add_subview(model);
         }, this); //Add a subview per feature in the cluster
-        $(this.el).jPaginate();
+        $(this.el).jPaginate({
+            items: 5,
+            next: ">>",
+            previous: "<<",
+            cookies: false,
+            position: 'both'
+        });
     },
     remove_feature: function(feature) {
         //_.each(feature.cluster, this.remove_subview, this); //remove a subview per feature in the cluster
@@ -144,6 +152,7 @@ Ocs.View.ReportList = Backbone.View.extend(
         this.render();
     },
     render: function() {
+        $('.pagination').remove();
         $(this.el).html(this.template());
     }
 }));
