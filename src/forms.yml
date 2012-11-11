@@ -197,18 +197,31 @@ pqr:
                 value: Al enviar los datos usted acepta los términos y condiciones del sitio
                 disabled: disabled
                 class: input-block-level
-                rows: 2
         is_anonymous:
             type: checkbox
             options:
                 value: anonimo
-                label: Reporte anónimo
-        submit:
-            type: button
+                label: Deseo hacer el reporte de forma anonima
+        image:
+            type: file
             options:
-                label:
-                type: submit
-                content: 'Enviar'
+                label: Adjunte una imagen
+                validators:
+                    is_image:
+                        validator: IsImage
+                    file_size:
+                        validator: FilesSize
+                        options:
+                            min: 10kB
+                            max: 4MB
+                    length:
+                        validator: StringLength
+                        options:
+                            max: 1000
+        submit:
+            type: submit
+            options:
+                label: Enviar
                 class: btn btn-primary
     displayGroups:
         claim:
@@ -221,6 +234,7 @@ pqr:
                 - category
                 - classification
                 - geo_point
+                - image
                 - is_anonymous
         citizen_data:
             name: datos_personales

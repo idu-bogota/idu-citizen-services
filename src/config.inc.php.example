@@ -3,3 +3,5 @@ $openerp_server = 'https://192.168.56.101/xmlrpc';
 $username = 'admin';
 $pwd = 'admin1';
 $dbname = 'openerp-idu';
+$attachement_path = '/var/www/images/';
+$attachement_base_url = '/images/';

@@ -7,3 +7,6 @@
 [submodule "externals/openerp-php-webservice-client"]
 	path = externals/openerp-php-webservice-client
 	url = https://github.com/idu-bogota/openerp-php-webservice-client.git
+[submodule "externals/phpthumb"]
+	path = externals/phpthumb
+	url = https://github.com/masterexploder/PHPThumb.git

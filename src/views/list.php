@@ -41,8 +41,8 @@
     });
 </script>
 <script type="text/template" id="item-template">
-    <a class="pull-left" href="#">
-        <img class="media-object" src="http://placehold.it/64x64">
+    <a class="pull-left" href="<%= image_url %>">
+        <img class="media-object" src="<%= thumb_image_url %>">
     </a>
     <div class="media-body report-item">
         <!-- <h4 class="media-heading">Reporte No: <%= claim_id %></h4> -->

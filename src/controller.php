@@ -3,6 +3,7 @@
 define ('EXTERNALS_DIR',__DIR__.'/../externals');
 require_once(EXTERNALS_DIR.'/Glue/vendor/glue/glue.php');
 require_once(EXTERNALS_DIR.'/openerp-php-webservice-client/src/OpenErpOcs.php');
+
 ini_set('include_path', get_include_path().PATH_SEPARATOR.EXTERNALS_DIR.'/zend/library');
 ini_set('include_path', get_include_path().PATH_SEPARATOR.EXTERNALS_DIR.'/zend-form-decorators-bootstrap');
 require_once 'Zend/Loader/Autoloader.php';
@@ -17,20 +18,74 @@ class myOpenErpConnection {
 
     static function getConnection() {
         if(self::$openerp_client === null) {
-            include(__DIR__.'/config.inc.php');
+            $openerp_server = glue("config")->read('openerp_server');
+            $username = glue("config")->read('username');
+            $pwd = glue("config")->read('pwd');
+            $dbname = glue("config")->read('dbname');
             self::$openerp_client = new OpenErpWebServiceClient($openerp_server, $username, $pwd, $dbname);
         }
         return self::$openerp_client;
     }
+}
 
+class myOpenErpPqr extends OpenErpPqr {
+    public function getFilename() {
+        return 'pqr-'.$this->id;
+    }
+
+    public function getFullFilename() {
+        $path = glue("config")->read('attachement_path');
+        return $path.'/'.$this->getFilename();
+    }
+    public function getFullThumbFilename() {
+        $path = glue("config")->read('attachement_path');
+        return $path.'/thumb/'.$this->getFilename();
+    }
+
+    public function imageExists() {
+        return file_exists($this->getFullFilename());
+    }
+
+    public function imageThumbExists() {
+        return file_exists($this->getFullThumbFilename());
+    }
+
+    public function getImageUrl() {
+        if($this->imageExists()) {
+          $path = glue("config")->read('attachement_base_url');
+          return $path.'/'.$this->getFilename();
+        }
+        return 'http://placehold.it/150&text=Sin+imagen';
+    }
+
+    public function getImageThumbUrl() {
+        if($this->imageThumbExists()) {
+          $path = glue("config")->read('attachement_base_url');
+          return $path.'/thumb/'.$this->getFilename();
+        }
+        return 'http://placehold.it/64&text=Sin+imagen';
+    }
 }
 
 class myGlueBase extends GlueBase {
-    public function setFlash($type, $message, $flash_id) {
+    public function __construct() {
+        parent::__construct();
+        include(__DIR__.'/config.inc.php');
+        glue("config")->write('openerp_server', $openerp_server);
+        glue("config")->write('username', $username);
+        glue("config")->write('pwd', $pwd);
+        glue("config")->write('dbname', $dbname);
+        glue("config")->write('attachement_base_url', $attachement_base_url);
+        glue("config")->write('attachement_path', $attachement_path);
+    }
+
+    public function setFlash($type, $message, $flash_id = null) {
         $flash = array(
             $type.'_message' => $message,
         );
-        $flash_id = md5("flash_id:".uniqid());
+        if($flash_id === null) {
+            $flash_id = md5("flash_id:".uniqid());
+        }
         glue("session")->write("flash.$flash_id", json_encode($flash));
         return $flash_id;
     }
@@ -92,6 +147,12 @@ class App extends myGlueBase {
                 $pqr = $form->buildObject();
                 $numero_radicado = $pqr->create();
                 $flash_id = $this->setFlash('success', 'PQR registrada exitosamente con número: '.$numero_radicado);
+                try {
+                    $form->saveImage();
+                }
+                catch (Exception $e) {
+                    $flash_id = $this->setFlash('error', 'El archivo anexo no pudo ser almacenado', $flash_id);
+                }
                 header('Location: ./?flash_id='.$flash_id);
                 return;
             }
@@ -109,11 +170,13 @@ class App extends myGlueBase {
     */
     public function list_geojson() {
         header('Content-Type: application/json; charset=utf-8');
-        $pqr = new OpenErpPqr($this->getOpenErpConnection());
+        $pqr = new myOpenErpPqr($this->getOpenErpConnection());
         $items = $pqr->fetch();
         $features = array();
         foreach ($items as $i) {
             if($feature = $i->getGeoJsonFeature(true)) {
+                $feature['properties']['image_url'] = $i->getImageUrl();
+                $feature['properties']['thumb_image_url'] = $i->getImageThumbUrl();
                 $features[] = $feature;
             }
         }

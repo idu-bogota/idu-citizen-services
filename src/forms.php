@@ -5,7 +5,7 @@
  * @author Cinxgler Mariaca
  */
 
-class BaseForm extends Twitter_Bootstrap_Form {
+class BaseForm extends Zend_Form  { //Twitter_Bootstrap_Form_Vertical //Twitter_Bootstrap_Form //Zend_Form
     protected function getOpenErpConnection() {
         return myOpenErpConnection::getConnection();
     }
@@ -18,9 +18,12 @@ class BaseForm extends Twitter_Bootstrap_Form {
  */
 
 class PqrForm extends BaseForm {
+    public $object = null;
+
     public function init() {
         $config = new Zend_Config_Yaml( __DIR__.'/forms.yml');
         $this->setConfig($config->pqr);
+        $this->setAttrib('enctype', 'multipart/form-data');
         $this->getElement('category')->addMultiOptions($this->retrieveCategoryOptions());
         $this->getElement('classification')->addMultiOptions($this->retrieveClassificationOptions());
         $document_type = array(
@@ -69,7 +72,7 @@ class PqrForm extends BaseForm {
     public function buildObject(){
         $c = $this->getOpenErpConnection();
         $values = $this->getValues();
-        $pqr = new OpenErpPqr($c);
+        $pqr = new myOpenErpPqr($c);
         $attributes = array();
         if( !empty($values['name']) && !empty($values['lastname']) ) {
             $citizen = array(
@@ -107,7 +110,21 @@ class PqrForm extends BaseForm {
         if(!empty($values['email'])) $attributes['email_from'] = $values['email'];
         if(!empty($values['phone'])) $attributes['partner_phone'] = $values['phone'];
         $pqr->attributes = $attributes;
+        $this->object = $pqr;
         return $pqr;
+    }
+
+    public function saveImage() {
+        require_once(EXTERNALS_DIR.'/phpthumb/src/ThumbLib.inc.php');
+        $upload = new Zend_File_Transfer_Adapter_Http();
+        $upload->receive();
+        $filename = $this->object->getFullFilename();
+        $thumb_fname = $this->object->getFullThumbFilename();
+        $filter_rename = new Zend_Filter_File_Rename(array('target' => $filename, 'overwrite' => true));
+        $filter_rename->filter($upload->getFileName());
+        $thumb = PhpThumbFactory::create($filename);
+        $thumb->adaptiveResize(64, 64);
+        $thumb->save($thumb_fname);
     }
 }
 
