@@ -81,7 +81,7 @@ class PqrForm extends BaseForm {
             );
             if(!empty($values['document_number'])) {
                 $citizen['document_type'] = $values['document_type'];
-                $citizen['document_id'] = $values['document_number']; #FIXME: cambiar a document_number en OpenErp
+                $citizen['document_number'] = $values['document_number']; #FIXME: cambiar a document_number en OpenErp
             }
             $contact_map = array('email','twitter','facebook','phone','address');
             foreach($contact_map as $f) {
