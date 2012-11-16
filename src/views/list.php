@@ -4,7 +4,7 @@
 <div class="span6">
     <div class="hero-unit">
         <h1>Participe</h1>
-        <p>Realize el reporte de daños en la malla vial y el espacio público de la ciudad, de manera rápida y sencilla.</p>
+        <p>Realice el reporte de daños en la malla vial y el espacio público de la ciudad de manera rápida y sencilla.</p>
         <p>
             <a class="btn btn-primary" href="./new">Reportar</a>
         </p>
