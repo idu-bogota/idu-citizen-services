@@ -171,7 +171,7 @@ class App extends myGlueBase {
     public function list_geojson() {
         header('Content-Type: application/json; charset=utf-8');
         $pqr = new myOpenErpPqr($this->getOpenErpConnection());
-        $items = $pqr->fetch();
+        $items = $pqr->fetch(array(),0,100);
         $features = array();
         foreach ($items as $i) {
             if($feature = $i->getGeoJsonFeature(true)) {
@@ -182,7 +182,7 @@ class App extends myGlueBase {
         }
         $feature = array(
           'type' => 'FeatureCollection',
-          'features' => $features,
+          'features' => $features
         );
         echo json_encode($feature);
     }
