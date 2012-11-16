@@ -66,9 +66,9 @@ Ocs.View.ListMap = Ocs.View.BaseMap.extend({
         this.report_list_view.render();
         var style = new OpenLayers.Style({
             pointRadius: "${radius}",
-            fillColor: "#ffcc66",
+            fillColor: "#00FF00",
             fillOpacity: 0.8,
-            strokeColor: "#cc6633",
+            strokeColor: "#001100",
             strokeWidth: 2,
             strokeOpacity: 0.8
         }, {
