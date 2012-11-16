@@ -34,11 +34,11 @@ class myOpenErpPqr extends OpenErpPqr {
     }
 
     public function getFullFilename() {
-        $path = glue("config")->read('attachement_path');
+        $path = glue("config")->read('attachment_path');
         return $path.'/'.$this->getFilename();
     }
     public function getFullThumbFilename() {
-        $path = glue("config")->read('attachement_path');
+        $path = glue("config")->read('attachment_path');
         return $path.'/thumb/'.$this->getFilename();
     }
 
@@ -52,7 +52,7 @@ class myOpenErpPqr extends OpenErpPqr {
 
     public function getImageUrl() {
         if($this->imageExists()) {
-          $path = glue("config")->read('attachement_base_url');
+          $path = glue("config")->read('attachment_base_url');
           return $path.'/'.$this->getFilename();
         }
         return 'http://placehold.it/150&text=Sin+imagen';
@@ -60,7 +60,7 @@ class myOpenErpPqr extends OpenErpPqr {
 
     public function getImageThumbUrl() {
         if($this->imageThumbExists()) {
-          $path = glue("config")->read('attachement_base_url');
+          $path = glue("config")->read('attachment_base_url');
           return $path.'/thumb/'.$this->getFilename();
         }
         return 'http://placehold.it/64&text=Sin+imagen';
@@ -75,8 +75,8 @@ class myGlueBase extends GlueBase {
         glue("config")->write('username', $username);
         glue("config")->write('pwd', $pwd);
         glue("config")->write('dbname', $dbname);
-        glue("config")->write('attachement_base_url', $attachement_base_url);
-        glue("config")->write('attachement_path', $attachement_path);
+        glue("config")->write('attachment_base_url', $attachment_base_url);
+        glue("config")->write('attachment_path', $attachment_path);
     }
 
     public function setFlash($type, $message, $flash_id = null) {
