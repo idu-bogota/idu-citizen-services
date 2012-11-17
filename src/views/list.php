@@ -57,6 +57,9 @@
 <script type="text/template" id="list-template">
         <div class="hero-unit">
             <h1>Consulte</h1>
-            <p>Haga click sobre los reportes disponibles en el mapa para conocer los detalles del mismo</p>
+            <p>Conozca los detalles de los últimas reportes realizados a través de esta herramienta, haciendo click en los puntos que se presenten en el mapa.</p>
+            <p>
+                <a class="btn btn-primary" id="consultar" href="#">Consultar</a>
+            </p>
         </div>
 </script>

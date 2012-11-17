@@ -63,6 +63,7 @@ Ocs.View.ListMap = Ocs.View.BaseMap.extend({
         this.report_list_view = new Ocs.View.ReportList({
             el: $('#report_list')
         });
+        this.report_list_view.on('display_layer', this.display_layer, this);
         this.report_list_view.render();
         var style = new OpenLayers.Style({
             pointRadius: "${radius}",
@@ -92,6 +93,7 @@ Ocs.View.ListMap = Ocs.View.BaseMap.extend({
         var list_layer = this.model.get('list_layer');
         list_layer.styleMap = style_map;
         list_layer.redraw();
+        list_layer.setVisibility(false);
 
         select_control = new OpenLayers.Control.SelectFeature( list_layer, {
             onSelect: _.bind(this.on_feature_select, this),
@@ -113,14 +115,32 @@ Ocs.View.ListMap = Ocs.View.BaseMap.extend({
     },
     on_feature_unselect: function (feature) {
         this.report_list_view.remove_feature(feature);
+        this.display_layer();
+    },
+    display_layer: function() {
+        var layer = this.model.get('list_layer');
+        layer.setVisibility(true);
+        var feature = new OpenLayers.Feature.Vector();
+        feature.cluster = [];
+        _.each(layer.features, function(i) {
+            feature.cluster.push(i.cluster[0]);
+        });
+        this.report_list_view.add_feature(feature, true);
     }
 });
 
 Ocs.View.ReportList = Backbone.View.extend(
     _.extend({}, Mixins.SubviewCollection, {
+    events: {
+        "click #consultar" : "display_layer",
+    },
     initialize: function() {
         this.template = _.template($('#list-template').html());
         this.subview_tmpl = _.template($('#item-template').html());
+    },
+    display_layer: function(e) {
+        this.trigger('display_layer');
+        e.preventDefault();
     },
     create_subview_instance: function(model) {
         var view = new Ocs.View.ReportListItem({
@@ -129,11 +149,16 @@ Ocs.View.ReportList = Backbone.View.extend(
         });
         return view;
     },
-    add_feature: function(feature) {
+    add_feature: function(feature, all) {
         this.render();
         this.remove_all_subviews();
         $('.pagination').remove();
-        $(this.el).append('<h2>Reportes seleccionados</h2>');
+        if(all) {
+            $(this.el).append('<h2>Reportes</h2>');
+        }
+        else {
+            $(this.el).append('<h2>Reportes seleccionados</h2>');
+        }
         _.each(feature.cluster, function(feature) {
             var model = new Ocs.Model.Report({ feature: feature });
             var view = this.add_subview(model);
