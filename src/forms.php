@@ -118,13 +118,15 @@ class PqrForm extends BaseForm {
         require_once(EXTERNALS_DIR.'/phpthumb/src/ThumbLib.inc.php');
         $upload = new Zend_File_Transfer_Adapter_Http();
         $upload->receive();
-        $filename = $this->object->getFullFilename();
-        $thumb_fname = $this->object->getFullThumbFilename();
-        $filter_rename = new Zend_Filter_File_Rename(array('target' => $filename, 'overwrite' => true));
-        $filter_rename->filter($upload->getFileName());
-        $thumb = PhpThumbFactory::create($filename);
-        $thumb->adaptiveResize(64, 64);
-        $thumb->save($thumb_fname);
+        if( $upload->isUploaded() ) {
+            $filename = $this->object->getFullFilename();
+            $thumb_fname = $this->object->getFullThumbFilename();
+            $filter_rename = new Zend_Filter_File_Rename(array('target' => $filename, 'overwrite' => true));
+            $filter_rename->filter($upload->getFileName());
+            $thumb = PhpThumbFactory::create($filename);
+            $thumb->adaptiveResize(64, 64);
+            $thumb->save($thumb_fname);
+        }
     }
 }
 
