@@ -117,7 +117,7 @@ class App extends myGlueBase {
     public function form() {
         $form = new PqrForm();
         $data = array(
-            "title" => 'Reporte un daño',
+            "title" => 'Reporte un daño en la malla vial y el espacio público',
             'form' => $form,
             'menu_item' => 'new',
         );
@@ -138,7 +138,7 @@ class App extends myGlueBase {
     public function save_post() {
         $form = new PqrForm();
         $data = array(
-            "title" => 'Reporte un daño en la malla vial',
+            "title" => 'Reporte un daño en la malla vial y el espacio público',
             'form' => $form,
             'menu_item' => 'new',
         );
@@ -192,7 +192,7 @@ class App extends myGlueBase {
     */
     public function list_html() {
         $data = array(
-            "title" => 'Listado de reportes de daño',
+            "title" => 'Listado de reportes de daño de la malla vial y el espacio público',
             'menu_item' => 'list',
         );
         $data = array_merge($data, $this->getFlash());
