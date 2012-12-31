@@ -112,17 +112,32 @@ class myGlueBase extends GlueBase {
 
 class App extends myGlueBase {
     /**
-        @Get /new
+        @Get /simple
     */
     public function form() {
         $form = new PqrForm();
         $data = array(
-            "title" => 'Reporte un daño en la malla vial y el espacio público',
+            "title" => 'Reporte un daño en la malla vial',
             'form' => $form,
             'menu_item' => 'new',
         );
         $data = array_merge($data, $this->getFlash());
         echo glue("template")->render("../views/map.php with ../views/layout.php", $data);
+    }
+    /**
+        @Get /new
+    */
+    public function wizard() {
+        $view = new Zend_View();
+        $form = new PqrForm(array('view' => $view));
+        $data = array(
+            "title" => 'Reporte un daño en la malla vial',
+            'form' => $form,
+            'menu_item' => 'new',
+            'view' => $view,
+        );
+        $data = array_merge($data, $this->getFlash());
+        echo glue("template")->render("../views/wizard.php with ../views/layout.php", $data);
     }
 
     /**
@@ -138,7 +153,7 @@ class App extends myGlueBase {
     public function save_post() {
         $form = new PqrForm();
         $data = array(
-            "title" => 'Reporte un daño en la malla vial y el espacio público',
+            "title" => 'Reporte un daño en la malla vial',
             'form' => $form,
             'menu_item' => 'new',
         );

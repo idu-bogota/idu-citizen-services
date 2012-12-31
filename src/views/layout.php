@@ -8,6 +8,7 @@
     <script type='text/javascript' src='js/underscore-min.js'></script>
     <script type='text/javascript' src='js/backbone-min.js'></script>
     <script type='text/javascript' src='js/bootstrap-min.js'></script>
+    <script type='text/javascript' src='js/wizard.js'></script>
     <script type='text/javascript' src='js/mixins.js'></script>
     <script type='text/javascript' src='js/jPaginate.js'></script>
     <script type='text/javascript' src='js/ocs-public-portal.js'></script>
@@ -17,20 +18,18 @@
     <link href="css/styles.css" rel="stylesheet">
 </head>
 <body>
-    <div class="container-fluid">
-        <div class="navbar navbar-inverse">
-            <div class="navbar-inner">
-                <a class="brand" href="http://www.idu.gov.co/">IDU</a>
-                <ul class="nav">
-                    <li <?php echo is_item_active($menu_item, 'list') ?>><a href="./">Inicio</a></li>
-                    <li <?php echo is_item_active($menu_item, 'new') ?>><a href="./new">Reporte un daño</a></li>
-                </ul>
-            </div>
+    <div class="navbar navbar-inverse">
+        <div class="navbar-inner">
+            <a class="brand" href="http://www.idu.gov.co/">IDU</a>
+            <ul class="nav">
+                <li <?php echo is_item_active($menu_item, 'list') ?>><a href="./">Inicio</a></li>
+                <li <?php echo is_item_active($menu_item, 'new') ?>><a href="./new">Reporte un daño</a></li>
+            </ul>
         </div>
-        <div class="page-header">
-            <h1><?php echo $title ?></h1>
-        </div>
-        
+    </div>
+
+    <div class="container">
+        <h1><?php echo $title ?></h1>
         <?php if(isset($warning_message)): ?>
             <div class="alert">
                 <button type="button" class="close" data-dismiss="alert">×</button>
@@ -49,10 +48,9 @@
                 <?php echo $success_message ?>
             </div>
         <?php endif ?>
-
-        <div class="row-fluid">
-            <?php echo $content_for_layout;?>
-        </div>
+    </div>
+    <div class="container">
+        <?php echo $content_for_layout;?>
     </div>
 </body>
 </html>

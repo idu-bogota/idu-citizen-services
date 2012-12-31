@@ -159,6 +159,19 @@ pqr:
                         validator: StringLength
                         options:
                             max: 100
+        claim_address:
+            type: text
+            options:
+                label: Dirección del daño
+                class: input-block-level
+                filters:
+                    trim:
+                        filter: StringTrim
+                validators:
+                    length:
+                        validator: StringLength
+                        options:
+                            max: 100
         category:
             type: select
             options:
@@ -170,6 +183,24 @@ pqr:
             options:
                 required: true
                 label: Clasificación
+                class: input-block-level
+        ancho:
+            type: select
+            options:
+                required: true
+                label: Ancho
+                class: input-block-level
+        largo:
+            type: select
+            options:
+                required: true
+                label: Largo
+                class: input-block-level
+        profundidad:
+            type: select
+            options:
+                required: true
+                label: Profundidad
                 class: input-block-level
         description:
             type: textarea
@@ -197,11 +228,6 @@ pqr:
                 value: Al enviar los datos usted acepta los términos y condiciones del sitio
                 disabled: disabled
                 class: input-block-level
-        is_anonymous:
-            type: checkbox
-            options:
-                value: anonimo
-                label: No deseo ingresar mis datos personales o de contacto
         image:
             type: file
             options:

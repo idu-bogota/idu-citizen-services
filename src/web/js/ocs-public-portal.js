@@ -197,7 +197,7 @@ Ocs.View.ReportListItem = Backbone.View.extend({
 Ocs.Model = {};
 Ocs.Model.Map = Backbone.Model.extend({
     urlRoot: '',
-    map: new OpenLayers.Map('map_element', { controls:[] }),
+    map: new OpenLayers.Map(),
     defaults: function() {
         return {
             id:  '',
@@ -233,7 +233,145 @@ Ocs.Model.Report = Backbone.Model.extend({
         this.set(this.get('feature').attributes);
     },
 });
-////////////// OPENLAYERS Extensions
+
+/****************************************
+ * Wizard
+ */
+Ocs.Wizard = {};
+Ocs.Wizard.Wizard = WizardView.extend({
+    events: {
+        "click #next_step_button" : "goNextStep",
+        "click #prev_step_button" : "goPrevStep"
+    },
+    initializeModel: function() {
+        this.model = new WizardModel({
+            steps: new WizardStepCollection([
+                  {
+                    step_number :       1,
+                    title :             "Tipo de daño",
+                    instructions :      "Por favor seleccione el tipo de daño que desea reportar",
+                    view :              new Ocs.Wizard.Tipo.Step({ el: $($("#wizard_tipo").html()) })
+                  },
+                  {
+                    step_number :       2,
+                    title :             "Descripción",
+                    instructions :      "Por favor ingrese mayores detalles acerca del tipo de daño que desea reportar",
+                    view :              new Ocs.Wizard.Descripcion.Step({ el: $($("#wizard_descripcion").html()) })
+                  },
+                  {
+                    step_number :       3,
+                    title :             "Ubicación",
+                    instructions :      "Por favor ingrese la ubicación ",
+                    view :              new Ocs.Wizard.Ubicacion.Step({ el: $($("#wizard_ubicacion").html()) })
+                  },
+                  {
+                    step_number :       4,
+                    title :             "Datos de contacto",
+                    instructions :      "Por favor ingrese los datos de contacto",
+                    view :              new Ocs.Wizard.Contacto.Step({ el: $($("#wizard_contacto").html()) })
+                  },
+                  {
+                    step_number :       5,
+                    title :             "Enviar",
+                    instructions :      "Diligencie y envie",
+                    view :              new Ocs.Wizard.Enviar.Step({ el: $($("#wizard_enviar").html()) })
+                  },
+            ]),
+        });
+        this.model.save = function() { this.trigger('save') };
+        this.model.on('save',this.finish, this);
+    },
+    finish: function() {
+        $('#wizard_loader',this.el).show();
+        $('#next_step_button',this.el).attr('disabled','disabled');
+        return false;
+    },
+});
+
+/****************************************
+ * Tipo de Daño
+ */
+Ocs.Wizard.Tipo = {};
+Ocs.Wizard.Tipo.Step = Backbone.View.extend({
+    initialize: function() {
+    },
+    validate: function() {
+        return true;
+    },
+});
+/****************************************
+ * Descripción
+ */
+Ocs.Wizard.Descripcion = {};
+Ocs.Wizard.Descripcion.Step = Backbone.View.extend({
+    initialize: function() {
+    },
+    validate: function() {
+        return true;
+    },
+});
+/****************************************
+ * Ubicación
+ */
+Ocs.Wizard.Ubicacion = {};
+Ocs.Wizard.Ubicacion.Step = Backbone.View.extend({
+    initialize: function() {
+        var styleMap = new OpenLayers.StyleMap({
+            'default': {
+                pointRadius: 10,
+                fillOpacity: 1,
+                externalGraphic: 'http://www.openlayers.org/dev/img/marker.png'
+            },
+            'temporary': {
+                fillOpacity: 0.5,
+                pointRadius: 10,
+                externalGraphic: 'http://www.openlayers.org/dev/img/marker.png'
+            }
+        });
+        window.main = new Ocs.View.FormMap({ //FIXME: shouldn't use window.main
+            model: new Ocs.Model.Map({
+                markers: new OpenLayers.Layer.Vector("Markers", {styleMap: styleMap}),
+            }),
+            el: $('#map_element', this.el),
+            initial_zoom: 15
+        });
+    },
+    validate: function() {
+        return true;
+    },
+    render: function() {
+        $(this.el).show();
+        window.main.render();
+        return this;
+    }
+});
+/****************************************
+ * Contacto
+ */
+Ocs.Wizard.Contacto = {};
+Ocs.Wizard.Contacto.Step = Backbone.View.extend({
+    initialize: function() {
+    },
+    validate: function() {
+        return true;
+    },
+});
+/****************************************
+ * Enviar
+ */
+Ocs.Wizard.Enviar = {};
+Ocs.Wizard.Enviar.Step = Backbone.View.extend({
+    initialize: function() {
+    },
+    validate: function() {
+        return true;
+    },
+});
+
+/****************************************
+ * OPENLAYERS Extensions
+ */
+
 Ocs.OpenLayers = {};
 Ocs.OpenLayers.Control = {};
 Ocs.OpenLayers.Control.SinglePointEditingToolbar = OpenLayers.Class( OpenLayers.Control.Panel, {

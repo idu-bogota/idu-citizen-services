@@ -1,5 +1,6 @@
+<div class="row">
 <div class="span6">
-    <div id='map_element' class="map span12"></div>
+    <div id='map_element' class="map"></div>
 </div>
 <div class="span6">
     <div class="hero-unit">
@@ -11,6 +12,7 @@
     </div>
     <div id="report_list">
     </div>
+</div>
 </div>
 <script type='text/javascript'>
     $(document).ready(function(){
