@@ -172,31 +172,23 @@ pqr:
                         validator: StringLength
                         options:
                             max: 100
-        category:
-            type: select
+        claim_type:
+            type: hidden
             options:
                 required: true
-                label: Categoria
-                class: input-block-level
-        classification:
-            type: select
-            options:
-                required: true
-                label: Clasificación
-                class: input-block-level
-        ancho:
+        width:
             type: select
             options:
                 required: true
                 label: Ancho
                 class: input-block-level
-        largo:
+        length:
             type: select
             options:
                 required: true
                 label: Largo
                 class: input-block-level
-        profundidad:
+        deep:
             type: select
             options:
                 required: true
@@ -256,9 +248,11 @@ pqr:
             options:
                 legend: Detalles de su reporte
             elements:
+                - claim_type
+                - width
+                - length
+                - deep
                 - description
-                - category
-                - classification
                 - geo_point
                 - image
                 - is_anonymous

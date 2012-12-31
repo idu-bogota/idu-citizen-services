@@ -33,6 +33,7 @@ WizardView = Backbone.View.extend({
 
     render: function() {
         this.model.get('steps').each(function(step){$(step.get('view').el).hide()});
+        $('#step_error').html('');
         $(this.model.currentView().render().el).show();
         var current_step = this.model.currentStep().toJSON();
         $('#step_title').html(current_step['title']);
@@ -190,7 +191,11 @@ WizardStep = Backbone.Model.extend({
     },
     validate: function() {
         if(_.isFunction(this.get('view').validate)) {
-            return this.get('view').validate();
+            var is_valid = this.get('view').validate();
+            if(is_valid != true) {
+                this.display_error(is_valid);
+            }
+            return is_valid == true;
         }
         return true;
     },
@@ -199,6 +204,10 @@ WizardStep = Backbone.Model.extend({
             return this.get('view').skipMe();
         }
         return false;
+    },
+    display_error: function(msg) {
+        var msg = '<div class="alert alert-error"><button type="button" class="close" data-dismiss="alert">&times;</button>' + msg + '</div>'
+        $('#step_error').html(msg);
     }
 });
 

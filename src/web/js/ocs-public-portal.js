@@ -293,11 +293,29 @@ Ocs.Wizard.Wizard = WizardView.extend({
  */
 Ocs.Wizard.Tipo = {};
 Ocs.Wizard.Tipo.Step = Backbone.View.extend({
+    events: {
+      "click .btn.tipo_hueco": "select_type"
+    },
     initialize: function() {
     },
     validate: function() {
-        return true;
+        if($('#claim_type').val()) {
+            return true;
+        }
+        return 'Por favor seleccione un tipo de daño antes de continuar';
     },
+    select_type: function(e){
+        $('#step_error').html('');
+        $('.btn.tipo_hueco', this.el).each(function (i, v) {
+            $(v).removeClass('btn-success');
+            $(v).html('Seleccionar');
+        });
+        var button = $(e.currentTarget);
+        $('#claim_type').val(button.attr('value'));
+        button.addClass('btn-success');
+        button.html('Seleccionado');
+        return false;
+    }
 });
 /****************************************
  * Descripción

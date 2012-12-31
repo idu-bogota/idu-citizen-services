@@ -26,6 +26,7 @@
       <div class="span12">
         <h2 id="step_title"></h2>
         <div class="well" id="step_instructions"></div>
+        <div id="step_error"></div>
       </div>
     </div>
     <div id="current_step_container"></div>

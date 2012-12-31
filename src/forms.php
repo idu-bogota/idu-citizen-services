@@ -24,8 +24,6 @@ class PqrForm extends BaseForm {
         $config = new Zend_Config_Yaml( __DIR__.'/forms.yml');
         $this->setConfig($config->pqr);
         $this->setAttrib('enctype', 'multipart/form-data');
-        $this->getElement('category')->addMultiOptions($this->retrieveCategoryOptions());
-        $this->getElement('classification')->addMultiOptions($this->retrieveClassificationOptions());
         $document_type = array(
             'C' => 'Cédula de ciudadanía',
             'T' => 'Tarjeta de identidad',

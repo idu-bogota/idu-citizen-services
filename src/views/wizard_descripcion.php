@@ -3,9 +3,9 @@
 </div>
 <div class="row-fluid">
   <div class="span6">
-    <?php echo $form->ancho->render($view); ?>
-    <?php echo $form->largo->render($view); ?>
-    <?php echo $form->profundidad->render($view); ?>
+    <?php echo $form->width->render($view); ?>
+    <?php echo $form->length->render($view); ?>
+    <?php echo $form->deep->render($view); ?>
   </div>
   <div class="span6">
     <?php echo $form->image->render($view); ?>
