@@ -273,7 +273,7 @@ Ocs.Wizard.Wizard = WizardView.extend({
                   {
                     step_number :       5,
                     title :             "Enviar",
-                    instructions :      "Diligencie y envie",
+                    instructions :      "Al enviar los datos usted acepta los términos y condiciones del sitio",
                     view :              new Ocs.Wizard.Enviar.Step({ el: $($("#wizard_enviar").html()) })
                   },
             ]),
@@ -325,6 +325,9 @@ Ocs.Wizard.Descripcion.Step = Backbone.View.extend({
     initialize: function() {
     },
     validate: function() {
+        if(!$('#description').val()) {
+            return 'Por favor ingrese una descripción';
+        }
         return true;
     },
 });
@@ -371,6 +374,21 @@ Ocs.Wizard.Contacto.Step = Backbone.View.extend({
     initialize: function() {
     },
     validate: function() {
+        if($('#name').val() && !$('#lastname').val()) {
+            return 'Por favor ingrese sus apellidos';
+        }
+        if($('#lastname').val() && !$('#name').val()) {
+            return 'Por favor ingrese su primer y segundo nombre';
+        }
+        if($('#lastname').val() && !$('#name').val()) {
+            return 'Por favor ingrese su primer y segundo nombre';
+        }
+        if($('#document_number').val() && (!$('#name').val() || !$('#lastname').val())) {
+            return 'Por favor ingrese sus nombres y apellidos';
+        }
+        if($('#name').val() && (!$('#email').val() && !$('#twitter').val() && !$('#facebook').val() && !$('#phone').val() && !$('#address').val())) {
+            return 'Por favor ingrese al menos un dato de contacto';
+        }
         return true;
     },
 });

@@ -214,12 +214,6 @@ pqr:
                         validator: StringLength
                         options:
                             max: 1000
-        disclaimer:
-            type: note
-            options:
-                value: Al enviar los datos usted acepta los términos y condiciones del sitio
-                disabled: disabled
-                class: input-block-level
         image:
             type: file
             options:
@@ -278,5 +272,4 @@ pqr:
         send:
             name: send
             elements:
-                - disclaimer
                 - submit
