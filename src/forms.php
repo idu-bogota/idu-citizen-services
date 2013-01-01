@@ -83,11 +83,6 @@ class PqrForm extends BaseForm {
             $attributes['partner_address_id'] = $citizen;
         }
 
-        $classification_id = 1; //fallback
-        $classifications = $this->retrieveClassificationObjects(true);
-        if( is_array($classifications[$values['classification']]['parent_id']) ) {
-            $classification_id = $classifications[$values['classification']]['parent_id'][0];
-        }
         include(__DIR__.'/config.inc.php');
         $config_map = array('categ_id','classification_id','sub_classification_id','csp_id','channel');
         foreach($config_map as $f) {
@@ -111,13 +106,16 @@ class PqrForm extends BaseForm {
         require_once(EXTERNALS_DIR.'/phpthumb/src/ThumbLib.inc.php');
         $upload = new Zend_File_Transfer_Adapter_Http();
         $upload->receive();
-        $filename = $this->object->getFullFilename();
-        $thumb_fname = $this->object->getFullThumbFilename();
-        $filter_rename = new Zend_Filter_File_Rename(array('target' => $filename, 'overwrite' => true));
-        $filter_rename->filter($upload->getFileName());
-        $thumb = PhpThumbFactory::create($filename);
-        $thumb->adaptiveResize(64, 64);
-        $thumb->save($thumb_fname);
+        $fname_uploaded = $upload->getFileName();
+        if(!empty($fname_uploaded)) {
+            $filename = $this->object->getFullFilename();
+            $thumb_fname = $this->object->getFullThumbFilename();
+            $filter_rename = new Zend_Filter_File_Rename(array('target' => $filename, 'overwrite' => true));
+            $filter_rename->filter($upload->getFileName());
+            $thumb = PhpThumbFactory::create($filename);
+            $thumb->adaptiveResize(64, 64);
+            $thumb->save($thumb_fname);
+        }
     }
 }
 

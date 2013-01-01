@@ -168,7 +168,7 @@ class App extends myGlueBase {
                     $form->saveImage();
                 }
                 catch (Exception $e) {
-                    $flash_id = $this->setFlash('error', 'El archivo anexo no pudo ser almacenado', $flash_id);
+                    $flash_id = $this->setFlash('error', 'El archivo anexo no pudo ser almacenado '.$e->getMessage(), $flash_id);
                 }
                 header('Location: ./?flash_id='.$flash_id);
                 return;
