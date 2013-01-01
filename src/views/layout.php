@@ -20,7 +20,7 @@
     <link href="css/styles.css" rel="stylesheet">
 </head>
 <body>
-    <div class="navbar navbar-inverse">
+    <div class="navbar navbar-inverse hidden-phone">
         <div class="navbar-inner">
             <a class="brand" href="http://www.idu.gov.co/">IDU</a>
             <ul class="nav">
@@ -31,7 +31,11 @@
     </div>
 
     <div class="container">
-        <h1><?php echo $title ?></h1>
+        <?php if(!is_mobile()): ?>
+            <h1 class="hidden-phone"><?php echo $title ?></h1>
+        <?php else : ?>
+            <strong class="visible-phone"><?php echo $title ?></strong>
+        <?php endif ?>
         <?php if(isset($warning_message)): ?>
             <div class="alert">
                 <button type="button" class="close" data-dismiss="alert">×</button>

@@ -1,18 +1,19 @@
+<?php if(!is_mobile()): ?>
 <div class="row">
-<div class="span6">
-    <div id='map_element' class="map"></div>
-</div>
-<div class="span6">
-    <div class="hero-unit">
-        <h1>Participe</h1>
-        <p>Realice el reporte de daños en la malla vial y el espacio público de la ciudad de manera rápida y sencilla.</p>
-        <p>
-            <a class="btn btn-primary" href="./new">Reportar</a>
-        </p>
-    </div>
-    <div id="report_list">
-    </div>
-</div>
+  <div class="span6">
+      <div id='map_element' class="map"></div>
+  </div>
+  <div class="span6">
+      <div class="hero-unit">
+          <h1>Participe</h1>
+          <p>Realice el reporte de daños en la malla vial y el espacio público de la ciudad de manera rápida y sencilla.</p>
+          <p>
+              <a class="btn btn-primary" href="./new">Reportar</a>
+          </p>
+      </div>
+      <div id="report_list">
+      </div>
+  </div>
 </div>
 <script type='text/javascript'>
     $(document).ready(function(){
@@ -65,3 +66,16 @@
             </p>
         </div>
 </script>
+<?php else: ?>
+    <div class="row">
+      <div class="span12">
+          <div class="well">
+              <h1>Participe</h1>
+              <p>Realice el reporte de daños en la malla vial y el espacio público de la ciudad de manera rápida y sencilla.</p>
+              <p>
+                  <a class="btn btn-primary" href="./new">Reportar</a>
+              </p>
+          </div>
+      </div>
+    </div>
+<?php endif ?>

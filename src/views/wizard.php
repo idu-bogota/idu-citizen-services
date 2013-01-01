@@ -18,7 +18,7 @@
 </style>
 <form id="claim_form" enctype="multipart/form-data" action="submit" method="post">
 <div id="wizard">
-    <div class="row">
+    <div class="row hidden-phone">
       <div class="span12">
         <ul class="nav nav-pills pull-right" id="progress_indicator"></ul>
       </div>
