@@ -283,7 +283,9 @@ Ocs.Wizard.Wizard = WizardView.extend({
     },
     finish: function() {
         $('#wizard_loader',this.el).show();
+        $('#prev_step_button',this.el).attr('disabled','disabled');
         $('#next_step_button',this.el).attr('disabled','disabled');
+        $('#claim_form').submit();
         return false;
     },
 });
@@ -297,23 +299,32 @@ Ocs.Wizard.Tipo.Step = Backbone.View.extend({
       "click .btn.tipo_hueco": "select_type"
     },
     initialize: function() {
+        var claim_type = $('#damage_type_by_citizen',this.el).val();
+        if(claim_type) {
+            var btn = $('.btn.tipo_hueco[value='+claim_type+']', this.el);
+            this.select_type_button(btn);
+        }
     },
     validate: function() {
-        if($('#claim_type').val()) {
+        if($('#damage_type_by_citizen').val()) {
             return true;
         }
         return 'Por favor seleccione un tipo de daño antes de continuar';
     },
-    select_type: function(e){
+    select_type_button: function(button){
         $('#step_error').html('');
         $('.btn.tipo_hueco', this.el).each(function (i, v) {
             $(v).removeClass('btn-success');
             $(v).html('Seleccionar');
         });
-        var button = $(e.currentTarget);
-        $('#claim_type').val(button.attr('value'));
+        $('#damage_type_by_citizen').val(button.attr('value'));
         button.addClass('btn-success');
         button.html('Seleccionado');
+        return false;
+    },
+    select_type: function(e){
+        var button = $(e.currentTarget);
+        this.select_type_button(button);
         return false;
     }
 });
@@ -358,6 +369,9 @@ Ocs.Wizard.Ubicacion.Step = Backbone.View.extend({
         });
     },
     validate: function() {
+        if(!$('#geo_point').val()) {
+            return 'Por favor marque un punto en el mapa o ubique el daño a travéz de una dirección';
+        }
         return true;
     },
     render: function() {

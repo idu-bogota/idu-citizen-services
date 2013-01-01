@@ -151,11 +151,13 @@ class App extends myGlueBase {
         @Post /submit
     */
     public function save_post() {
+        $view = new Zend_View();
         $form = new PqrForm();
         $data = array(
             "title" => 'Reporte un daño en la malla vial',
             'form' => $form,
             'menu_item' => 'new',
+            'view' => $view,
         );
         if ($form->isValid($_POST)) {
             try {
@@ -177,7 +179,7 @@ class App extends myGlueBase {
         } else {
             $data['warning_message'] = 'El formulario no pudó ser validado correctamente, por favor revise los datos ingresados.';
         }
-        echo glue("template")->render("../views/map.php with ../views/layout.php", $data);
+        echo glue("template")->render("../views/wizard.php with ../views/layout.php", $data);
     }
 
     /**

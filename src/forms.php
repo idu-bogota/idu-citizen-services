@@ -24,13 +24,6 @@ class PqrForm extends BaseForm {
         $config = new Zend_Config_Yaml( __DIR__.'/forms.yml');
         $this->setConfig($config->pqr);
         $this->setAttrib('enctype', 'multipart/form-data');
-        $document_type = array(
-            'C' => 'Cédula de ciudadanía',
-            'T' => 'Tarjeta de identidad',
-            'P' => 'Pasaporte',
-            'E' => 'Cédula de extranjería'
-        );
-        $this->getElement('document_type')->addMultiOptions($document_type);
     }
 
     protected function retrieveCategoryOptions(){
@@ -95,16 +88,18 @@ class PqrForm extends BaseForm {
         if( is_array($classifications[$values['classification']]['parent_id']) ) {
             $classification_id = $classifications[$values['classification']]['parent_id'][0];
         }
-        $attributes['categ_id'] = $values['category'];
-        $attributes['classification_id'] = $classification_id;
-        $attributes['sub_classification_id'] = $values['classification'];
-        $attributes['csp_id'] = 1;//FIXME: definir cual es el csp_id
+        include(__DIR__.'/config.inc.php');
+        $config_map = array('categ_id','classification_id','sub_classification_id','csp_id','channel');
+        foreach($config_map as $f) {
+            $attributes[$f] = $$f;
+        }
         $attributes['external_dms_id'] = '0';
         $attributes['priority'] = 'l';
-        $attributes['description'] = $values['description'];
         $attributes['state'] = 'pending';
-        $attributes['channel'] = 1;//FIXME: definir cual es el channel
-        $attributes['geo_point'] = $values['geo_point'];
+        $desc_map = array('description','damage_type_by_citizen', 'damage_width_by_citizen', 'damage_length_by_citizen', 'damage_deep_by_citizen','geo_point');
+        foreach($desc_map as $f) {
+            $attributes[$f] = $values[$f];
+        }
         if(!empty($values['email'])) $attributes['email_from'] = $values['email'];
         if(!empty($values['phone'])) $attributes['partner_phone'] = $values['phone'];
         $pqr->attributes = $attributes;

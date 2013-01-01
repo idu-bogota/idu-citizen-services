@@ -1,5 +1,5 @@
 <div class="row-fluid" data-toggle="buttons-radio">
-  <?php echo $form->claim_type->render($view) ?>
+  <?php echo $form->damage_type_by_citizen->render($view) ?>
   <ul class="thumbnails">
     <?php
         $options = array(

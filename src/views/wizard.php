@@ -16,6 +16,7 @@
     background-color: #999;
   }
 </style>
+<form id="claim_form" enctype="multipart/form-data" action="submit" method="post">
 <div id="wizard">
     <div class="row">
       <div class="span12">
@@ -38,6 +39,7 @@
       </div>
     </div>
 </div>
+</form>
 <script type='text/javascript'>
     $(document).ready(function(){
         window.Wizard = new Ocs.Wizard.Wizard({el: $('#wizard')});
