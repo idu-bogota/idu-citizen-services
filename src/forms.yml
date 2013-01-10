@@ -181,6 +181,15 @@ pqr:
             type: hidden
             options:
                 required: true
+                validators:
+                    regex:
+                        validator: Regex
+                        options:
+                            pattern: '/(fisura|hueco|hundimiento)/'
+                            messages:
+                                regexInvalid: 'Texto ingresado no tiene un formato válido'
+                                regexNotMatch: "'%value%' no es uno de los tipos de daños soportados"
+
         damage_width_by_citizen:
             type: select
             options:

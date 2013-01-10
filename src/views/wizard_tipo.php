@@ -3,20 +3,20 @@
   <ul class="thumbnails">
     <?php
         $options = array(
-            'bache' => array(
-                'key' => 'bache',
-                'img' => 'http://placehold.it/400x200',
-                'desc' => '<p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>',
+            'fisura' => array(
+                'key' => 'fisura',
+                'img' => 'img/fisura.jpg',
+                'desc' => '<p>Consiste en la fractura de la capa del pavimento o concreto.</p>',
             ),
             'hueco' => array(
                 'key' => 'hueco',
-                'img' => 'http://placehold.it/400x200',
-                'desc' => '<p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>',
+                'img' => 'img/hueco.jpg',
+                'desc' => '<p>Es una depresión en la superficie de la vía generada por el crecimiento de fisuras causadas e intensificadas por el tráfico y/o el clima.</p>',
             ),
             'hundimiento' => array(
                 'key' => 'hundimiento',
-                'img' => 'http://placehold.it/400x200',
-                'desc' => '<p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>',
+                'img' => 'img/hundimiento.jpg',
+                'desc' => '<p>Es una depresión pronunciada generada principalmente por la erosión de los materiales que soportan la estructura de la via (ejemplo. tubos rotos).</p>',
             ),
         );
     ?>
