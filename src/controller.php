@@ -77,6 +77,7 @@ class myGlueBase extends GlueBase {
         glue("config")->write('dbname', $dbname);
         glue("config")->write('attachment_base_url', $attachment_base_url);
         glue("config")->write('attachment_path', $attachment_path);
+        glue("config")->write('geocoding_service_url', $geocoding_service_url);
     }
 
     public function setFlash($type, $message, $flash_id = null) {
@@ -218,6 +219,40 @@ class App extends myGlueBase {
 
     protected function getOpenErpConnection() {
         return myOpenErpConnection::getConnection();
+    }
+
+    /**
+        @Get /geocode
+    */
+    public function geocode() {
+        header('Content-Type: application/json; charset=utf-8');
+        $service_url = glue("config")->read('geocoding_service_url');
+        $curl = curl_init($service_url);
+        $curl_post_data = array(
+            'Street' => $_GET['address'],
+            'Zone' => '11001000',
+            'f' => 'pjson',
+            'outSR' => '4326'
+        );
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($curl, CURLOPT_POST, true);
+        curl_setopt($curl, CURLOPT_POSTFIELDS, $curl_post_data);
+        $curl_response = curl_exec($curl);
+        curl_close($curl);
+        $response = json_decode($curl_response, true);
+        $result = array();
+        if(sizeof($response['candidates'])) {
+            $result = array(
+                'address' => $response['candidates'][0]['address'],
+                'position' => array(
+                    'coords' => array(
+                        'longitude' => $response['candidates'][0]['location']['x'],
+                        'latitude' => $response['candidates'][0]['location']['y'],
+                    )
+                )
+            );
+        }
+        echo json_encode($result);
     }
 }
 

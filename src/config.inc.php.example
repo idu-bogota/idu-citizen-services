@@ -5,6 +5,7 @@ $pwd = 'admin1';
 $dbname = 'openerp-idu';
 $attachment_path = '/var/www/images/';
 $attachment_base_url = '/images/';
+$geocoding_service_url = 'http://localhost/ArcGIS/rest/services/GeocodeIDU/GeocodeServer/findAddressCandidates';
 $categ_id = 1;
 $classification_id = 2;
 $sub_classification_id = 25;

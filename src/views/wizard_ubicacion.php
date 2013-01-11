@@ -4,7 +4,7 @@
     <div class="span6">
         <?php echo $form->geo_point->render($view); ?>
         <?php echo $form->claim_address->render($view); ?>
-        <button type="button" class="btn">Ubicar dirección en el mapa</button>
+        <button type="button" class="btn" id="geocode_btn">Ubicar dirección en el mapa</button>
         <br /><br />
         <div class="well">
           El IDU se encarga de ...

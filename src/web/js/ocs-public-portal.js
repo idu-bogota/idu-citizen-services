@@ -55,6 +55,7 @@ Ocs.View.FormMap = Ocs.View.BaseMap.extend({
         var feature = new OpenLayers.Feature.Vector(point,{icon: "http://www.openlayers.org/dev/img/marker.png"} );
         layer.addFeatures(feature);
         this.map.setCenter(lonLat, 18);// Zoom level
+        return point;
     }
 });
 
@@ -347,6 +348,10 @@ Ocs.Wizard.Descripcion.Step = Backbone.View.extend({
  */
 Ocs.Wizard.Ubicacion = {};
 Ocs.Wizard.Ubicacion.Step = Backbone.View.extend({
+    events: {
+        "click #geocode_btn" : "geocode",
+        "keypress #claim_address":  "geocode_on_enter",
+    },
     initialize: function() {
         var styleMap = new OpenLayers.StyleMap({
             'default': {
@@ -378,6 +383,28 @@ Ocs.Wizard.Ubicacion.Step = Backbone.View.extend({
         $(this.el).show();
         window.main.render();
         return this;
+    },
+    geocode: function() {
+        var address = $('#claim_address',this.el).val();
+        $.get('geocode', {address: address}, function(data) {
+            if(!_.isEmpty(data)) {
+                window.main.model.get("markers").removeAllFeatures();
+                var point = window.main.set_geolocation(data.position);
+                window.main.model.set('geometry',point);
+                $('#step_error').html('');
+            }
+            else {
+                msg = 'La dirección no pudo ser ubicada geograficamente';
+                var msg = '<div class="alert alert-error"><button type="button" class="close" data-dismiss="alert">&times;</button>' + msg + '</div>'
+                $('#step_error').html(msg);
+            }
+        }, 'json');
+    },
+    geocode_on_enter: function(e) {
+        this.input = $('#claim_address');
+        var text = this.input.val();
+        if (!text || e.keyCode != 13) return;
+        this.geocode();
     }
 });
 /****************************************
