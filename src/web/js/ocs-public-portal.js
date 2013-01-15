@@ -427,7 +427,10 @@ Ocs.Wizard.Contacto.Step = Backbone.View.extend({
         if($('#document_number').val() && (!$('#name').val() || !$('#lastname').val())) {
             return 'Por favor ingrese sus nombres y apellidos';
         }
-        if($('#name').val() && (!$('#email').val() && !$('#twitter').val() && !$('#facebook').val() && !$('#phone').val() && !$('#address').val())) {
+        if(!$('#document_number').val() && $('#name').val()) {
+            return 'Por favor ingrese un número de documento de identidad';
+        }
+        if($('#name').val() && (!$('#email').val() && !$('#twitter').val() && !$('#facebook').val() && !$('#phone').val())) {
             return 'Por favor ingrese al menos un dato de contacto';
         }
         return true;
