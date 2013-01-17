@@ -271,12 +271,12 @@ Ocs.Wizard.Wizard = WizardView.extend({
                     instructions :      "Por favor ingrese los datos de contacto",
                     view :              new Ocs.Wizard.Contacto.Step({ el: $($("#wizard_contacto").html()) })
                   },
-                  {
-                    step_number :       5,
-                    title :             "Enviar",
-                    instructions :      "Al enviar los datos usted acepta los términos y condiciones del sitio",
-                    view :              new Ocs.Wizard.Enviar.Step({ el: $($("#wizard_enviar").html()) })
-                  },
+//                   {
+//                     step_number :       5,
+//                     title :             "Enviar",
+//                     instructions :      "Al enviar los datos usted acepta los términos y condiciones del sitio",
+//                     view :              new Ocs.Wizard.Enviar.Step({ el: $($("#wizard_enviar").html()) })
+//                   },
             ]),
         });
         this.model.save = function() { this.trigger('save') };
