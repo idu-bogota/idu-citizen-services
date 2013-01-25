@@ -252,6 +252,7 @@ pqr:
         image:
             type: file
             options:
+                required: true
                 label: Adjunte una imagen
                 validators:
                     is_image:

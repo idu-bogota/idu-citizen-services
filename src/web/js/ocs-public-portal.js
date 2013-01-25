@@ -340,6 +340,9 @@ Ocs.Wizard.Descripcion.Step = Backbone.View.extend({
         if(!$('#description').val()) {
             return 'Por favor ingrese una descripción';
         }
+        if(!$('#image').val()) {
+            return 'Por favor adjunte una fotografía del daño';
+        }
         return true;
     },
 });
