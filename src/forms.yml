@@ -18,6 +18,7 @@ pqr:
         name:
             type: text
             options:
+                required: true #Solicitado por Dirección
                 label: Nombres
                 class: input-block-level
                 required: false
@@ -35,6 +36,7 @@ pqr:
         lastname:
             type: text
             options:
+                required: true #Solicitado por Dirección
                 label: Apellidos
                 class: input-block-level
                 filters:
@@ -61,6 +63,7 @@ pqr:
         document_number:
             type: text
             options:
+                required: true #Solicitado por Dirección
                 label: Número de documento
                 class: input-block-level
                 filters:

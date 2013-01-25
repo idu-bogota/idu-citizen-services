@@ -418,13 +418,16 @@ Ocs.Wizard.Contacto.Step = Backbone.View.extend({
     initialize: function() {
     },
     validate: function() {
+        if(!$('#name').val()) {
+            return 'Por favor ingrese su nombre';
+        }
         if($('#name').val() && !$('#lastname').val()) {
             return 'Por favor ingrese sus apellidos';
         }
         if($('#lastname').val() && !$('#name').val()) {
             return 'Por favor ingrese su primer y segundo nombre';
         }
-        if($('#lastname').val() && !$('#name').val()) {
+        if(!$('#lastname').val() && !$('#name').val()) {
             return 'Por favor ingrese su primer y segundo nombre';
         }
         if($('#document_number').val() && (!$('#name').val() || !$('#lastname').val())) {
