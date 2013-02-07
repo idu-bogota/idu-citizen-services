@@ -345,6 +345,64 @@ Ocs.Wizard.Descripcion.Step = Backbone.View.extend({
         }
         return true;
     },
+    render: function() {
+        var type = $('#damage_type_by_citizen').val();
+
+        //defaults
+        length_options = width_options = {
+            'ns-nr': '- Seleccionar -',
+            '10-30cm': 'Entre 10 y 30 centimetros',
+            '30-50cm': 'Entre 30 y 50 centimetros',
+            '50-100cm': 'Entre 50 centimetros y un metro',
+            '+1m': 'Más de un metro'
+        };
+
+        deep_options = {
+            'ns-nr': '- Seleccionar -',
+            '30-50cm': 'Entre 30 y 50 centimetros',
+            '50-100cm': 'Entre 50 centimetros y un metro',
+            '+1m': 'Más de un metro'
+        }
+
+        var deep_el = $('#damage_deep_by_citizen-label,#damage_deep_by_citizen-element');
+        deep_el.show();
+        if(type == 'fisura') {
+            deep_el.hide();
+            width_options = {
+                'ns-nr': '- Seleccionar -',
+                '1-5cm': 'Entre 1 y 5 centimetros',
+                '6-10cm': 'Entre 6 y 10 centimetros'
+            };
+        }
+        else if(type == 'hueco') {
+            deep_options = {
+                'ns-nr': '- Seleccionar -',
+                '5-10cm': 'Entre 5 y 10 centimetros',
+                '10-30cm': 'Entre 10 y 30 centimetros',
+            }
+        }
+
+        create_options = function(value, key) {
+            html_options += '<option value="' + key + '">' + value + '</a>';
+        };
+
+        //width
+        var html_options = '';
+        _.each(width_options, create_options);
+        $('#damage_width_by_citizen').html(html_options);
+
+        //length
+        html_options = '';
+        _.each(length_options, create_options);
+        $('#damage_legth_by_citizen').html(html_options);
+
+        //deep
+        html_options = '';
+        _.each(deep_options, create_options);
+        $('#damage_deep_by_citizen').html(html_options);
+
+        return this;
+    },
 });
 /****************************************
  * Ubicación

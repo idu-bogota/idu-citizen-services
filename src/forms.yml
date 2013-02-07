@@ -201,7 +201,9 @@ pqr:
                 class: input-block-level
                 multiOptions:
                     ns-nr: '- Seleccionar -'
-                    0-10cm: 'Entre 0 y 10 centimetros'
+                    1-5cm: 'Entre 1 y 5 centimetros'
+                    6-10cm: 'Entre 6 y 10 centimetros'
+                    1-10cm: 'Entre 1 y 10 centimetros'
                     10-30cm: 'Entre 10 y 30 centimetros'
                     30-50cm: 'Entre 30 y 50 centimetros'
                     50-100cm: 'Entre 50 centimetros y un metro'
@@ -214,7 +216,6 @@ pqr:
                 class: input-block-level
                 multiOptions:
                     ns-nr: '- Seleccionar -'
-                    0-10cm: 'Entre 0 y 10 centimetros'
                     10-30cm: 'Entre 10 y 30 centimetros'
                     30-50cm: 'Entre 30 y 50 centimetros'
                     50-100cm: 'Entre 50 centimetros y un metro'
@@ -227,7 +228,7 @@ pqr:
                 class: input-block-level
                 multiOptions:
                     ns-nr: '- Seleccionar -'
-                    0-10cm: 'Entre 0 y 10 centimetros'
+                    5-10cm: 'Entre 5 y 10 centimetros'
                     10-30cm: 'Entre 10 y 30 centimetros'
                     30-50cm: 'Entre 30 y 50 centimetros'
                     50-100cm: 'Entre 50 centimetros y un metro'
