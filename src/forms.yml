@@ -150,7 +150,7 @@ pqr:
                     regex:
                         validator: Regex
                         options:
-                            pattern: '/[a-zA-Z0-9_]{1,20}/'
+                            pattern: '/[a-zA-Z0-9\.]{5,50}/'
                             messages:
                                 regexInvalid: 'Texto ingresado no tiene un formato válido'
                                 regexNotMatch: "'%value%' no es válido como nombre de usuario para una cuenta de Facebook"
