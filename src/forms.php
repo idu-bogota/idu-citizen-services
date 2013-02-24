@@ -74,7 +74,7 @@ class PqrForm extends BaseForm {
                 $citizen['document_type'] = $values['document_type'];
                 $citizen['document_number'] = $values['document_number'];
             }
-            $contact_map = array('email','twitter','facebook','phone');
+            $contact_map = array('email','twitter','facebook','phone','gender');
             foreach($contact_map as $f) {
                 if( !empty($values[$f]) ) {
                     $citizen[$f] = $values[$f];

@@ -56,10 +56,10 @@ pqr:
                 label: Tipo de documento
                 class: input-block-level
                 multiOptions:
-                  C: 'Cédula de ciudadanía'
-                  T: 'Tarjeta de identidad'
-                  P: 'Pasaporte'
-                  E: 'Cédula de extranjería'
+                  CC: 'Cédula de ciudadanía'
+                  TI: 'Tarjeta de identidad'
+                  Pasaporte: 'Pasaporte'
+                  CE: 'Cédula de extranjería'
         document_number:
             type: text
             options:
@@ -78,6 +78,14 @@ pqr:
                             max: 100
                     Alnum:
                         validator: Alnum
+        gender:
+            type: select
+            options:
+                label: Género
+                class: input-block-level
+                multiOptions:
+                  m: 'Masculino'
+                  f: 'Femenino'
         email:
             type: text
             options:
@@ -296,6 +304,7 @@ pqr:
             elements:
                 - name
                 - lastname
+                - gender
                 - document_type
                 - document_number
         contact_data:
