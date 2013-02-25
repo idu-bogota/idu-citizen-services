@@ -168,7 +168,13 @@ class App extends myGlueBase {
         if ($form->isValid($_POST)) {
             try {
                 $pqr = $form->buildObject();
-                $numero_radicado = $pqr->create();
+                $result = $pqr->create();
+                if($result['status'] == 'success') {
+                    $numero_radicado = $result['result']['id'];
+                }
+                else {
+                    throw new Exception($result['message']);
+                }
                 $flash_id = $this->setFlash('success', 'PQR registrada exitosamente con número: '.$numero_radicado);
                 try {
                     $form->saveImage();
