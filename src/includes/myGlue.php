@@ -2,7 +2,7 @@
 class myGlueBase extends GlueBase {
     public function __construct() {
         parent::__construct();
-        include(__DIR__.'/config.inc.php');
+        include(__DIR__.'/../config.inc.php');
         glue("config")->write('openerp_server', $openerp_server);
         glue("config")->write('username', $username);
         glue("config")->write('pwd', $pwd);

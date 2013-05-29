@@ -10,9 +10,9 @@ $loader->registerNamespace('Twitter');
 //************************************
 
 require_once(__DIR__.'/forms.php');
-require_once(__DIR__.'/openerp.php');
-require_once(__DIR__.'/helper.php');
-require_once(__DIR__.'/myGlue.php');
+require_once(__DIR__.'/includes/openerp.php');
+require_once(__DIR__.'/includes/helper.php');
+require_once(__DIR__.'/includes/myGlue.php');
 
 /**
  * Main App Class
