@@ -1,4 +1,5 @@
 <?php
+//************ CONSTANTS ********
 define ('EXTERNALS_DIR',__DIR__.'/../externals');
 define ('ROOT_PATH',__DIR__);
 //************ External libraries ********
