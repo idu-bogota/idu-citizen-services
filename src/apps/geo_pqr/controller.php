@@ -1,18 +1,5 @@
 <?php
-//************ External libraries ********
-define ('EXTERNALS_DIR',__DIR__.'/../externals');
-require_once(EXTERNALS_DIR.'/Glue/vendor/glue/glue.php');
-ini_set('include_path', get_include_path().PATH_SEPARATOR.EXTERNALS_DIR.'/zend/library');
-ini_set('include_path', get_include_path().PATH_SEPARATOR.EXTERNALS_DIR.'/zend-form-decorators-bootstrap');
-require_once 'Zend/Loader/Autoloader.php';
-$loader = Zend_Loader_Autoloader::getInstance();
-$loader->registerNamespace('Twitter');
-//************************************
-
 require_once(__DIR__.'/forms.php');
-require_once(__DIR__.'/includes/openerp.php');
-require_once(__DIR__.'/includes/helper.php');
-require_once(__DIR__.'/includes/myGlue.php');
 
 /**
  * Main App Class
@@ -20,7 +7,7 @@ require_once(__DIR__.'/includes/myGlue.php');
  * @author Cinxgler Mariaca
  */
 
-class App extends myGlueBase {
+class GeoPqrApp extends myGlueBase {
     /**
         @Get /simple
     */
@@ -32,7 +19,7 @@ class App extends myGlueBase {
             'menu_item' => 'new',
         );
         $data = array_merge($data, $this->getFlash());
-        echo glue("template")->render("../views/map.php with ../views/layout.php", $data);
+        echo glue("template")->render("views/map.php with views/layout.php", $data);
     }
     /**
         @Get /new
@@ -47,7 +34,7 @@ class App extends myGlueBase {
             'view' => $view,
         );
         $data = array_merge($data, $this->getFlash());
-        echo glue("template")->render("../views/wizard.php with ../views/layout.php", $data);
+        echo glue("template")->render("views/wizard.php with views/layout.php", $data);
     }
 
     /**
@@ -95,7 +82,7 @@ class App extends myGlueBase {
         } else {
             $data['warning_message'] = 'El formulario no pudó ser validado correctamente, por favor revise los datos ingresados.';
         }
-        echo glue("template")->render("../views/wizard.php with ../views/layout.php", $data);
+        echo glue("template")->render("views/wizard.php with views/layout.php", $data);
     }
 
     /**
@@ -129,7 +116,7 @@ class App extends myGlueBase {
             'menu_item' => 'list',
         );
         $data = array_merge($data, $this->getFlash());
-        echo glue("template")->render("../views/list.php with ../views/layout.php", $data);
+        echo glue("template")->render("views/list.php with views/layout.php", $data);
     }
 
     protected function getOpenErpConnection() {

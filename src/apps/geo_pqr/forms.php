@@ -1,15 +1,4 @@
 <?php
-/**
- * Base Form for the php script it contain methods to connect to openerp to retrieve data
- *
- * @author Cinxgler Mariaca
- */
-
-class BaseForm extends Zend_Form  { //Twitter_Bootstrap_Form_Vertical //Twitter_Bootstrap_Form //Zend_Form
-    protected function getOpenErpConnection() {
-        return myOpenErpConnection::getConnection();
-    }
-}
 
 /**
  * PQR Form
@@ -83,7 +72,7 @@ class PqrForm extends BaseForm {
             $attributes['partner_address_id'] = $citizen;
         }
 
-        include(__DIR__.'/config.inc.php');
+        include(ROOT_PATH.'/config.inc.php');
         $config_map = array('categ_id','classification_id','sub_classification_id','csp_id','channel');
         foreach($config_map as $f) {
             $attributes[$f] = $$f;
@@ -121,15 +110,4 @@ class PqrForm extends BaseForm {
             $thumb->save($thumb_fname);
         }
     }
-}
-
-/**
- * Form note element
- *
- * @author Ruslan Zavackiy <ruslan.zavackiy@gmail.com>
- * @package elements
- */
-class Zend_Form_Element_Note extends Zend_Form_Element_Xhtml
-{
-    public $helper = 'formNote';
 }
