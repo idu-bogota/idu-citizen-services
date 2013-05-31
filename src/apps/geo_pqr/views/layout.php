@@ -24,8 +24,8 @@
         <div class="navbar-inner">
             <a class="brand" href="http://www.idu.gov.co/">IDU</a>
             <ul class="nav">
-                <li <?php echo is_item_active($menu_item, 'list') ?>><a href="./">Inicio</a></li>
-                <li <?php echo is_item_active($menu_item, 'new') ?>><a href="./new">Reporte un daño</a></li>
+                <li <?php echo get_menu_item_class($menu_item, 'list') ?>><a href="./">Inicio</a></li>
+                <li <?php echo get_menu_item_class($menu_item, 'new') ?>><a href="./new">Reporte un daño</a></li>
             </ul>
         </div>
     </div>
@@ -60,9 +60,3 @@
     </div>
 </body>
 </html>
-<?php
-function is_item_active($selected, $item_id) {
-    if($selected == $item_id) {
-        return 'class = "active"';
-    }
-}

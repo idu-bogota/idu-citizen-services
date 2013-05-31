@@ -9,3 +9,9 @@ function is_mobile() {
     }
     return $is_mobile;
 }
+
+function get_menu_item_class($selected, $item_id) {
+    if($selected == $item_id) {
+        return 'class = "active"';
+    }
+}

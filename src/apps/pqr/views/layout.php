@@ -3,29 +3,38 @@
 <head>
     <meta charset='utf-8' />
     <title><?php echo $title ?></title>
-    <link href="css/bootstrap-min.css" rel="stylesheet">
-    <link href="css/bootstrap-responsive-min.css" rel="stylesheet">
-    <link href="css/bootstrap-fileupload.min.css" rel="stylesheet">
-    <link href="css/styles.css" rel="stylesheet">
+    <link href="<?php echo RELATIVE_ROOT_URI ?>/css/bootstrap-min.css" rel="stylesheet">
+    <link href="<?php echo RELATIVE_ROOT_URI ?>/css/bootstrap-responsive-min.css" rel="stylesheet">
+    <link href="<?php echo RELATIVE_ROOT_URI ?>/css/styles.css" rel="stylesheet">
 </head>
 <body>
-    <div class="navbar navbar-inverse hidden-phone">
-        <div class="navbar-inner">
-            <a class="brand" href="http://www.idu.gov.co/">IDU</a>
-            <ul class="nav">
-                <li <?php echo is_item_active($menu_item, 'list') ?>><a href="./">Inicio</a></li>
-                <li <?php echo is_item_active($menu_item, 'new') ?>><a href="./new">Reporte un daño</a></li>
-            </ul>
-        </div>
+    <div class="container">
+        <ul class="nav nav-tabs">
+            <li <?php echo get_menu_item_class($menu_item, 'new') ?>><a href="./">Envie un requerimiento</a></li>
+            <li <?php echo get_menu_item_class($menu_item, 'search') ?>><a href="./search">Consulte su requerimiento</a></li>
+        </ul>
+        <?php if(isset($warning_message)): ?>
+            <div class="alert">
+                <button type="button" class="close" data-dismiss="alert">×</button>
+                <strong>Atención!</strong> <?php echo $warning_message ?>
+            </div>
+        <?php endif ?>
+        <?php if(isset($error_message)): ?>
+            <div class="alert  alert-error">
+                <button type="button" class="close" data-dismiss="alert">×</button>
+                <strong>Error!</strong> <?php echo $error_message ?>
+            </div>
+        <?php endif ?>
+        <?php if(isset($success_message)): ?>
+            <div class="alert alert-success">
+                <button type="button" class="close" data-dismiss="alert">×</button>
+                <?php echo $success_message ?>
+            </div>
+        <?php endif ?>
+    </div>
+    <div class="container">
+        <?php echo $content_for_layout;?>
     </div>
 
-    <div class="container">
-    </div>
 </body>
 </html>
-<?php
-function is_item_active($selected, $item_id) {
-    if($selected == $item_id) {
-        return 'class = "active"';
-    }
-}
