@@ -5,17 +5,17 @@
         $options = array(
             'fisura' => array(
                 'key' => 'fisura',
-                'img' => 'img/fisura.jpg',
+                'img' => RELATIVE_ROOT_URI.'/img/fisura.jpg',
                 'desc' => '<p>Consiste en la fractura de la capa del pavimento o concreto.</p>',
             ),
             'hueco' => array(
                 'key' => 'hueco',
-                'img' => 'img/hueco.jpg',
+                'img' => RELATIVE_ROOT_URI.'/img/hueco.jpg',
                 'desc' => '<p>Es una depresión en la superficie de la vía generada por el crecimiento de fisuras causadas e intensificadas por el tráfico y/o el clima.</p>',
             ),
             'hundimiento' => array(
                 'key' => 'hundimiento',
-                'img' => 'img/hundimiento.jpg',
+                'img' => RELATIVE_ROOT_URI.'/img/hundimiento.jpg',
                 'desc' => '<p>Es una depresión pronunciada generada principalmente por la erosión de los materiales que soportan la estructura de la via (ejemplo. tubos rotos).</p>',
             ),
         );

@@ -17,5 +17,7 @@ require_once(ROOT_PATH.'/includes/helper.inc.php');
 require_once(ROOT_PATH.'/includes/myGlue.inc.php');
 
 //************ Run App ********
-require_once(ROOT_PATH.'/apps/'.APP_FOLDER_NAME.'/controller.php');
+define ('APP_ROOT_PATH',ROOT_PATH.'/apps/'.APP_FOLDER_NAME);
+ini_set('include_path', get_include_path().':'.APP_ROOT_PATH);
+require_once(APP_ROOT_PATH.'/controller.php');
 glue("session")->init();
