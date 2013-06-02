@@ -1,1 +1,1 @@
-Esto es el formulario
+<?php echo $form->render($view) ?>

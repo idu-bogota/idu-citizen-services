@@ -8,7 +8,6 @@
     <link href="<?php echo RELATIVE_ROOT_URI ?>/css/styles.css" rel="stylesheet">
 </head>
 <body>
-    <div class="container">
         <ul class="nav nav-tabs">
             <li <?php echo get_menu_item_class($menu_item, 'new') ?>><a href="./">Envie un requerimiento</a></li>
             <li <?php echo get_menu_item_class($menu_item, 'search') ?>><a href="./search">Consulte su requerimiento</a></li>
@@ -31,10 +30,7 @@
                 <?php echo $success_message ?>
             </div>
         <?php endif ?>
-    </div>
-    <div class="container">
         <?php echo $content_for_layout;?>
-    </div>
 
 </body>
 </html>

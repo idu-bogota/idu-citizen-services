@@ -12,7 +12,7 @@ class GeoPqrApp extends myGlueBase {
         @Get /simple
     */
     public function form() {
-        $form = new PqrForm();
+        $form = new GeoPqrForm();
         $data = array(
             "title" => 'Reporte un daño en la malla vial',
             'form' => $form,
@@ -26,7 +26,7 @@ class GeoPqrApp extends myGlueBase {
     */
     public function wizard() {
         $view = new Zend_View();
-        $form = new PqrForm(array('view' => $view));
+        $form = new GeoPqrForm(array('view' => $view));
         $data = array(
             "title" => 'Reporte un daño en la malla vial',
             'form' => $form,
@@ -49,7 +49,7 @@ class GeoPqrApp extends myGlueBase {
     */
     public function save_post() {
         $view = new Zend_View();
-        $form = new PqrForm();
+        $form = new GeoPqrForm();
         $data = array(
             "title" => 'Reporte un daño en la malla vial',
             'form' => $form,
