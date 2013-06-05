@@ -195,6 +195,17 @@ base_pqr:
                         validator: StringLength
                         options:
                             max: 1000
+        categ_id:
+            type: select
+            options:
+                label: Tipo de requerimiento
+                class: input-block-level
+                multiOptions:
+                    Reclamo: Reclamo
+                    Solicitud: Solicitud
+                    Sugerencia: Sugerencia
+                    Denuncia: Denuncia
+                    Queja: Queja
         submit:
             type: submit
             options:
@@ -227,6 +238,7 @@ base_pqr:
             options:
                 legend: Detalles de su reporte
             elements:
+                - categ_id
                 - claim_address
                 - description
         send:
