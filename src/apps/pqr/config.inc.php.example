@@ -1,7 +1,5 @@
 <?php
-$categ_id = 1;
-$classification_id = 2;
-$sub_classification_id = 25;
+$sub_classification_id = 108;
 $csp_id = 1;
 $channel = 21;
 

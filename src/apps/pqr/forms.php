@@ -13,10 +13,14 @@ class PqrForm extends BasePqrForm {
     public function buildObject() {
         $pqr = parent::buildObject();
         include(__DIR__.'/config.inc.php');
-        $config_map = array('categ_id','classification_id','sub_classification_id','csp_id','channel');
+        $config_map = array('sub_classification_id','csp_id','channel');
         foreach($config_map as $f) {
             $pqr->attributes[$f] = $$f;
         }
         return $pqr;
     }
+}
+
+class PqrSearchForm extends BasePqrForm {
+    protected $form_name = 'pqr_search';
 }

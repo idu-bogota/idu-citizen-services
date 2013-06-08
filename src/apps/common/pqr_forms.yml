@@ -162,19 +162,6 @@ base_pqr:
                         validator: StringLength
                         options:
                             max: 100
-        claim_address:
-            type: text
-            options:
-                label: Dirección del daño
-                class: input-block-level
-                filters:
-                    trim:
-                        filter: StringTrim
-                validators:
-                    length:
-                        validator: StringLength
-                        options:
-                            max: 100
         description:
             type: textarea
             options:
@@ -239,7 +226,6 @@ base_pqr:
                 legend: Detalles de su reporte
             elements:
                 - categ_id
-                - claim_address
                 - description
         send:
             name: send
@@ -258,6 +244,19 @@ geo_pqr:
         document_number:
             options:
                 required: true #Solicitado por Dirección
+        claim_address:
+            type: text
+            options:
+                label: Dirección del daño
+                class: input-block-level
+                filters:
+                    trim:
+                        filter: StringTrim
+                validators:
+                    length:
+                        validator: StringLength
+                        options:
+                            max: 100
         geo_point:
             type: hidden
             options:
@@ -358,3 +357,40 @@ geo_pqr:
 
 pqr:
     _extends: base_pqr
+
+pqr_search:
+    action: search
+    method: post
+    elements:
+        number:
+            type: text
+            options:
+                required: true
+                label: Número de requerimiento
+                title: Por favor ingrese el número de radicado de su requerimiento
+                class: input-block-level
+                filters:
+                    trim:
+                        filter: StringTrim
+                validators:
+                    length:
+                        validator: StringLength
+                        options:
+                            max: 10
+                    alpha:
+                        validator: Numeric
+        password:
+            type: password
+            options:
+                required: true
+                label: Ingrese la clave para consultar el requerimiento
+                title: Por favor ingrese la clave para acceder a su requerimiento
+                class: input-block-level
+                filters:
+                    trim:
+                        filter: StringTrim
+        submit:
+            type: submit
+            options:
+                label: Enviar
+                class: btn btn-primary

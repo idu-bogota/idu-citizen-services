@@ -3,14 +3,16 @@
 <head>
     <meta charset='utf-8' />
     <title><?php echo $title ?></title>
-    <link href="<?php echo RELATIVE_ROOT_URI ?>/css/bootstrap-min.css" rel="stylesheet">
-    <link href="<?php echo RELATIVE_ROOT_URI ?>/css/bootstrap-responsive-min.css" rel="stylesheet">
-    <link href="<?php echo RELATIVE_ROOT_URI ?>/css/styles.css" rel="stylesheet">
+    <link href="<?php echo glue("route")->url("/css/bootstrap-min.css") ?>" rel="stylesheet">
+    <link href="<?php echo glue("route")->url("/css/bootstrap-responsive-min.css") ?>" rel="stylesheet">
+    <link href="<?php echo glue("route")->url("/css/styles.css") ?>" rel="stylesheet">
+    <script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js'></script>
+    <script type='text/javascript' src='<?php echo glue("route")->url('/js/bootstrap-min.js') ?>'></script>
 </head>
 <body>
         <ul class="nav nav-tabs">
-            <li <?php echo get_menu_item_class($menu_item, 'new') ?>><a href="./">Envie un requerimiento</a></li>
-            <li <?php echo get_menu_item_class($menu_item, 'search') ?>><a href="./search">Consulte su requerimiento</a></li>
+            <li <?php echo get_menu_item_class($menu_item, 'new') ?>><a href="<?php echo $_SERVER['SCRIPT_NAME'] ?>/">Envie un requerimiento</a></li>
+            <li <?php echo get_menu_item_class($menu_item, 'search') ?>><a href="<?php echo $_SERVER['SCRIPT_NAME'] ?>/search">Consulte su requerimiento</a></li>
         </ul>
         <?php if(isset($warning_message)): ?>
             <div class="alert">
@@ -34,3 +36,8 @@
 
 </body>
 </html>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('input').tooltip({trigger: 'hover focus'});
+    });
+</script>

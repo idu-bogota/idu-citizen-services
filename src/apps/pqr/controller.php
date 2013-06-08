@@ -53,8 +53,9 @@ class PqrApp extends myGlueBase {
                 else {
                     throw new Exception($result['message']);
                 }
-                $flash_id = $this->setFlash('success', 'Requerimiento registrado exitosamente con número: '.$numero_radicado);
-                header('Location: ./search?flash_id='.$flash_id);
+                $obfuscated = myObfuscator::obfuscate($numero_radicado);
+                $flash_id = $this->setFlash('success', 'Requerimiento registrado exitosamente con número: '.$numero_radicado.' la contraseña para consultarlo es:'.$obfuscated);
+                header("Location: ".$_SERVER['SCRIPT_NAME']."/requerimiento/$obfuscated?flash_id=$flash_id");
                 return;
             }
             catch(Exception $e) {
@@ -71,10 +72,45 @@ class PqrApp extends myGlueBase {
     */
     public function search() {
         $data = array(
+            "form" => new PqrSearchForm(),
             "title" => 'Consulte el estado de su requerimiento',
             'menu_item' => 'search',
+            'view' => new Zend_View(),
         );
         $data = array_merge($data, $this->getFlash());
         echo glue("template")->render("views/search_form.php with views/layout.php", $data);
     }
+
+    /**
+        @Post /search
+    */
+    public function search_post() {
+        #FIXME: this isn't a strong method to authenticate
+        $id = myObfuscator::deobfuscate($_POST['password']);
+        if($id == $_POST['number']) {
+            header("Location: ".$_SERVER['SCRIPT_NAME']."/requerimiento/".$_POST['password']);
+        }
+        else {
+            $flash_id = $this->setFlash('error', 'Los datos ingresados son erroneos');
+            header("Location: ".$_SERVER['SCRIPT_NAME']."/search?flash_id=$flash_id");
+        }
+    }
+
+    /**
+        @Get /requerimiento/:id
+    */
+    public function load($params) {
+        $c = $this->getOpenErpConnection();
+        $pqr = new OpenErpPqr($c);
+        $id = myObfuscator::deobfuscate($params['id']);
+        $pqr->loadOne($id);
+        $data = array(
+            "title" => 'Detalles de su requerimiento',
+            'menu_item' => 'search',
+            'pqr' => $pqr,
+        );
+        $data = array_merge($data, $this->getFlash());
+        echo glue("template")->render("views/pqr_display.php with views/layout.php", $data);
+    }
+    
 }

@@ -12,6 +12,10 @@ class myGlueBase extends GlueBase {
         glue("config")->write('geocoding_service_url', $geocoding_service_url);
     }
 
+    protected function getOpenErpConnection() {
+        return myOpenErpConnection::getConnection();
+    }
+
     public function setFlash($type, $message, $flash_id = null) {
         $flash = array(
             $type.'_message' => $message,

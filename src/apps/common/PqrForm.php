@@ -9,7 +9,7 @@
 class BasePqrForm extends BaseForm {
     public $object = null;
     protected $form_name = 'pqr_base';
-    protected $description_fieldmap = array('description','claim_address');
+    protected $description_fieldmap = array('description');
 
     public function init() {
         $config = new Zend_Config_Yaml( __DIR__.'/pqr_forms.yml',$this->form_name);
@@ -80,6 +80,7 @@ class BasePqrForm extends BaseForm {
         foreach($this->description_fieldmap as $f) {
             $attributes[$f] = $values[$f];
         }
+        if(!empty($values['categ_id'])) $attributes['categ_id'] = $values['categ_id'];
         if(!empty($values['email'])) $attributes['email_from'] = $values['email'];
         if(!empty($values['phone'])) $attributes['partner_phone'] = $values['phone'];
         $pqr->attributes = $attributes;
