@@ -107,10 +107,11 @@ class PqrApp extends myGlueBase {
         $data = array(
             "title" => 'Detalles de su requerimiento',
             'menu_item' => 'search',
-            'pqr' => $pqr,
+            'pqr' => $pqr->attributes,
         );
         if($pqr->attributes == false) {
             header('HTTP/1.0 404 Not Found');
+            $data['title'] = "Requerimiento no encontrado";
             echo glue("template")->render("views/pqr_not_found.php with views/layout.php", $data);
             return;
         }
