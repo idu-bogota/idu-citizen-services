@@ -10,6 +10,8 @@ class myGlueBase extends GlueBase {
         glue("config")->write('attachment_base_url', $attachment_base_url);
         glue("config")->write('attachment_path', $attachment_path);
         glue("config")->write('geocoding_service_url', $geocoding_service_url);
+        glue("config")->write('recaptcha_pubkey', $recaptcha_pubkey);
+        glue("config")->write('recaptcha_privkey', $recaptcha_privkey);
     }
 
     protected function getOpenErpConnection() {

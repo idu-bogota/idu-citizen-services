@@ -112,5 +112,4 @@ class PqrApp extends myGlueBase {
         $data = array_merge($data, $this->getFlash());
         echo glue("template")->render("views/pqr_display.php with views/layout.php", $data);
     }
-    
 }

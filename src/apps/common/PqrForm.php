@@ -15,6 +15,28 @@ class BasePqrForm extends BaseForm {
         $config = new Zend_Config_Yaml( __DIR__.'/pqr_forms.yml',$this->form_name);
         $this->setConfig($config);
         $this->setAttrib('enctype', 'multipart/form-data');
+        $publickey = glue("config")->read('recaptcha_pubkey');
+        $privatekey = glue("config")->read('recaptcha_privkey');
+        if(!empty($publickey)) {
+            $recaptcha = new Zend_Service_ReCaptcha($publickey, $privatekey);
+            $captcha = new Zend_Form_Element_Captcha('captcha',
+                array(
+                    'captcha'       => 'ReCaptcha',
+                    'captchaOptions' => array('captcha' => 'ReCaptcha', 'service' => $recaptcha)
+                    )
+            );
+            $this->addElement($captcha);
+            $send_group = $this->getDisplayGroup('send');
+            if($send_group) {
+                $send_group->clearElements();
+                $send_group->addElement($captcha);
+                $send_group->addElement($this->getElement('submit'));
+            }
+            else {
+                $captcha->setOrder(99);
+                $this->getElement('submit')->setOrder(100);
+            }
+        }
     }
 
     protected function retrieveCategoryOptions(){

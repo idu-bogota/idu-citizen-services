@@ -7,9 +7,11 @@ $dbname = 'openerp-idu';
 $attachment_path = '/var/www/images/';
 $attachment_base_url = '/images/';
 $geocoding_service_url = 'http://localhost/ArcGIS/rest/services/GeocodeIDU/GeocodeServer/findAddressCandidates';
+$recaptcha_privkey = 'Your priv key';
+$recaptcha_pubkey = 'Your pub key';
 
 /* Create your own implementation */
-class myObfuscate
+class myObfuscator
 {
     public static function obfuscate($string)
     {
