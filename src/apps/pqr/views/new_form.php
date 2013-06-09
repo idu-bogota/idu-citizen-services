@@ -1,3 +1,1 @@
-<div class="container">
-    <?php echo $form->render($view) ?>
-</div>
+<?php echo $form->render($view) ?>

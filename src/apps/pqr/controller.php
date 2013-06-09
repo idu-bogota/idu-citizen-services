@@ -109,6 +109,11 @@ class PqrApp extends myGlueBase {
             'menu_item' => 'search',
             'pqr' => $pqr,
         );
+        if($pqr->attributes == false) {
+            header('HTTP/1.0 404 Not Found');
+            echo glue("template")->render("views/pqr_not_found.php with views/layout.php", $data);
+            return;
+        }
         $data = array_merge($data, $this->getFlash());
         echo glue("template")->render("views/pqr_display.php with views/layout.php", $data);
     }
