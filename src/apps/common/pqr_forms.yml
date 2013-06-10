@@ -7,6 +7,7 @@ base_pqr:
             options:
                 required: false
                 label: Nombres
+                title: Ingrese su primer y segundo nombre
                 class: input-block-level
                 required: false
                 filters:
@@ -25,6 +26,7 @@ base_pqr:
             options:
                 required: false
                 label: Apellidos
+                title: Ingrese su primer y segundo apellido
                 class: input-block-level
                 filters:
                     trim:
@@ -41,6 +43,7 @@ base_pqr:
             type: select
             options:
                 label: Tipo de documento
+                title: Seleccione el tipo de documento de identidad que posee
                 class: input-block-level
                 multiOptions:
                   CC: 'Cédula de ciudadanía'
@@ -51,6 +54,7 @@ base_pqr:
             type: text
             options:
                 required: false
+                title: Indique el número del documento de identidad seleccionado
                 label: Número de documento
                 class: input-block-level
                 filters:
@@ -77,6 +81,7 @@ base_pqr:
             type: text
             options:
                 label: Correo electrónico
+                title: Indique el correo electrónico al cual se le puede contactar
                 class: input-block-level
                 filters:
                     trim:
@@ -96,6 +101,7 @@ base_pqr:
             type: text
             options:
                 label: Teléfono
+                title: Indique el teléfono al cual se le puede contactar
                 class: input-block-level
                 filters:
                     trim:
@@ -113,6 +119,7 @@ base_pqr:
             type: text
             options:
                 label: Twitter
+                title: Indique su cuenta de Twitter a la cual se le puede contactar
                 class: input-block-level
                 filters:
                     trim:
@@ -134,6 +141,7 @@ base_pqr:
             options:
                 label: Facebook
                 class: input-block-level
+                title: Indique su cuenta de Facebook a la cual se le puede contactar
                 filters:
                     trim:
                         filter: StringTrim
@@ -153,6 +161,7 @@ base_pqr:
             type: text
             options:
                 label: Dirección
+                title: Indique la dirección de correspondencia a la cual se le puede contactar
                 class: input-block-level
                 filters:
                     trim:
@@ -167,6 +176,7 @@ base_pqr:
             options:
                 required: true
                 label: Descripción
+                title: Indique el detalle de su petición, queja, reclamo o sugerencia, sea lo más descriptivo posible e incluya si es necesario la dirección del requerimiento
                 class: input-block-level
                 rows: 5
                 filters:
@@ -186,6 +196,7 @@ base_pqr:
             type: select
             options:
                 label: Tipo de requerimiento
+                title: Indique el tipo de requerimiento
                 class: input-block-level
                 multiOptions:
                     Reclamo: Reclamo

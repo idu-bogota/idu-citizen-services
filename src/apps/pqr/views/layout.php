@@ -40,6 +40,6 @@
 </html>
 <script type="text/javascript">
     $(document).ready(function(){
-        $('input').tooltip({trigger: 'hover focus'});
+        $('input, select, textarea').tooltip({trigger: 'hover focus'});
     });
 </script>
