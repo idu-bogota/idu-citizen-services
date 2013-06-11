@@ -19,7 +19,7 @@
         display_fields($solution_fields, $pqr);
     }
 ?>
-
+<a href="<?php echo $_SERVER['SCRIPT_NAME'] ?>/search" class="btn">Consultar otro requerimiento</a>
 <?php function display_fields($fields_map, $pqr) { ?>
     <dl>
       <?php foreach($fields_map as $key => $label): ?>

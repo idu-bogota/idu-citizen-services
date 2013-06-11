@@ -86,7 +86,6 @@ class PqrApp extends myGlueBase {
         @Post /search
     */
     public function search_post() {
-        #FIXME: this isn't a strong method to authenticate
         $id = myObfuscator::obfuscate($_POST['number']);
         $form = new PqrSearchForm();
         if($form->isValid($_POST)) {
