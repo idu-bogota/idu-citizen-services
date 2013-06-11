@@ -54,7 +54,8 @@ class PqrApp extends myGlueBase {
                     throw new Exception($result['message']);
                 }
                 $obfuscated = myObfuscator::obfuscate($numero_radicado);
-                $flash_id = $this->setFlash('success', 'Requerimiento registrado exitosamente con número: '.$numero_radicado.' la contraseña para consultarlo es:'.$obfuscated);
+                //$flash_id = $this->setFlash('success', 'Requerimiento registrado exitosamente con número: '.$numero_radicado.' la contraseña para consultarlo es:'.$obfuscated);
+                $flash_id = $this->setFlash('success', 'Requerimiento registrado exitosamente con número: '.$numero_radicado);
                 header("Location: ".$_SERVER['SCRIPT_NAME']."/requerimiento/$obfuscated?flash_id=$flash_id");
                 return;
             }
@@ -86,9 +87,10 @@ class PqrApp extends myGlueBase {
     */
     public function search_post() {
         #FIXME: this isn't a strong method to authenticate
-        $id = myObfuscator::deobfuscate($_POST['password']);
-        if($id == $_POST['number']) {
-            header("Location: ".$_SERVER['SCRIPT_NAME']."/requerimiento/".$_POST['password']);
+        $id = myObfuscator::deobfuscate($_POST['number']);
+        $form = new PqrSearchForm();
+        if($form->isValid($_POST)) {
+            header("Location: ".$_SERVER['SCRIPT_NAME']."/requerimiento/$id");
         }
         else {
             $flash_id = $this->setFlash('error', 'Los datos ingresados son erroneos');

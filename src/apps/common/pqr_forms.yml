@@ -389,17 +389,17 @@ pqr_search:
                         options:
                             max: 10
                     alpha:
-                        validator: Numeric
-        password:
-            type: password
-            options:
-                required: true
-                label: Ingrese la clave para consultar el requerimiento
-                title: Por favor ingrese la clave para acceder a su requerimiento
-                class: input-block-level
-                filters:
-                    trim:
-                        filter: StringTrim
+                        validator: Digits
+#         password:
+#             type: password
+#             options:
+#                 required: true
+#                 label: Ingrese la clave para consultar el requerimiento
+#                 title: Por favor ingrese la clave para acceder a su requerimiento
+#                 class: input-block-level
+#                 filters:
+#                     trim:
+#                         filter: StringTrim
         submit:
             type: submit
             options:
