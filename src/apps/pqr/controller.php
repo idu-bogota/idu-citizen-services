@@ -87,7 +87,7 @@ class PqrApp extends myGlueBase {
     */
     public function search_post() {
         #FIXME: this isn't a strong method to authenticate
-        $id = myObfuscator::deobfuscate($_POST['number']);
+        $id = myObfuscator::obfuscate($_POST['number']);
         $form = new PqrSearchForm();
         if($form->isValid($_POST)) {
             header("Location: ".$_SERVER['SCRIPT_NAME']."/requerimiento/$id");
