@@ -368,6 +368,38 @@ geo_pqr:
 
 pqr:
     _extends: base_pqr
+    elements:
+        attachment:
+            type: file
+            options:
+                required: false
+                label: Archivo adjunto
+                description: Puede adicionar un archivo con documentos que soporten el requerimiento, si tiene más de un archivo por favor empaquete todos los archivos en formato ZIP
+                validators:
+                    valid_extension:
+                        validator: ExcludeExtension
+                        options:
+                            extension:
+                                - exe
+                                - php
+                                - bat
+                                - com
+                    file_size:
+                        validator: FilesSize
+                        options:
+                            min: 10kB
+                            max: 4MB
+                    length:
+                        validator: StringLength
+                        options:
+                            max: 1000
+    displayGroups:
+        claim:
+            elements:
+                - categ_id
+                - description
+                - attachment
+
 
 pqr_search:
     action: search
