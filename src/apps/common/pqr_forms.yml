@@ -369,6 +369,15 @@ geo_pqr:
 pqr:
     _extends: base_pqr
     elements:
+        canal_respuesta:
+            type: select
+            options:
+                label: Canal de respuesta
+                title: Seleccione el medio o canal por el cúal desea recibir la respuesta a su requerimiento
+                class: input-block-level
+                multiOptions:
+                  electronico: 'Medio electrónico'
+                  fisico: 'A través de correo físico'
         attachment:
             type: file
             options:
@@ -398,6 +407,7 @@ pqr:
             elements:
                 - categ_id
                 - description
+                - canal_respuesta
                 - attachment
 
 

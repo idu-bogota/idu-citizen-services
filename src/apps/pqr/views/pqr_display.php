@@ -39,7 +39,7 @@
             }
           ?>
           <dt><?php echo $label ?></dt>
-          <dd><?php echo $value ?></dd>
+          <dd><?php echo nl2br(htmlentities($value, ENT_COMPAT, "UTF-8")) ?></dd>
       <?php endforeach ?>
     </dl>
 <?php } //end function display_fields?>

@@ -31,7 +31,8 @@ class PqrForm extends BasePqrForm {
                 $pqr->attributes['attachment_name'], $filesize, $filemd5
             );
         }
-
+        $values = $this->getValues();
+        $pqr->attributes['description'] .= sprintf("\n\n------\nCanal de respuesta seleccionado: %s\n", $values['canal_respuesta']);
         return $pqr;
     }
 }
