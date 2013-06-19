@@ -5,14 +5,14 @@
  * @author Cinxgler Mariaca
  */
 
-class ProyectosApp extends myGlueBase {
+class ObrasApp extends myGlueBase {
     /**
         @Get /
     */
     public function map() {
         $view = new Zend_View();
         $data = array(
-            "title" => 'Mapa de proyectos del IDU',
+            "title" => 'Mapa de obras del IDU',
             'menu_item' => 'map',
             'view' => $view,
         );
