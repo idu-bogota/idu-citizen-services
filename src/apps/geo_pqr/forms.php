@@ -19,6 +19,18 @@ class GeoPqrForm extends BasePqrForm {
         foreach($config_map as $f) {
             $pqr->attributes[$f] = $$f;
         }
+        //attach file
+        $upload = new Zend_File_Transfer_Adapter_Http();
+        $upload->receive();
+        $fname_uploaded = $upload->getFileName();
+        if(!empty($fname_uploaded)) {
+            $filemd5 = md5_file($fname_uploaded);
+            $filesize = filesize ($fname_uploaded);
+            $file_info = $upload->getFileInfo();
+            $file_encode64 = base64_encode(file_get_contents($fname_uploaded));
+            $pqr->attributes['attachment'] = $file_encode64;
+            $pqr->attributes['attachment_name'] = $file_info['image']['name'];
+        }
         return $pqr;
     }
 

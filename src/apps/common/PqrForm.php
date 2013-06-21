@@ -105,8 +105,11 @@ class BasePqrForm extends BaseForm {
         $attributes['priority'] = 'l';
         $attributes['state'] = 'pending';
         foreach($this->description_fieldmap as $f) {
-            $attributes[$f] = $values[$f];
+            if(!empty($values[$f])) {
+                $attributes[$f] = $values[$f];
+            }
         }
+
         if(!empty($values['categ_id'])) $attributes['categ_id'] = $values['categ_id'];
         if(!empty($values['email'])) $attributes['email_from'] = $values['email'];
         if(!empty($values['phone'])) $attributes['partner_phone'] = $values['phone'];

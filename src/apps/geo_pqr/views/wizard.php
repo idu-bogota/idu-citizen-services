@@ -33,7 +33,7 @@
     <div id="current_step_container"></div>
     <div class="form-actions">
       <div class="pull-right">
-        <img src="img/ajax-loader.gif" id="wizard_loader" class="loader" style="display:none">
+        <img src="<?php echo RELATIVE_ROOT_URI ?>/img/ajax-loader.gif" id="wizard_loader" class="loader" style="display:none">
         <button type="button" id="prev_step_button" class="btn" href="#">Anterior</button>
         <button type="button" id="next_step_button" class="btn btn-primary" href="#">Siguiente</button>
       </div>

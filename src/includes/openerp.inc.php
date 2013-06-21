@@ -22,6 +22,15 @@ class myOpenErpPqr extends OpenErpPqr {
     protected function processAttributes() {
     }
 
+    public function create() {
+        $r = parent::create();
+        $this->id = null;
+        if(!empty($r['result']['id'])) {
+            $this->id = $r['result']['id'];
+        }
+        return $r;
+    }
+
     public function getFilename() {
         return 'pqr-'.$this->id;
     }
