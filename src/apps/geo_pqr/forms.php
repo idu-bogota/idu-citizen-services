@@ -8,6 +8,7 @@
 require_once ROOT_PATH.'/apps/common/PqrForm.php';
 
 class GeoPqrForm extends BasePqrForm {
+    protected $add_submit_button_on_captcha = false;
     protected $form_name = 'geo_pqr';
     protected $description_fieldmap = array('description','address','claim_address','damage_type_by_citizen', 'damage_width_by_citizen', 'damage_length_by_citizen', 'damage_deep_by_citizen','geo_point');
 

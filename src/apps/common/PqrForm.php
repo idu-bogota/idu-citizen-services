@@ -10,6 +10,7 @@ class BasePqrForm extends BaseForm {
     public $object = null;
     protected $form_name = 'pqr_base';
     protected $description_fieldmap = array('description');
+    protected $add_submit_button_on_captcha = true;
 
     public function init() {
         $config = new Zend_Config_Yaml( __DIR__.'/pqr_forms.yml',$this->form_name);
@@ -30,11 +31,15 @@ class BasePqrForm extends BaseForm {
             if($send_group) {
                 $send_group->clearElements();
                 $send_group->addElement($captcha);
-                $send_group->addElement($this->getElement('submit'));
+                if($this->add_submit_button_on_captcha) {
+                    $send_group->addElement($this->getElement('submit'));
+                }
             }
             else {
                 $captcha->setOrder(99);
-                $this->getElement('submit')->setOrder(100);
+                if($this->add_submit_button_on_captcha) {
+                    $this->getElement('submit')->setOrder(100);
+                }
             }
         }
     }
