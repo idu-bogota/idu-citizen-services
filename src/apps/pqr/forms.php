@@ -13,7 +13,7 @@ class PqrForm extends BasePqrForm {
     public function buildObject() {
         $pqr = parent::buildObject();
         include(__DIR__.'/config.inc.php');
-        $config_map = array('sub_classification_id','csp_id','channel');
+        $config_map = array('sub_classification_id','csp_id','channel','user_id');
         foreach($config_map as $f) {
             $pqr->attributes[$f] = $$f;
         }
