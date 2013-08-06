@@ -113,6 +113,9 @@ class BasePqrForm extends BaseForm {
         if(!empty($values['categ_id'])) $attributes['categ_id'] = $values['categ_id'];
         if(!empty($values['email'])) $attributes['email_from'] = $values['email'];
         if(!empty($values['phone'])) $attributes['partner_phone'] = $values['phone'];
+
+        $attributes['ack_message_subject'] = '[IDU-PQR #{0}] Su requerimiento ha sido recibido';
+        $attributes['ack_message_body'] = "Su requerimiento ha sido registrado en nuestro Sistema de Gestión de PQRS con el radicado No {0}\n\nNuestra Oficina de Atención al Ciudadano procederá a atender su solicitud para darle respuesta tan pronto como sea posible.\n\nMuchas gracias por comunicarse con nosotros.\n\n------ Su Requerimiento ------\n{1}\n";
         $pqr->attributes = $attributes;
         $this->object = $pqr;
         return $pqr;
