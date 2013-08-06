@@ -26,8 +26,8 @@
           <?php
             if($key == 'state') {
                 $state_map = array(
-                  'draft' => 'El requerimiento ha sido recibido pero no es ha iniciado su trámite.',
-                  'pending' => 'El requerimiento ha sido recibido pero no es ha iniciado su trámite.',
+                  'draft' => 'El requerimiento ha sido recibido pero no ha iniciado su trámite.',
+                  'pending' => 'El requerimiento ha sido recibido y está siendo tramitado actualmente por la dependencia correspondiente.',
                   'open' => 'El requerimiento ha sido recibido y está siendo tramitado actualmente por la dependencia correspondiente.',
                   'done' => 'El requerimiento ha sido tramitado por la dependencia correspondiente.',
                 );

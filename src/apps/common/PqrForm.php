@@ -101,9 +101,9 @@ class BasePqrForm extends BaseForm {
             $attributes['partner_address_id'] = $citizen;
         }
 
-        $attributes['orfeo_id'] = '0';
+        $attributes['orfeo_id'] = 0;
         $attributes['priority'] = 'l';
-        $attributes['state'] = 'pending';
+        $attributes['state'] = 'draft';
         foreach($this->description_fieldmap as $f) {
             if(!empty($values[$f])) {
                 $attributes[$f] = $values[$f];
