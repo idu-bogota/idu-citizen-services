@@ -9,8 +9,8 @@ La aplicación PHP utiliza el framework minimalista PHP [GLUE](https://github.co
 
 El desarrollo de la interfaz hace uso de:
 
-    * [http://getbootstrap.com/2.3.2/](Framework CSS Bootstrap 2.3) y la extensión [http://jasny.github.io/bootstrap/index.html](Jasny)
-    * [http://documentcloud.github.io/backbone/](Framework MVC Javascript)
-    * [http://www.openlayers.org/](Framework para webmapping Openlayers)
+ * [http://getbootstrap.com/2.3.2/](Framework CSS Bootstrap 2.3) y la extensión [http://jasny.github.io/bootstrap/index.html](Jasny)
+ * [http://documentcloud.github.io/backbone/](Framework MVC Javascript)
+ * [http://www.openlayers.org/](Framework para webmapping Openlayers)
 
 El módulo geo_pqr utiliza la libreria javascript *src/web/js/wizard.js* para la construcción del asistente, el cual se implementa en el javascript disponible en src/web/js/geo_pqr.js
