@@ -1,3 +1,4 @@
+/* Formulario para el despliegue de un mapa con opelayers centrado en la ciudad de Bogotá */
 Ocs.View.FormMap = Ocs.View.BaseMap.extend({
     my_initialize: function() {
         this.model.on('change:geometry', this.set_geometry, this);
@@ -31,6 +32,7 @@ Ocs.View.FormMap = Ocs.View.BaseMap.extend({
     }
 });
 
+/* Mapa que despliega el listado de PQRs registradas */
 Ocs.View.ListMap = Ocs.View.BaseMap.extend({
     my_initialize: function() {
         this.report_list_view = new Ocs.View.ReportList({
@@ -102,6 +104,7 @@ Ocs.View.ListMap = Ocs.View.BaseMap.extend({
     }
 });
 
+/* Despliega la información alfa numérica del listado de PQRS registradas */
 Ocs.View.ReportList = Backbone.View.extend(
 _.extend({}, Mixins.SubviewCollection, {
     events: {
@@ -155,6 +158,7 @@ _.extend({}, Mixins.SubviewCollection, {
     }
 }));
 
+/* Item del listado alfanumerico de PQRS */
 Ocs.View.ReportListItem = Backbone.View.extend({
     className: 'media',
     initialize: function() {

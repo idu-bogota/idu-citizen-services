@@ -1,14 +1,14 @@
 <?php
 define ('RELATIVE_ROOT_URI','/web');
-$openerp_server = 'https://192.168.56.101/xmlrpc';
-$username = 'admin';
-$pwd = 'admin1';
-$dbname = 'openerp-idu';
-$attachment_path = '/var/www/images/';
-$attachment_base_url = '/images/';
+$openerp_server = 'https://192.168.56.101/xmlrpc';//URL al servidor OpenERP
+$username = 'admin';//Usuario OpenERP
+$pwd = 'admin1';//Clave usuario OpenERP
+$dbname = 'openerp-idu';//Base de datos de OpenERP
+$attachment_path = '/var/www/images/';//Verificar que el usuario del servidor web ie. www-data pueda escribir en este directorio
+$attachment_base_url = '/images/';//URL relativa al directorio de imagenes adjuntas
 $geocoding_service_url = 'http://localhost/ArcGIS/rest/services/GeocodeIDU/GeocodeServer/findAddressCandidates';
-$recaptcha_privkey = 'Your priv key';
-$recaptcha_pubkey = 'Your pub key';
+$recaptcha_privkey = 'Your priv key';//Dejar en null para no utilizar re-captcha
+$recaptcha_pubkey = 'Your pub key';//Dejar en null para no utilizar re-captcha
 
 /* Create your own implementation */
 class myObfuscator

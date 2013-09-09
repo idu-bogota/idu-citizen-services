@@ -1,5 +1,6 @@
 var Ocs = { };//Setting namespace
 Ocs.View = { };
+/* Clase base para desplegar un mapa de Bogotá utilizando OpenLayers */
 Ocs.View.BaseMap = Backbone.View.extend({
     options: {
         initial_zoom: 14,
@@ -75,6 +76,7 @@ Ocs.Model.Report = Backbone.Model.extend({
  * OPENLAYERS Extensions
  */
 
+/* Crea un toolbar para permitir la edición de un unico punto en una capa */
 Ocs.OpenLayers = {};
 Ocs.OpenLayers.Control = {};
 Ocs.OpenLayers.Control.SinglePointEditingToolbar = OpenLayers.Class( OpenLayers.Control.Panel, {
@@ -126,6 +128,7 @@ Ocs.OpenLayers.Control.SinglePointEditingToolbar = OpenLayers.Class( OpenLayers.
     CLASS_NAME: "OpenLayers.Control.EditingToolbar"
 });
 
+/* Clase para permitir adicionar un unico punto en una capa, utilizada en gep_pqr para reportar un daño por PQR */
 Ocs.OpenLayers.Control.DrawOnePointOnly = OpenLayers.Class( OpenLayers.Control.DrawFeature, {
     initialize: function(layer, handler, options) {
         OpenLayers.Control.DrawFeature.prototype.initialize.apply(this, [layer, handler, options]);

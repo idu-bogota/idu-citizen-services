@@ -34,6 +34,9 @@ class GeoPqrForm extends BasePqrForm {
         return $pqr;
     }
 
+    /**
+    *  Genera el thumbnail de la imagen subida por el usuario
+    */
     public function saveImage() {
         require_once(EXTERNALS_DIR.'/phpthumb/src/ThumbLib.inc.php');
         $upload = new Zend_File_Transfer_Adapter_Http();

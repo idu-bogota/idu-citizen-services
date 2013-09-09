@@ -1,5 +1,5 @@
 <?php
-$sub_classification_id = 108;
-$csp_id = 1;
-$channel = 21;
-$user_id = 3;
+$sub_classification_id = 108; //Subcriterio de registro de la PQR
+$csp_id = 1;//Punto de atención en el que se registra la PQR
+$channel = 21; //Canal de atención por la cual se recibe la PQR
+$user_id = 3;//Usuario a quién se le asigna por defecto la PQR para su atención
