@@ -5,7 +5,16 @@ Contiene el código de los servicios proveídos a los ciudadanos por el Institut
 
 De manera general el aplicativo se encarga de desplegar una interfaz de usuario del sistema de gestión de PQRS desarrollado en OpenERP y públicado en https://github.com/idu-bogota/openerp-idu-addons/ .
 
-La aplicación PHP utiliza el framework minimalista PHP [GLUE](https://github.com/aheinze/Glue). En la carpeta *src* se encuentran subdirectorios, cada uno representa un módulo, en cada uno de ellos se encuentra el código que esta compuesto por una clase controladora *controller.php*, una clase con la definición de los formularios que se despliegan (ver *forms.php*) desarrollados utilizando el [framework Zend](http://framework.zend.com/manual/1.12/en/zend.form.quickstart.html), las vistas estan creadeas en la subcarpeta *views* y los elementos js, css e imágenes estan en la carpeta *src/web*, cada módulo es llamado utilizando un frontcontroller que esta publicado en la carpeta *src/web*.
+La aplicación PHP utiliza el framework minimalista PHP [GLUE](https://github.com/aheinze/Glue). 
+
+En la carpeta *src* se encuentran subdirectorios, cada uno representa un módulo, en cada uno de ellos se encuentra el código que esta compuesto por:
+
+* Una clase controladora *controller.php* donde se definen las URLs a exponerse en la web y el código asociado
+* Una clase con la definición de los formularios que se despliegan (ver *forms.php*) desarrollados utilizando el [framework Zend](http://framework.zend.com/manual/1.12/en/zend.form.quickstart.html)
+* Las vistas estan creadeas en la subcarpeta *views* 
+* Los elementos js, css e imágenes estan en la carpeta *src/web*
+
+Cada módulo es llamado utilizando un frontcontroller que esta publicado en la carpeta *src/web*.
 
 El desarrollo de la interfaz hace uso de:
 
