@@ -1,5 +1,4 @@
 <?php
-define ('RELATIVE_ROOT_URI','/web');
 $openerp_server = 'https://192.168.56.101/xmlrpc';//URL al servidor OpenERP
 $username = 'admin';//Usuario OpenERP
 $pwd = 'admin1';//Clave usuario OpenERP

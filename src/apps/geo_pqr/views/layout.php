@@ -5,20 +5,20 @@
     <title><?php echo $title ?></title>
     <script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js'></script>
     <script type='text/javascript' src='http://openlayers.org/api/2.12/OpenLayers.js'></script>
-    <script type='text/javascript' src='<?php echo RELATIVE_ROOT_URI ?>/js/underscore-min.js'></script>
-    <script type='text/javascript' src='<?php echo RELATIVE_ROOT_URI ?>/js/backbone-min.js'></script>
-    <script type='text/javascript' src='<?php echo RELATIVE_ROOT_URI ?>/js/bootstrap-min.js'></script>
-    <script type='text/javascript' src='<?php echo RELATIVE_ROOT_URI ?>/js/wizard.js'></script>
-    <script type='text/javascript' src='<?php echo RELATIVE_ROOT_URI ?>/js/mixins.js'></script>
-    <script type='text/javascript' src='<?php echo RELATIVE_ROOT_URI ?>/js/jPaginate.js'></script>
-    <script type='text/javascript' src='<?php echo RELATIVE_ROOT_URI ?>/js/bootstrap-fileupload.min.js'></script>
-    <script type='text/javascript' src='<?php echo RELATIVE_ROOT_URI ?>/js/ocs-public-portal.js'></script>
-    <script type='text/javascript' src='<?php echo RELATIVE_ROOT_URI ?>/js/geo_pqr.js'></script>
+    <script type='text/javascript' src='<?php echo glue("route")->url('/js/underscore-min.js') ?>'></script>
+    <script type='text/javascript' src='<?php echo glue("route")->url('/js/backbone-min.js') ?>'></script>
+    <script type='text/javascript' src='<?php echo glue("route")->url('/js/bootstrap-min.js') ?>'></script>
+    <script type='text/javascript' src='<?php echo glue("route")->url('/js/wizard.js') ?>'></script>
+    <script type='text/javascript' src='<?php echo glue("route")->url('/js/mixins.js') ?>'></script>
+    <script type='text/javascript' src='<?php echo glue("route")->url('/js/jPaginate.js') ?>'></script>
+    <script type='text/javascript' src='<?php echo glue("route")->url('/js/bootstrap-fileupload.min.js') ?>'></script>
+    <script type='text/javascript' src='<?php echo glue("route")->url('/js/ocs-public-portal.js') ?>'></script>
+    <script type='text/javascript' src='<?php echo glue("route")->url('/js/geo_pqr.js') ?>'></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="<?php echo RELATIVE_ROOT_URI ?>/css/bootstrap-min.css" rel="stylesheet">
-    <link href="<?php echo RELATIVE_ROOT_URI ?>/css/bootstrap-responsive-min.css" rel="stylesheet">
-    <link href="<?php echo RELATIVE_ROOT_URI ?>/css/bootstrap-fileupload.min.css" rel="stylesheet">
-    <link href="<?php echo RELATIVE_ROOT_URI ?>/css/styles.css" rel="stylesheet">
+    <link href="<?php echo glue("route")->url('/css/bootstrap-min.css') ?>" rel="stylesheet">
+    <link href="<?php echo glue("route")->url('/css/bootstrap-responsive-min.css') ?>" rel="stylesheet">
+    <link href="<?php echo glue("route")->url('/css/bootstrap-fileupload.min.css') ?>" rel="stylesheet">
+    <link href="<?php echo glue("route")->url('/css/styles.css') ?>" rel="stylesheet">
 </head>
 <body>
     <div class="navbar navbar-inverse hidden-phone">
