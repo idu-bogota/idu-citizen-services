@@ -298,6 +298,19 @@ geo_pqr:
                         validator: StringLength
                         options:
                             max: 1000
+        damage_element_by_citizen:
+            type: hidden
+            options:
+                required: true
+                validators:
+                    regex:
+                        validator: Regex
+                        options:
+                            pattern: '/(via|anden|puente_peatonal|cicloruta)/'
+                            messages:
+                                regexInvalid: 'Texto ingresado no tiene un formato válido'
+                                regexNotMatch: "'%value%' no es uno de los tipos de elementos de infraestructura soportados"
+
         damage_type_by_citizen:
             type: hidden
             options:
@@ -306,7 +319,7 @@ geo_pqr:
                     regex:
                         validator: Regex
                         options:
-                            pattern: '/(fisura|hueco|hundimiento)/'
+                            pattern: '/(via-fisura|via-hueco|via-hundimiento-canalizacion|anden-hueco|anden-desnivel|anden-accesibilidad|cicloruta-hueco|cicloruta-obstruccion|cicloruta-segnal|puente-peatonal-grieta|puente-peatonal-laminas|puente-peatonal-accesibilidad)/'
                             messages:
                                 regexInvalid: 'Texto ingresado no tiene un formato válido'
                                 regexNotMatch: "'%value%' no es uno de los tipos de daños soportados"

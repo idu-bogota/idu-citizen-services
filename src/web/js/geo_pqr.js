@@ -184,30 +184,36 @@ Ocs.Wizard.Wizard = WizardView.extend({
             steps: new WizardStepCollection([
             {
                 step_number :       1,
+                title :             "Infraestructura",
+                instructions :      "Por favor seleccione que tipo de infraestructura presenta el daño",
+                view :              new Ocs.Wizard.Elemento.Step({ el: $($("#wizard_elemento").html()) })
+            },
+            {
+                step_number :       2,
                 title :             "Tipo de daño",
                 instructions :      "Por favor seleccione el tipo de daño que desea reportar",
                 view :              new Ocs.Wizard.Tipo.Step({ el: $($("#wizard_tipo").html()) })
             },
             {
-                step_number :       2,
+                step_number :       3,
                 title :             "Descripción",
                 instructions :      "Por favor ingrese mayores detalles acerca del tipo de daño que desea reportar",
                 view :              new Ocs.Wizard.Descripcion.Step({ el: $($("#wizard_descripcion").html()) })
             },
             {
-                step_number :       3,
+                step_number :       4,
                 title :             "Ubicación",
                 instructions :      "Por favor ingrese la ubicación ",
                 view :              new Ocs.Wizard.Ubicacion.Step({ el: $($("#wizard_ubicacion").html()) })
             },
             {
-                step_number :       4,
+                step_number :       5,
                 title :             "Datos de contacto",
                 instructions :      "Por favor ingrese los datos de contacto",
                 view :              new Ocs.Wizard.Contacto.Step({ el: $($("#wizard_contacto").html()) })
             },
             {
-                step_number :       5,
+                step_number :       6,
                 title :             "Confirmar",
                 instructions :      "Al enviar los datos usted acepta los términos y condiciones del sitio",
                 view :              new Ocs.Wizard.Enviar.Step({ el: $($("#wizard_enviar").html()) })
@@ -227,12 +233,51 @@ Ocs.Wizard.Wizard = WizardView.extend({
 });
 
 /****************************************
+ * Elemnto de infraestructura
+ */
+Ocs.Wizard.Elemento = {};
+Ocs.Wizard.Elemento.Step = Backbone.View.extend({
+    events: {
+        "click .btn.tipo_elemento": "select_type"
+    },
+    initialize: function() {
+        var claim_type = $('#damage_element_by_citizen',this.el).val();
+        if(claim_type) {
+            var btn = $('.btn.tipo_elemento[value='+claim_type+']', this.el);
+            this.select_type_button(btn);
+        }
+    },
+    validate: function() {
+        if($('#damage_element_by_citizen').val()) {
+            return true;
+        }
+        return 'Por favor seleccione un tipo de daño antes de continuar';
+    },
+    select_type_button: function(button){
+        $('#step_error').html('');
+        $('.btn.tipo_elemento', this.el).each(function (i, v) {
+            $(v).removeClass('btn-success');
+            $(v).html('Seleccionar');
+        });
+        $('#damage_element_by_citizen').val(button.attr('value'));
+        button.addClass('btn-success');
+        button.html('Seleccionado');
+        return false;
+    },
+    select_type: function(e){
+        var button = $(e.currentTarget);
+        this.select_type_button(button);
+        return false;
+    },
+});
+
+/****************************************
 * Tipo de Daño
 */
 Ocs.Wizard.Tipo = {};
 Ocs.Wizard.Tipo.Step = Backbone.View.extend({
     events: {
-        "click .btn.tipo_hueco": "select_type"
+        "click .btn.damage_type": "select_type"
     },
     initialize: function() {
         var claim_type = $('#damage_type_by_citizen',this.el).val();
@@ -249,7 +294,7 @@ Ocs.Wizard.Tipo.Step = Backbone.View.extend({
     },
     select_type_button: function(button){
         $('#step_error').html('');
-        $('.btn.tipo_hueco', this.el).each(function (i, v) {
+        $('.btn.damage_type', this.el).each(function (i, v) {
             $(v).removeClass('btn-success');
         $(v).html('Seleccionar');
         });
@@ -262,6 +307,14 @@ Ocs.Wizard.Tipo.Step = Backbone.View.extend({
         var button = $(e.currentTarget);
         this.select_type_button(button);
         return false;
+    },
+    render: function() {
+        var type = $('#damage_element_by_citizen').val();
+        $('.thumbnails', this.el).hide();
+        var damage_type_el = $('.element_type_'+type, this.el);
+        damage_type_el.show();
+
+        return this;
     }
 });
 /****************************************
@@ -299,9 +352,17 @@ Ocs.Wizard.Descripcion.Step = Backbone.View.extend({
             '+1m': 'Más de un metro'
         }
 
+        var damage_dimension_el = $('.damage_dimension');
+
+        if (type == 'anden-accesibilidad' || type == 'cicloruta-segnal' || type == 'puente-peatonal-accesibilidad') {
+            damage_dimension_el.hide();
+            return this;
+        }
+        damage_dimension_el.show();
+
         var deep_el = $('#damage_deep_by_citizen-label,#damage_deep_by_citizen-element');
         deep_el.show();
-        if(type == 'fisura') {
+        if(type == 'via-fisura' || type == 'puente-peatonal-grieta') {
             deep_el.hide();
             width_options = {
                 'ns-nr': '- Seleccionar -',
@@ -309,12 +370,15 @@ Ocs.Wizard.Descripcion.Step = Backbone.View.extend({
                 '6-10cm': 'Entre 6 y 10 centimetros'
             };
         }
-        else if(type == 'hueco') {
+        else if(type == 'via-hueco' || type == 'cicloruta-hueco' || type == 'anden-hueco') {
             deep_options = {
                 'ns-nr': '- Seleccionar -',
                 '5-10cm': 'Entre 5 y 10 centimetros',
                 '10-30cm': 'Entre 10 y 30 centimetros',
             }
+        }
+        else if (type == 'puente-peatonal-laminas' || type == 'cicloruta-obstruccion' || type == 'anden-desnivel') {
+            deep_el.hide();
         }
 
         create_options = function(value, key) {
