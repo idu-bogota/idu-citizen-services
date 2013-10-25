@@ -18,7 +18,7 @@
                 'img' => glue("route")->url('/img/cicloruta.jpg'),
                 'desc' => '<p>Es una depresión pronunciada generada principalmente por la erosión de los materiales que soportan la estructura de la via (ejemplo. tubos rotos).</p>',
             ),
-            'puente-peatonal' => array(
+            'puente_peatonal' => array(
                 'label' => 'puente peatonal',
                 'img' => glue("route")->url('/img/puente-peatonal.jpg'),
                 'desc' => '<p>Es una depresión pronunciada generada principalmente por la erosión de los materiales que soportan la estructura de la via (ejemplo. tubos rotos).</p>',

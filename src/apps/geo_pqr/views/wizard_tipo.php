@@ -70,7 +70,7 @@
             'via' => array('via-fisura','via-hueco','via-hundimiento'),
             'anden' => array('anden-desnivel','anden-hueco','anden-accesibilidad'),
             'cicloruta' => array('cicloruta-hueco','cicloruta-obstruccion','cicloruta-segnal'),
-            'puente-peatonal' => array('puente-peatonal-grieta','puente-peatonal-laminas','puente-peatonal-accesibilidad'),
+            'puente_peatonal' => array('puente-peatonal-grieta','puente-peatonal-laminas','puente-peatonal-accesibilidad'),
         );
     ?>
     <?php foreach($elements_map as $element => $damage_type_keys): ?>
