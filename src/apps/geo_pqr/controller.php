@@ -38,6 +38,13 @@ class GeoPqrApp extends myGlueBase {
     }
 
     /**
+        @Get /show
+        @TODO: Buscar radicado y ver detalles
+    */
+    public function show() {
+    }
+
+    /**
         @Get /submit
     */
     public function submit() {
@@ -87,6 +94,8 @@ class GeoPqrApp extends myGlueBase {
 
     /**
         @Get /list.geojson
+
+        @TODO: Listar limitando por BBOX
     */
     public function list_geojson() {
         header('Content-Type: application/json; charset=utf-8');
@@ -109,6 +118,8 @@ class GeoPqrApp extends myGlueBase {
 
     /**
         @Get /
+
+        @TODO: Listar limitando por BBOX
     */
     public function list_html() {
         $data = array(
