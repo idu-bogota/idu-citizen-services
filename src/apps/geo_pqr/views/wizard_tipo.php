@@ -67,7 +67,7 @@
             ),
         );
         $elements_map = array(
-            'via' => array('via-fisura','via-hueco','via-hundimiento'),
+            'via' => array('via-fisura','via-hueco','via-hundimiento-canalizacion'),
             'anden' => array('anden-desnivel','anden-hueco','anden-accesibilidad'),
             'cicloruta' => array('cicloruta-hueco','cicloruta-obstruccion','cicloruta-segnal'),
             'puente_peatonal' => array('puente-peatonal-grieta','puente-peatonal-laminas','puente-peatonal-accesibilidad'),
