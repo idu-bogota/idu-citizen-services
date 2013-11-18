@@ -10,6 +10,7 @@ class BasePqrForm extends BaseForm {
     public $object = null;
     protected $form_name = 'pqr_base';
     protected $description_fieldmap = array('description');
+    protected $forward_fieldmap = array();
     protected $add_submit_button_on_captcha = true;
 
     public function init() {
@@ -104,7 +105,13 @@ class BasePqrForm extends BaseForm {
         $attributes['orfeo_id'] = 0;
         $attributes['priority'] = 'l';
         $attributes['state'] = 'draft';
+        $attributes['description'] = '';
         foreach($this->description_fieldmap as $f) {
+            if(!empty($values[$f])) {
+                $attributes['description'] .= "\n\n--------- $f ---------\n".$values[$f];
+            }
+        }
+        foreach($this->forward_fieldmap as $f) {
             if(!empty($values[$f])) {
                 $attributes[$f] = $values[$f];
             }
