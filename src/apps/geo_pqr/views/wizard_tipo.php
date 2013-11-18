@@ -21,49 +21,49 @@
             'anden-hueco' => array(
                 'label' => 'hueco',
                 'img' => glue("route")->url('/img/anden-hueco.jpg'),
-                'desc' => '<p>Es una depresión pronunciada generada principalmente por la erosión de los materiales que soportan la estructura de la via (ejemplo. tubos rotos).</p>',
+                'desc' => '<p>Es una depresión en la superficie generada por el crecimiento de fisuras causadas e intensificadas por el tráfico y/o el clima</p>',
             ),
             'anden-desnivel' => array(
                 'label' => 'desnivel',
                 'img' => glue("route")->url('/img/anden-desnivel.jpg'),
-                'desc' => '<p>Es una depresión pronunciada generada principalmente por la erosión de los materiales que soportan la estructura de la via (ejemplo. tubos rotos).</p>',
+                'desc' => '<p>El Anden presenta hundimientos o levantamientos.</p>',
             ),
             'anden-accesibilidad' => array(
                 'label' => 'accesibilidad',
                 'img' => glue("route")->url('/img/anden-accesibilidad.jpg'),
-                'desc' => '<p>Es una depresión pronunciada generada principalmente por la erosión de los materiales que soportan la estructura de la via (ejemplo. tubos rotos).</p>',
+                'desc' => '<p>El andén no cumple con la normatividad de accesibilidad.</p>',
             ),
             //**** Cicloruta
             'cicloruta-hueco' => array(
                 'label' => 'hueco',
                 'img' => glue("route")->url('/img/cicloruta-hueco.jpg'),
-                'desc' => '<p>Es una depresión pronunciada generada principalmente por la erosión de los materiales que soportan la estructura de la via (ejemplo. tubos rotos).</p>',
+                'desc' => '<p>Es una depresión en la superficie de la vía generada por el crecimiento de fisuras causadas e intensificadas por el tráfico y/o el clima</p>',
             ),
             'cicloruta-obstruccion' => array(
                 'label' => 'obstrucción',
                 'img' => glue("route")->url('/img/cicloruta-poste.jpg'),
-                'desc' => '<p>Es una depresión pronunciada generada principalmente por la erosión de los materiales que soportan la estructura de la via (ejemplo. tubos rotos).</p>',
+                'desc' => '<p>Cualquier elemento que se encuentre en la vía que evite la libre circulación.</p>',
             ),
             'cicloruta-segnal' => array(
                 'label' => 'señalización',
                 'img' => glue("route")->url('/img/cicloruta-segnales.jpg'),
-                'desc' => '<p>Es una depresión pronunciada generada principalmente por la erosión de los materiales que soportan la estructura de la via (ejemplo. tubos rotos).</p>',
+                'desc' => '<p>La falta o daño en elementos de señalización.</p>',
             ),
             //**** Puente Peatonal
             'puente-peatonal-grieta' => array(
                 'label' => 'Grietas',
                 'img' => glue("route")->url('/img/puente-peatonal-grieta.jpg'),
-                'desc' => '<p>Es una depresión pronunciada generada principalmente por la erosión de los materiales que soportan la estructura de la via (ejemplo. tubos rotos).</p>',
+                'desc' => '<p>Consiste en la fractura de la capa del pavimento, concreto o laminas que hacen parte de la superficie de transito del puente peatonal.</p>',
             ),
             'puente-peatonal-laminas' => array(
-                'label' => 'Laminas dañadas o robadas',
+                'label' => 'Láminas dañadas o robadas',
                 'img' => glue("route")->url('/img/puente-peatonal-laminas.jpg'),
-                'desc' => '<p>Es una depresión pronunciada generada principalmente por la erosión de los materiales que soportan la estructura de la via (ejemplo. tubos rotos).</p>',
+                'desc' => '<p>Las láminas del puente peatonal se encuentran rotas o han sido robadas.</p>',
             ),
             'puente-peatonal-accesibilidad' => array(
                 'label' => 'Acceso al puente peatonal',
                 'img' => glue("route")->url('/img/puente-peatonal-escalones.jpg'),
-                'desc' => '<p>Es una depresión pronunciada generada principalmente por la erosión de los materiales que soportan la estructura de la via (ejemplo. tubos rotos).</p>',
+                'desc' => '<p>Hay algún daño que evita el acceso al puente peatonal.</p>',
             ),
         );
         $elements_map = array(
