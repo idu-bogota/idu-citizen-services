@@ -67,6 +67,7 @@ base_pqr:
                         validator: StringLength
                         options:
                             max: 100
+                            min: 6
                     Alnum:
                         validator: Alnum
         gender:

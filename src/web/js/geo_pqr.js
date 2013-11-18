@@ -282,7 +282,7 @@ Ocs.Wizard.Tipo.Step = Backbone.View.extend({
     initialize: function() {
         var claim_type = $('#damage_type_by_citizen',this.el).val();
         if(claim_type) {
-            var btn = $('.btn.tipo_hueco[value='+claim_type+']', this.el);
+            var btn = $('.btn.damage_type[value='+claim_type+']', this.el);
             this.select_type_button(btn);
         }
     },
@@ -435,7 +435,7 @@ Ocs.Wizard.Ubicacion.Step = Backbone.View.extend({
     },
     validate: function() {
         if(!$('#geo_point').val()) {
-            return 'Por favor marque un punto en el mapa o ubique el daño a travéz de una dirección';
+            return 'Por favor marque un punto en el mapa o ubique el daño a través de una dirección';
         }
         return true;
     },
@@ -490,8 +490,11 @@ Ocs.Wizard.Contacto.Step = Backbone.View.extend({
         if($('#document_number').val() && (!$('#name').val() || !$('#lastname').val())) {
             return 'Por favor ingrese sus nombres y apellidos';
         }
-        if(!$('#document_number').val() && $('#name').val()) {
+        if(!$('#document_number').val() && $('#name').val()  ) {
             return 'Por favor ingrese un número de documento de identidad';
+        }
+        if($('#document_number').val() && $('#document_number').val().length < 6 ) {
+            return 'Por favor verifique su número de identificación';
         }
         if($('#name').val() && (!$('#email').val() && !$('#twitter').val() && !$('#facebook').val() && !$('#phone').val())) {
             return 'Por favor ingrese al menos un dato de contacto';
