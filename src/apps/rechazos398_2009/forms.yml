@@ -1,0 +1,25 @@
+rechazo:
+    action: submit
+    method: post
+    elements:
+        document_number:
+            type: text
+            options:
+                required: false
+                title: Indique el número del documento de identidad por el cual va a realizar la búsqueda
+                label: Número de documento
+                class: input-block-level
+                filters:
+                    digits:
+                        filter: Digits
+                    trim:
+                        filter: StringTrim
+                validators:
+                    length:
+                        validator: StringLength
+                        options:
+                            max: 20
+                            min: 5
+                    Alnum:
+                        validator: Alnum
+ 

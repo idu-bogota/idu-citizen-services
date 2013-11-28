@@ -1,0 +1,7 @@
+<?php
+$dbtype = 'postgresql';
+$dbuser = 'dbuser';
+$dbpass = 'dbpass';
+$dbhost = 'localhost';
+$dbname = 'database';
+$dbtable = 'table';
