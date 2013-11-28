@@ -6,7 +6,7 @@ rechazo:
             type: text
             options:
                 required: false
-                title: Indique el número del documento de identidad por el cual va a realizar la búsqueda
+                title: Indique el número de documento del beneficiario utilizado para la solicitud de la devolución de valorización
                 label: Número de documento
                 class: input-block-level
                 filters:
@@ -22,4 +22,8 @@ rechazo:
                             min: 5
                     Alnum:
                         validator: Alnum
- 
+        submit:
+            type: submit
+            options:
+                label: Buscar
+                class: btn btn-primary
