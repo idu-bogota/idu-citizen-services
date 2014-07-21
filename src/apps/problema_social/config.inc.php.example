@@ -1,0 +1,7 @@
+<?php
+$categ_id = 1; //ID del tipo de PQR
+$classification_id = 2;//Criterio de la PQR
+$sub_classification_id = 25;//Subcriterio de la PQR
+$csp_id = 1;//Punto de atención al cual quedará registrada la PQR
+$channel = 21;//ID del Canal en el cual se recibe la PQR
+

@@ -1,0 +1,254 @@
+problema_social:
+    action: submit
+    method: post
+    elements:
+        nombres:
+            type: text
+            options:
+                required: false
+                label: Nombres
+                title: Ingrese su primer y segundo nombre
+                class: input-block-level
+                required: false
+                filters:
+                    trim:
+                        filter: StringTrim
+                validators:
+                    length:
+                        validator: StringLength
+                        options:
+                            max: 100
+                    alpha:
+                        validator: Alpha
+                        options: { allowwhitespace: true }
+        apellidos:
+            type: text
+            options:
+                required: false
+                label: Apellidos
+                title: Ingrese su primer y segundo apellido
+                class: input-block-level
+                filters:
+                    trim:
+                        filter: StringTrim
+                validators:
+                    length:
+                        validator: StringLength
+                        options:
+                            max: 100
+                    alpha:
+                        validator: Alpha
+                        options: { allowwhitespace: true }
+        tipo_documento:
+            type: select
+            options:
+                label: Tipo de documento
+                title: Seleccione el tipo de documento de identidad que posee
+                class: input-block-level
+                multiOptions:
+                  CC: 'Cédula de ciudadanía'
+                  TI: 'Tarjeta de identidad'
+                  Pasaporte: 'Pasaporte'
+                  CE: 'Cédula de extranjería'
+        documento:
+            type: text
+            options:
+                required: false
+                title: Indique el número del documento de identidad seleccionado
+                label: Número de documento
+                class: input-block-level
+                filters:
+                    digits:
+                        filter: Alnum
+                    trim:
+                        filter: StringTrim
+                validators:
+                    length:
+                        validator: StringLength
+                        options:
+                            max: 100
+                            min: 6
+                    Alnum:
+                        validator: Alnum
+        email:
+            type: text
+            options:
+                label: Correo electrónico
+                title: Indique el correo electrónico al cual se le puede contactar
+                class: input-block-level
+                filters:
+                    trim:
+                        filter: StringTrim
+                validators:
+                    length:
+                        validator: StringLength
+                        options:
+                            max: 100
+                    email:
+                        validator: EmailAddress
+                        options:
+                            messages:
+                                emailAddressInvalid: 'El formato del email es incorrecto'
+                                emailAddressInvalidFormat: 'El formato del email es incorrecto'
+        telefono_fijo:
+            type: text
+            options:
+                label: Teléfono
+                title: Indique el teléfono al cual se le puede contactar
+                class: input-block-level
+                filters:
+                    trim:
+                        filter: StringTrim
+                validators:
+                    length:
+                        validator: StringLength
+                        options:
+                            max: 100
+                    alnum:
+                        validator: Alnum
+                        options:
+                            allowWhiteSpace: false
+        celular:
+            type: text
+            options:
+                label: Teléfono
+                title: Indique el teléfono al cual se le puede contactar
+                class: input-block-level
+                filters:
+                    trim:
+                        filter: StringTrim
+                validators:
+                    length:
+                        validator: StringLength
+                        options:
+                            max: 100
+                    alnum:
+                        validator: Alnum
+                        options:
+                            allowWhiteSpace: fase
+        direccion:
+            type: text
+            options:
+                label: Dirección
+                title: Indique la dirección de correspondencia a la cual se le puede contactar
+                class: input-block-level
+                filters:
+                    trim:
+                        filter: StringTrim
+                validators:
+                    length:
+                        validator: StringLength
+                        options:
+                            max: 100
+        descripcion:
+            type: textarea
+            options:
+                required: true
+                label: Descripción
+                title: Indique el detalle de su petición, queja, reclamo o sugerencia, sea lo más descriptivo posible e incluya si es necesario la dirección del requerimiento
+                class: input-block-level
+                rows: 5
+                filters:
+                    trim:
+                        filter: StringTrim
+                validators:
+                    not_empty:
+                        validator: notEmpty
+                        options:
+                            messages:
+                                isEmpty: 'Por favor ingrese una descripción del reclamo'
+                    length:
+                        validator: StringLength
+                        options:
+                            max: 1000
+        tipo_problema:
+            type: select
+            options:
+                label: Tipo de Problema
+                title: Indique el tipo de Problema social que se presenta
+                class: input-block-level
+                multiOptions:
+                    economico: Reclamo
+                    social: Social
+                    ambiental: Ambiental
+                    movilidad: Movilidad
+        tipo_problema_movilidad:
+            type: select
+            options:
+                label: Tipo de Problema
+                title: Indique el tipo de Problema de Movilidad que se presenta
+                class: input-block-level
+                multiOptions:
+                    congestion_vehicular: Reclamo
+                    carencia_semaforos: Social
+                    puentes_peatonales: Ambiental
+                    senalizacion: Movilidad
+                    dano_malla_vial: Daño en la malla vial
+        shape:
+            type: hidden
+            options:
+                required: true
+                filters:
+                    trim:
+                        filter: StringTrim
+                validators:
+                    not_empty:
+                        validator: notEmpty
+                        options:
+                            messages:
+                                isEmpty: 'Por favor seleccione un punto en el mapa'
+       image:
+            type: file
+            options:
+                required: true
+                label: Adjunte una imagen
+                validators:
+                    is_image:
+                        validator: IsImage
+                    file_size:
+                        validator: FilesSize
+                        options:
+                            min: 10kB
+                            max: 4MB
+                    length:
+                        validator: StringLength
+                        options:
+                            max: 1000
+        submit:
+            type: submit
+            options:
+                label: Enviar
+                class: btn btn-primary
+    displayGroups:
+        datos_ciudadano:
+            name: datos_personales
+            options:
+                legend: Datos personales
+            elements:
+                - nombres
+                - apellidos
+                - tipo_documento
+                - documento
+        contact_data:
+            name: datos_contacto
+            options:
+                legend: Datos de contacto
+            elements:
+                - email
+                - telefono_fijo
+                - celular
+                - direccion
+#        problema_social:
+#            name: claim_details
+#            description: descripcion
+#            options:
+#                legend: Problema social
+#            elements:
+#                - tipo_problema
+#                - tipo_problema_movilidad
+#                - descripcion
+#                - image
+#        send:
+#            name: send
+#            elements:
+#               - submit

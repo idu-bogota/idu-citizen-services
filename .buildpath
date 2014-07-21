@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<buildpath>
+	<buildpathentry kind="src" path="externals/Glue"/>
+	<buildpathentry kind="src" path="externals/openerp-php-webservice-client/src"/>
+	<buildpathentry kind="src" path="externals/openerp-php-webservice-client/tests"/>
+	<buildpathentry kind="src" path="externals/phpthumb/src"/>
+	<buildpathentry kind="src" path="externals/zend-form-decorators-bootstrap/Twitter/Bootstrap"/>
+	<buildpathentry kind="src" path="externals/zend/bin"/>
+	<buildpathentry kind="src" path="externals/zend/library/Zend"/>
+	<buildpathentry kind="src" path="src"/>
+	<buildpathentry kind="con" path="org.eclipse.php.core.LANGUAGE"/>
+</buildpath>
