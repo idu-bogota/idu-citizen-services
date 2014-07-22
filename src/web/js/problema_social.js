@@ -232,28 +232,28 @@ Ocs.Wizard.Wizard = WizardView.extend({
 Ocs.Wizard.Elemento = {};
 Ocs.Wizard.Elemento.Step = Backbone.View.extend({
     events: {
-        "click .btn.tipo_elemento": "select_type"
+        "click .btn.tipo_problema": "select_type"
     },
     initialize: function() {
-        var claim_type = $('#damage_element_by_citizen',this.el).val();
-        if(claim_type) {
-            var btn = $('.btn.tipo_elemento[value='+claim_type+']', this.el);
+        var tipo_problema = $('#tipo_problema',this.el).val();
+        if(tipo_problema) {
+            var btn = $('.btn.tipo_problema[value='+tipo_problema+']', this.el);
             this.select_type_button(btn);
         }
     },
     validate: function() {
-        if($('#damage_element_by_citizen').val()) {
+        if($('#tipo_problema').val()) {
             return true;
         }
         return 'Por favor seleccione un tipo de problema antes de continuar';
     },
     select_type_button: function(button){
         $('#step_error').html('');
-        $('.btn.tipo_elemento', this.el).each(function (i, v) {
+        $('.btn.tipo_problema', this.el).each(function (i, v) {
             $(v).removeClass('btn-success');
             $(v).html('Seleccionar');
         });
-        $('#damage_element_by_citizen').val(button.attr('value'));
+        $('#tipo_problema').val(button.attr('value'));
         button.addClass('btn-success');
         button.html('Seleccionado');
         return false;

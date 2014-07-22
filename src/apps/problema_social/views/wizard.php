@@ -57,6 +57,7 @@
 <script type="text/template" id="wizard_progress_indicator_tmpl">
     <li class="<%= css_class %>" ><a href="#"><%= title %></a></li>
 </script>
-<script type="text/template" id="wizard_contacto">
-    <?php include __DIR__ . '/wizard_contacto.php'?>
+<script type="text/template" id="wizard_tipo_problema">
+    <?php include __DIR__ . '/wizard_tipo_problema.php'?>
 </script>
+

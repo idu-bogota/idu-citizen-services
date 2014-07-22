@@ -162,16 +162,17 @@ problema_social:
                         options:
                             max: 1000
         tipo_problema:
-            type: select
+            type: hidden
             options:
-                label: Tipo de Problema
-                title: Indique el tipo de Problema social que se presenta
-                class: input-block-level
-                multiOptions:
-                    economico: Reclamo
-                    social: Social
-                    ambiental: Ambiental
-                    movilidad: Movilidad
+                required: true
+                validators:
+                    regex:
+                        validator: Regex
+                        options:
+                            pattern: '/(social|movilidad|ambiental|economico)/'
+                            messages:
+                                regexInvalid: 'Texto ingresado no tiene un formato válido'
+                                regexNotMatch: "'%value%' no es uno de los problemas que se encuentran en la tipificacion"
         tipo_problema_movilidad:
             type: select
             options:

@@ -13,7 +13,7 @@
     <script type='text/javascript' src='<?php echo glue("route")->url('/js/jPaginate.js') ?>'></script>
     <script type='text/javascript' src='<?php echo glue("route")->url('/js/bootstrap-fileupload.min.js') ?>'></script>
     <script type='text/javascript' src='<?php echo glue("route")->url('/js/ocs-public-portal.js') ?>'></script>
-    <script type='text/javascript' src='<?php echo glue("route")->url('/js/geo_pqr.js') ?>'></script>
+    <script type='text/javascript' src='<?php echo glue("route")->url('/js/problema_social.js') ?>'></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="<?php echo glue("route")->url('/css/bootstrap-min.css') ?>" rel="stylesheet">
     <link href="<?php echo glue("route")->url('/css/bootstrap-responsive-min.css') ?>" rel="stylesheet">

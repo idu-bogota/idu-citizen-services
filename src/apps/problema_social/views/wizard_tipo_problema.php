@@ -1,27 +1,27 @@
 <div class="row-fluid" data-toggle="buttons-radio">
-  <?php echo $form->damage_element_by_citizen->render($view) ?>
+  <?php echo $form->tipo_problema->render($view) ?>
   <ul class="thumbnails">
     <?php
         $options = array(
-            'via' => array(
-                'label' => 'vía',
-                'img' => glue("route")->url('/img/via.jpg'),
-                'desc' => '',
+            'social' => array(
+                'label' => 'Social',
+                'img' => glue("route")->url('/img/problema_social.jpg'),
+                'desc' => 'Describe aspectos de inseguridad por falta de iluminación o constantes hurtos',
             ),
-            'anden' => array(
-                'label' => 'anden',
-                'img' => glue("route")->url('/img/anden.jpg'),
-                'desc' => '',
+            'economico' => array(
+                'label' => 'Económico',
+                'img' => glue("route")->url('/img/problema_economico.jpg'),
+                'desc' => 'Aumento o reducción de ventas por la ejecución de la obra',
             ),
-            'cicloruta' => array(
-                'label' => 'cicloruta',
-                'img' => glue("route")->url('/img/cicloruta.jpg'),
-                'desc' => '',
+            'ambiental' => array(
+                'label' => 'Ambiental',
+                'img' => glue("route")->url('/img/problema_ambiental.jpg'),
+                'desc' => 'Contaminación del medio ambiente',
             ),
-            'puente_peatonal' => array(
-                'label' => 'puente peatonal',
-                'img' => glue("route")->url('/img/puente-peatonal.jpg'),
-                'desc' => '',
+            'movilidad' => array(
+                'label' => 'Movilidad',
+                'img' => glue("route")->url('/img/problema_movilidad.jpg'),
+                'desc' => 'Describe aspectos como: congestión vehicular, carencia de semáforos, Puentes peatonales, señalización, deficit de transporte',
             ),
         );
     ?>
@@ -32,7 +32,7 @@
             <div class="caption">
               <h3 class="text-info"><?php echo ucwords($option['label']) ?></h3>
               <?php echo $option['desc'] ?>
-              <p><button type="button" class="btn tipo_elemento" data-toggle="button" value="<?php echo $key ?>">Seleccionar</button></p>
+              <p><button type="button" class="btn tipo_problema" data-toggle="button" value="<?php echo $key ?>">Seleccionar</button></p>
             </div>
           </div>
         </li>
