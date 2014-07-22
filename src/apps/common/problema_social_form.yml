@@ -176,6 +176,7 @@ problema_social:
         tipo_problema_movilidad:
             type: select
             options:
+                required: false
                 label: Tipo de Problema
                 title: Indique el tipo de Problema de Movilidad que se presenta
                 class: input-block-level

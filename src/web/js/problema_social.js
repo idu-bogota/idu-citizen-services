@@ -319,7 +319,7 @@ Ocs.Wizard.Descripcion.Step = Backbone.View.extend({
     initialize: function() {
     },
     validate: function() {
-        if(!$('#description').val()) {
+        if(!$('#descripcion').val()) {
             return 'Por favor ingrese una descripción';
         }
         if(!$('#image').val()) {
@@ -328,72 +328,15 @@ Ocs.Wizard.Descripcion.Step = Backbone.View.extend({
         return true;
     },
     render: function() {
-        var type = $('#damage_type_by_citizen').val();
-
-        //defaults
-        length_options = width_options = {
-            'ns-nr': '- Seleccionar -',
-            '10-30cm': 'Entre 10 y 30 centimetros',
-            '30-50cm': 'Entre 30 y 50 centimetros',
-            '50-100cm': 'Entre 50 centimetros y un metro',
-            '+1m': 'Más de un metro'
-        };
-
-        deep_options = {
-            'ns-nr': '- Seleccionar -',
-            '30-50cm': 'Entre 30 y 50 centimetros',
-            '50-100cm': 'Entre 50 centimetros y un metro',
-            '+1m': 'Más de un metro'
+        var type = $('#tipo_problema').val();
+        var tipo_problema_movilidad_cmb = $('#tipo_problema_movilidad');
+        if (type != 'movilidad') {
+        	tipo_problema_movilidad_cmb.hide();
         }
-
-        var damage_dimension_el = $('.damage_dimension');
-
-        if (type == 'anden-accesibilidad' || type == 'cicloruta-segnal' || type == 'puente-peatonal-accesibilidad') {
-            damage_dimension_el.hide();
-            return this;
+        else
+        {
+             tipo_problema_movilidad.show();
         }
-        damage_dimension_el.show();
-
-        var deep_el = $('#damage_deep_by_citizen-label,#damage_deep_by_citizen-element');
-        deep_el.show();
-        if(type == 'via-fisura' || type == 'puente-peatonal-grieta') {
-            deep_el.hide();
-            width_options = {
-                'ns-nr': '- Seleccionar -',
-                '1-5cm': 'Entre 1 y 5 centimetros',
-                '6-10cm': 'Entre 6 y 10 centimetros'
-            };
-        }
-        else if(type == 'via-hueco' || type == 'cicloruta-hueco' || type == 'anden-hueco') {
-            deep_options = {
-                'ns-nr': '- Seleccionar -',
-                '5-10cm': 'Entre 5 y 10 centimetros',
-                '10-30cm': 'Entre 10 y 30 centimetros',
-            }
-        }
-        else if (type == 'puente-peatonal-laminas' || type == 'cicloruta-obstruccion' || type == 'anden-desnivel') {
-            deep_el.hide();
-        }
-
-        create_options = function(value, key) {
-            html_options += '<option value="' + key + '">' + value + '</a>';
-        };
-
-        //width
-        var html_options = '';
-        _.each(width_options, create_options);
-        $('#damage_width_by_citizen').html(html_options);
-
-        //length
-        html_options = '';
-        _.each(length_options, create_options);
-        $('#damage_legth_by_citizen').html(html_options);
-
-        //deep
-        html_options = '';
-        _.each(deep_options, create_options);
-        $('#damage_deep_by_citizen').html(html_options);
-
         return this;
     },
 });

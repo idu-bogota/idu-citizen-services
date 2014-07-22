@@ -60,4 +60,6 @@
 <script type="text/template" id="wizard_tipo_problema">
     <?php include __DIR__ . '/wizard_tipo_problema.php'?>
 </script>
-
+<script type="text/template" id="wizard_descripcion">
+   <?php include __DIR__ . '/wizard_descripcion.php'?>
+</script>
