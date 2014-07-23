@@ -199,7 +199,7 @@ problema_social:
                         options:
                             messages:
                                 isEmpty: 'Por favor seleccione un punto en el mapa'
-       image:
+        image:
             type: file
             options:
                 required: true
@@ -216,41 +216,10 @@ problema_social:
                         validator: StringLength
                         options:
                             max: 1000
+
         submit:
             type: submit
             options:
                 label: Enviar
                 class: btn btn-primary
-    displayGroups:
-        datos_ciudadano:
-            name: datos_personales
-            options:
-                legend: Datos personales
-            elements:
-                - nombres
-                - apellidos
-                - tipo_documento
-                - documento
-        contact_data:
-            name: datos_contacto
-            options:
-                legend: Datos de contacto
-            elements:
-                - email
-                - telefono_fijo
-                - celular
-                - direccion
-#        problema_social:
-#            name: claim_details
-#            description: descripcion
-#            options:
-#                legend: Problema social
-#            elements:
-#                - tipo_problema
-#                - tipo_problema_movilidad
-#                - descripcion
-#                - image
-#        send:
-#            name: send
-#            elements:
-#               - submit
+

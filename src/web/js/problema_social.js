@@ -192,7 +192,7 @@ Ocs.Wizard.Wizard = WizardView.extend({
                 step_number :       2,
                 title :             "Descripción",
                 instructions :      "Por favor ingrese mayores detalles acerca del problema que desea reportar",
-                view :              new Ocs.Wizard.Tipo.Step({ el: $($("#wizard_descripcion").html()) })
+                view :              new Ocs.Wizard.Descripcion.Step({ el: $($("#wizard_descripcion").html()) })
             },
             {
                 step_number :       3,
@@ -312,7 +312,7 @@ Ocs.Wizard.Tipo.Step = Backbone.View.extend({
     }
 });
 /****************************************
-* Descripción
+* Descripcion
 */
 Ocs.Wizard.Descripcion = {};
 Ocs.Wizard.Descripcion.Step = Backbone.View.extend({
@@ -328,7 +328,9 @@ Ocs.Wizard.Descripcion.Step = Backbone.View.extend({
         return true;
     },
     render: function() {
+    	/*
         var type = $('#tipo_problema').val();
+
         var tipo_problema_movilidad_cmb = $('#tipo_problema_movilidad');
         if (type != 'movilidad') {
         	tipo_problema_movilidad_cmb.hide();
@@ -338,6 +340,8 @@ Ocs.Wizard.Descripcion.Step = Backbone.View.extend({
              tipo_problema_movilidad.show();
         }
         return this;
+        */
+    	return this;
     },
 });
 /****************************************
