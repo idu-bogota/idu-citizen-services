@@ -1,6 +1,6 @@
+<div>
 <div class="row-fluid">
 	<?php echo $form->tipo_problema_movilidad->render($view); ?>
-	<input id="xxxx_val" type="text"></input>
     <?php echo $form->descripcion->render($view); ?>
 </div>
 <div class="row-fluid">
@@ -36,4 +36,5 @@
         <?php echo $form->image->render($view); ?>
     <?php endif ?>
   </div>
+</div>
 </div>

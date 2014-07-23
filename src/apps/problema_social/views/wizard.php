@@ -63,3 +63,13 @@
 <script type="text/template" id="wizard_descripcion">
    <?php include __DIR__ . '/wizard_descripcion.php'?>
 </script>
+<script type="text/template" id="wizard_ubicacion">
+   <?php include __DIR__ . '/wizard_ubicacion.php'?>
+</script>
+<script type="text/template" id="wizard_contacto">
+    <?php include __DIR__ . '/wizard_contacto.php'?>
+</script>
+<script type="text/template" id="wizard_enviar">
+    <?php include __DIR__ . '/wizard_enviar.php'?>
+</script>
+

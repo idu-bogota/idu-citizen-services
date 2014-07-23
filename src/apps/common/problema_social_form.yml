@@ -111,7 +111,7 @@ problema_social:
         celular:
             type: text
             options:
-                label: Teléfono
+                label: Teléfono Celular
                 title: Indique el teléfono al cual se le puede contactar
                 class: input-block-level
                 filters:
@@ -161,6 +161,27 @@ problema_social:
                         validator: StringLength
                         options:
                             max: 1000
+        ubicacion:
+            type: textarea
+            options:
+                required: true
+                label: Ubicación Precisa
+                title: Describa por favor la ubicación del problema social
+                class: input-block-level
+                rows: 5
+                filters:
+                    trim:
+                        filter: StringTrim
+                validators:
+                    not_empty:
+                        validator: notEmpty
+                        options:
+                            messages:
+                                isEmpty: 'Por favor ingrese una descripción precisa de la ubicación'
+                    length:
+                        validator: StringLength
+                        options:
+                            max: 1000
         tipo_problema:
             type: hidden
             options:
@@ -181,10 +202,10 @@ problema_social:
                 title: Indique el tipo de Problema de Movilidad que se presenta
                 class: input-block-level
                 multiOptions:
-                    congestion_vehicular: Reclamo
-                    carencia_semaforos: Social
-                    puentes_peatonales: Ambiental
-                    senalizacion: Movilidad
+                    congestion_vehicular: Congestión Vehicular
+                    carencia_semaforos: Carencia de Semáforos
+                    puentes_peatonales: Puentes Peatonales
+                    senalizacion: Señalización
                     dano_malla_vial: Daño en la malla vial
         shape:
             type: hidden
@@ -199,7 +220,7 @@ problema_social:
                         options:
                             messages:
                                 isEmpty: 'Por favor seleccione un punto en el mapa'
-       image:
+        image:
             type: file
             options:
                 required: true
@@ -240,17 +261,3 @@ problema_social:
                 - telefono_fijo
                 - celular
                 - direccion
-#        problema_social:
-#            name: claim_details
-#            description: descripcion
-#            options:
-#                legend: Problema social
-#            elements:
-#                - tipo_problema
-#                - tipo_problema_movilidad
-#                - descripcion
-#                - image
-#        send:
-#            name: send
-#            elements:
-#               - submit

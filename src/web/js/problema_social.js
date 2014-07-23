@@ -15,7 +15,7 @@ Ocs.View.FormMap = Ocs.View.BaseMap.extend({
     },
     set_geometry: function(model){
         var geoJSON = new OpenLayers.Format.GeoJSON();
-        $('#geo_point').attr('value',geoJSON.write(model.get('geometry')));
+        $('#shape').attr('value',geoJSON.write(model.get('geometry')));
     },
     set_geolocation: function(position) {
         var lonLat = new OpenLayers.LonLat(position.coords.longitude, position.coords.latitude);
@@ -192,7 +192,7 @@ Ocs.Wizard.Wizard = WizardView.extend({
                 step_number :       2,
                 title :             "Descripción",
                 instructions :      "Por favor ingrese mayores detalles acerca del problema que desea reportar",
-                view :              new Ocs.Wizard.Tipo.Step({ el: $($("#wizard_descripcion").html()) })
+                view :              new Ocs.Wizard.Descripcion.Step({ el: $($("#wizard_descripcion").html()) })
             },
             {
                 step_number :       3,
@@ -328,14 +328,11 @@ Ocs.Wizard.Descripcion.Step = Backbone.View.extend({
         return true;
     },
     render: function() {
+    	
         var type = $('#tipo_problema').val();
         var tipo_problema_movilidad_cmb = $('#tipo_problema_movilidad');
         if (type != 'movilidad') {
         	tipo_problema_movilidad_cmb.hide();
-        }
-        else
-        {
-             tipo_problema_movilidad.show();
         }
         return this;
     },
@@ -371,7 +368,7 @@ Ocs.Wizard.Ubicacion.Step = Backbone.View.extend({
         });
     },
     validate: function() {
-        if(!$('#geo_point').val()) {
+        if(!$('#shape').val()) {
             return 'Por favor marque un punto en el mapa o ubique el daño a través de una dirección';
         }
         return true;
@@ -412,28 +409,28 @@ Ocs.Wizard.Contacto.Step = Backbone.View.extend({
     initialize: function() {
     },
     validate: function() {
-        if(!$('#name').val()) {
+        if(!$('#nombres').val()) {
             return 'Por favor ingrese su nombre';
         }
-        if($('#name').val() && !$('#lastname').val()) {
+        if($('#nombres').val() && !$('#apellidos').val()) {
             return 'Por favor ingrese sus apellidos';
         }
-        if($('#lastname').val() && !$('#name').val()) {
+        if($('#apellidos').val() && !$('#nombres').val()) {
             return 'Por favor ingrese su primer y segundo nombre';
         }
-        if(!$('#lastname').val() && !$('#name').val()) {
+        if(!$('#apellidos').val() && !$('#nombres').val()) {
             return 'Por favor ingrese su primer y segundo nombre';
         }
-        if($('#document_number').val() && (!$('#name').val() || !$('#lastname').val())) {
-            return 'Por favor ingrese sus nombres y apellidos';
+        if($('#documento').val() && (!$('#nombres').val() || !$('#apellidos').val())) {
+            return 'Por favor ingrese sus nombres y apellidos y número de documento';
         }
-        if(!$('#document_number').val() && $('#name').val()  ) {
+        if(!$('#documento').val() && $('#apellidos').val()  ) {
             return 'Por favor ingrese un número de documento de identidad';
         }
-        if($('#document_number').val() && $('#document_number').val().length < 6 ) {
+        if($('#documento').val() && $('#documento').val().length < 6 ) {
             return 'Por favor verifique su número de identificación';
         }
-        if($('#name').val() && (!$('#email').val() && !$('#twitter').val() && !$('#facebook').val() && !$('#phone').val())) {
+        if($('#nombres').val() && (!$('#email').val() && !$('#celular').val() && !$('#telefono_fijo').val() && !$('#direccion').val())) {
             return 'Por favor ingrese al menos un dato de contacto';
         }
         return true;

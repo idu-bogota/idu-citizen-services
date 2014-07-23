@@ -1,5 +1,5 @@
 <div class="row-fluid">
     <div class="span12">
-        <?php echo $form->send->render($view); ?>
+        <?php echo $form->submit->render($view); ?>
     </div>
 </div>
