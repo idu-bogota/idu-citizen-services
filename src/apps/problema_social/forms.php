@@ -16,11 +16,11 @@ class ProblemaSocialForm extends ProblemaSocialBaseForm {
     protected $description_fieldmap = array('description','address','claim_address');
 
     public function buildObject() {	
-        $pqr = parent::buildObject();
+        $psocial = parent::buildObject();
         include(__DIR__.'/config.inc.php');
         //$config_map = array('categ_id','classification_id','sub_classification_id','csp_id','channel');
         foreach($config_map as $f) {
-            $pqr->attributes[$f] = $$f;
+            $psocial->attributes[$f] = $$f;
         }
         //attach file
         $upload = new Zend_File_Transfer_Adapter_Http();
@@ -31,10 +31,10 @@ class ProblemaSocialForm extends ProblemaSocialBaseForm {
             $filesize = filesize ($fname_uploaded);
             $file_info = $upload->getFileInfo();
             $file_encode64 = base64_encode(file_get_contents($fname_uploaded));
-            $pqr->attributes['attachment'] = $file_encode64;
-            $pqr->attributes['attachment_name'] = $file_info['image']['name'];
+            $psocial->attributes['attachment'] = $file_encode64;
+            $psocial->attributes['attachment_name'] = $file_info['image']['name'];
         }
-        return $pqr;
+        return $psocial;
     }
 
     /**
