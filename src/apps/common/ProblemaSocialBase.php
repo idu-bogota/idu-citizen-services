@@ -1,5 +1,6 @@
 <?php
-require_once(EXTERNALS_DIR.'/openerp-php-webservice-client/src/OpenErpProblemaSocial.php');
+require_once(ROOT_PATH.'/includes/OpenErpProblemaSocial.php');
+
 
 class ProblemaSocialBaseForm extends BaseForm {
 	public $object = null;
@@ -48,6 +49,27 @@ class ProblemaSocialBaseForm extends BaseForm {
 		$problema_social_obj = new OpenErpProblemaSocialObject($c);
 		$attributes = array();
 		if( !empty($values['nombres']) && !empty($values['apellidos']) ) {
+			$attributes['nombres'] = $values['nombres'];
+			$attributes['apellidos'] = $values['apellidos'];
+		}		
+		if(!empty($values['documento'])) {
+				$attributes['tipo_documento'] = $values['tipo_documento'];
+				$attributes['documento'] = $values['documento'];
+		}
+		$attributes['email'] = $values['email'];
+		$attributes['celular'] = $values['celular'];
+		$attributes['direccion'] = $values['direccion'];
+		$attributes['telefono_fijo'] = $values['telefono_fijo'];
+		$attributes['ubicacion'] = $values['ubicacion'];
+		$attributes['shape'] = $values['shape'];
+		$attributes['tipo_problema'] = $values['tipo_problema'];
+		$attributes['tipo_problema_movilidad'] = $values['tipo_problema_movilidad'];
+		$attributes['image'] = $values['image'];
+		$attributes['descripcion'] = $values['descripcion'];
+		
+		/*
+		
+		if( !empty($values['nombres']) && !empty($values['apellidos']) ) {
 			$citizen = array(
 					'nombres' => $values['nombres'],
 					'apellidos' => $values['apellidos']
@@ -70,11 +92,12 @@ class ProblemaSocialBaseForm extends BaseForm {
 				'shape' => $values['shape'],
 				'tipo_problema'=>$values['tipo_problema'],
 				'tipo_problema_movilidad'=>$values['tipo_problema_movilidad'],
-				'imagen'=>$values['imagen'],
+				'image'=>$values['image'],
 				'descripcion'=>$values['descripcion']
 		);
 		
 		$attributes['problema_social'] = $problema_social;
+		*/
 		$attributes['ack_message_subject'] = '[IDU-PQR #{0}] Su requerimiento ha sido recibido';
 		$attributes['ack_message_body'] = "Su requerimiento ha sido registrado en nuestro Sistema de Gestión de Problematicas Sociales y Cartografía Social con el identificador No {0}\n\nNuestra Oficina de Atención al Ciudadano procederá a atender su solicitud para darle respuesta tan pronto como sea posible.\n\nMuchas gracias por comunicarse con nosotros.\n\n------ Su Requerimiento ------\n{1}\n";
 		$problema_social_obj->attributes = $attributes;

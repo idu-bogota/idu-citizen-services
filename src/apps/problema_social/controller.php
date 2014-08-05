@@ -65,8 +65,8 @@ class ProblemaSocialApp extends myGlueBase {
         );
         if ($form->isValid($_POST)) {
             try {
-                $pqr = $form->buildObject();
-                $result = $pqr->create();
+                $psocial = $form->buildObject();
+                $result = $psocial->create();
                 if($result['status'] == 'success') {
                     $numero_radicado = $result['result']['id'];
                 }
