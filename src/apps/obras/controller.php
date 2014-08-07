@@ -9,26 +9,17 @@ class ObrasApp extends myGlueBase {
     /**
         @Get /
     */
-    public function map() {
+    public function informe_obra() {
         $view = new Zend_View();
+        $oe_informe = new OpenErpInformeObra($this->getOpenErpConnection());
+        $informe_obra = $oe_informe->findByFrenteId((int)$_GET['frente_id']);
+        $title = var_export($informe_obra);
         $data = array(
-            "title" => 'Mapa de obras del IDU',
+            "title" => $title,
             'menu_item' => 'map',
             'view' => $view,
         );
         $data = array_merge($data, $this->getFlash());
         echo glue("template")->render("views/map.php with views/layout.php", $data);
-    }
-
-    /**
-        @Get /contrato_grupo.json
-    */
-    public function contrato_grupo_geojson() {
-        header('Content-Type: application/json; charset=utf-8');
-        $data = array();
-        $url = "";
-        $client = new SoapClient($url, array("trace" => 0, "exception" => 0));
-        $result = $client->__soapCall("METODO", $parametros);
-        echo json_encode($data);
     }
 }

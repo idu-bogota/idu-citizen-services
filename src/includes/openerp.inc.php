@@ -68,3 +68,25 @@ class myOpenErpPqr extends OpenErpPqr {
         return 'http://placehold.it/64&text=Sin+imagen';
     }
 }
+
+class OpenErpInformeObra extends OpenErpObject {
+    protected $fetch_operation_name = 'search_ultimo_informe_publicado';
+    protected function getClassName() {
+        return 'reporte_obras.informe';
+    }
+
+    protected function getAttributesMetadata() {
+        return array (
+            'name' => array('compulsory' => 1, 'references' => FALSE),
+            'informe_id' => array('compulsory' => 1, 'references' => FALSE),
+            'actividad_semana' => array('compulsory' => 1, 'references' => FALSE),
+        );
+    }
+
+    protected function processAttributes() {}
+
+    public function findByFrenteId($frente_id)
+    {
+        return $this->client->execute($this->getClassName(), 'get_data_para_frente_id', array('frente_id'=>$frente_id));
+    }
+}

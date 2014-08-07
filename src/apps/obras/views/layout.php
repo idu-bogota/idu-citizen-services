@@ -3,8 +3,6 @@
 <head>
     <meta charset='utf-8' />
     <title><?php echo $title ?></title>
-    <link href="<?php echo RELATIVE_ROOT_URI ?>/css/bootstrap-min.css" rel="stylesheet">
-    <link href="<?php echo RELATIVE_ROOT_URI ?>/css/bootstrap-responsive-min.css" rel="stylesheet">
     <link href="<?php echo RELATIVE_ROOT_URI ?>/css/styles.css" rel="stylesheet">
     <script type='text/javascript' src='<?php echo RELATIVE_ROOT_URI ?>/js/bootstrap-min.js'></script>
 </head>
