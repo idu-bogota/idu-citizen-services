@@ -12,6 +12,15 @@ class myGlueBase extends GlueBase {
         glue("config")->write('geocoding_service_url', $geocoding_service_url);
         glue("config")->write('recaptcha_pubkey', $recaptcha_pubkey);
         glue("config")->write('recaptcha_privkey', $recaptcha_privkey);
+        //************ Cache *****************
+        $cache = Zend_Cache::factory('Core',
+                                    'File',
+                                    $cache_frontend_options,
+                                    $cache_backend_options);
+
+        $manager = new Zend_Cache_Manager;
+        $manager->setCache('cache', $cache);
+        glue("config")->write('cache_manager', $manager); #use: $cache = glue("config")->read('cache_manager')->getCache('cache');
     }
 
     protected function getOpenErpConnection() {

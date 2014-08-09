@@ -8,6 +8,14 @@ $attachment_base_url = '/images/';//URL relativa al directorio de imagenes adjun
 $geocoding_service_url = 'http://localhost/ArcGIS/rest/services/GeocodeIDU/GeocodeServer/findAddressCandidates';
 $recaptcha_privkey = 'Your priv key';//Dejar en null para no utilizar re-captcha
 $recaptcha_pubkey = 'Your pub key';//Dejar en null para no utilizar re-captcha
+$cache_frontend_options = array( # http://framework.zend.com/manual/1.11/en/zend.cache.introduction.html
+    'lifetime' => 7200,
+    'automatic_serialization' => true
+);
+$cache_backend_options = array(
+    'cache_dir' => '/tmp'
+);
+
 
 /* Create your own implementation */
 class myObfuscator

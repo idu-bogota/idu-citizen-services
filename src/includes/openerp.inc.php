@@ -85,21 +85,24 @@ class OpenErpInformeObra extends OpenErpObject {
 
     protected function processAttributes() {}
 
-    public function findByFrenteId($frente_id)
-    {
-        #TODO: Add cache: http://framework.zend.com/manual/1.11/en/zend.cache.introduction.html
-        $result = $this->client->execute($this->getClassName(), 'get_data_para_frente_id', $frente_id);
-        if(!empty($result) && $result['status'] == 'success' && isset($result['result']['attachment']))
-        {
-            $path = glue("config")->read('attachment_path');
-            $url_base = glue("config")->read('attachment_base_url');
-            $filename = $path.'reporte_obras/'.$result['result']['attachment']['name'];
-            if(!file_exists($filename))
-            {
-                $attachment = $this->client->execute($this->getClassName(), 'get_attachment_para_frente_id', $frente_id);
-                base64_to_file($attachment['result']['datas'], $filename);
+    public function findByFrenteId($frente_id) {
+        $cache = glue("config")->read('cache_manager')->getCache('cache');
+        $cache_key = 'reporte_obra_frente_id_'.$frente_id;
+        $result = $cache->load($cache_key);
+        if($result === false) {
+            $result = $this->client->execute($this->getClassName(), 'get_data_para_frente_id', $frente_id);
+            if(!empty($result) && $result['status'] == 'success' && isset($result['result']['attachment'])) {
+                $path = glue("config")->read('attachment_path');
+                $url_base = glue("config")->read('attachment_base_url');
+                $filename = $path.'reporte_obras/'.$result['result']['attachment']['name'];
+                if(!file_exists($filename))
+                {
+                    $attachment = $this->client->execute($this->getClassName(), 'get_attachment_para_frente_id', $frente_id);
+                    base64_to_file($attachment['result']['datas'], $filename);
+                }
+                $result['result']['attachment']['url'] = $url_base."reporte_obras/".$result['result']['attachment']['name'];
             }
-            $result['result']['attachment']['url'] = $url_base."reporte_obras/".$result['result']['attachment']['name'];
+            $cache->save($result, $cache_key);
         }
         return $result;
     }
