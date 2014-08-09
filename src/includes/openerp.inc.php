@@ -87,6 +87,27 @@ class OpenErpInformeObra extends OpenErpObject {
 
     public function findByFrenteId($frente_id)
     {
-        return $this->client->execute($this->getClassName(), 'get_data_para_frente_id', array('frente_id'=>$frente_id));
+        #TODO: Add cache: http://framework.zend.com/manual/1.11/en/zend.cache.introduction.html
+        $result = $this->client->execute($this->getClassName(), 'get_data_para_frente_id', $frente_id);
+        if(!empty($result) && $result['status'] == 'success' && isset($result['result']['attachment']))
+        {
+            $path = glue("config")->read('attachment_path');
+            $url_base = glue("config")->read('attachment_base_url');
+            $filename = $path.'reporte_obras/'.$result['result']['attachment']['name'];
+            if(!file_exists($filename))
+            {
+                $attachment = $this->client->execute($this->getClassName(), 'get_attachment_para_frente_id', $frente_id);
+                base64_to_file($attachment['result']['datas'], $filename);
+            }
+            $result['result']['attachment']['url'] = $url_base."reporte_obras/".$result['result']['attachment']['name'];
+        }
+        return $result;
     }
+}
+
+function base64_to_file($base64_string, $output_file) {
+    $ifp = fopen($output_file, "wb");
+    fwrite($ifp, base64_decode($base64_string));
+    fclose($ifp);
+    return($output_file);
 }

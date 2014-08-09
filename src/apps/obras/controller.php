@@ -11,15 +11,35 @@ class ObrasApp extends myGlueBase {
     */
     public function informe_obra() {
         $view = new Zend_View();
-        $oe_informe = new OpenErpInformeObra($this->getOpenErpConnection());
-        $informe_obra = $oe_informe->findByFrenteId((int)$_GET['frente_id']);
-        $title = var_export($informe_obra);
-        $data = array(
-            "title" => $title,
-            'menu_item' => 'map',
-            'view' => $view,
-        );
-        $data = array_merge($data, $this->getFlash());
-        echo glue("template")->render("views/map.php with views/layout.php", $data);
+        $result = null;
+        $informe_obra = null;
+        try
+        {
+            $oe_informe = new OpenErpInformeObra($this->getOpenErpConnection());
+            $result = $oe_informe->findByFrenteId((int)$_GET['frente_id']);
+            if(!empty($result) && $result['status'] == 'success')
+            {
+                $informe_obra = $result['result'];
+                $title = $informe_obra['name'];
+                $data = array(
+                    "title" => $title,
+                    'view' => $view,
+                    'informe_obra' => $informe_obra
+                );
+                $data = array_merge($data, $this->getFlash());
+                echo glue("template")->render("views/informe_obra.php with views/layout.php", $data);
+            }
+            else
+            {
+                error_log($result['message']);
+                echo glue("template")->render("views/informe_obra_error.php with views/layout.php", array());
+            }
+        }
+        catch(Exception $e)
+        {
+            error_log($e->getMessage());
+            echo glue("template")->render("views/informe_obra_error.php with views/layout.php", array());
+        }
+
     }
 }
