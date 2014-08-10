@@ -48,19 +48,19 @@
         <img class="media-object" src="<%= thumb_image_url %>">
     </a>
     <div class="media-body report-item">
-        <!-- <h4 class="media-heading">Reporte No: <%= claim_id %></h4> -->
-        <%= description %>
+        <!-- <h4 class="media-heading">Reporte No: <%= problema_id %></h4> -->
+        <%= create_date  %>
         <ul>
-            <li><strong>Reporte No:</strong> <%= claim_id %></li>
-            <li><strong>Categoría:</strong> <%= category %></li>
-            <li><strong>Clasificación: </strong><%= classification %></li>
+            <li><strong>Reporte No:</strong> <%= problema_id %></li>
+            <li><strong>Tipo de problema:</strong> <%= tipo_problema %></li>
+            <li><strong>Descripción: </strong><%= descripcion %></li>
         </ul>
     </div>
 </script>
 <script type="text/template" id="list-template">
         <div class="hero-unit">
             <h1>Consulte</h1>
-            <p>Conozca los detalles de los últimos reportes realizados a través de esta herramienta. Haciendo clic en los puntos que se presentan en el mapa</p>
+            <p>Conozca los detalles de los últimos reportes de problemas sociales realizados a través de esta herramienta. Haciendo clic en los puntos que se presentan en el mapa</p>
             <p>
                 <a class="btn btn-primary" id="consultar" href="#">Consultar</a>
             </p>

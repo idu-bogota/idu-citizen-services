@@ -66,42 +66,31 @@ class ProblemaSocialBaseForm extends BaseForm {
 		$attributes['tipo_problema_movilidad'] = $values['tipo_problema_movilidad'];
 		$attributes['image'] = $values['image'];
 		$attributes['descripcion'] = $values['descripcion'];
-		
-		/*
-		
-		if( !empty($values['nombres']) && !empty($values['apellidos']) ) {
-			$citizen = array(
-					'nombres' => $values['nombres'],
-					'apellidos' => $values['apellidos']
-			);
-			if(!empty($values['document_number'])) {
-				$citizen['tipo_documento'] = $values['tipo_documento'];
-				$citizen['documento'] = $values['documento'];
-			}
-			$contact_map = array('email','celular','direccion','telefono_fijo');
-			foreach($contact_map as $f) {
-				if( !empty($values[$f]) ) {
-					$citizen[$f] = $values[$f];
-				}
-			}
-			$attributes['ciudadano'] = $citizen;
-		}
-		
-		$problema_social = array(
-				'ubicacion' => $values['ubicacion'],
-				'shape' => $values['shape'],
-				'tipo_problema'=>$values['tipo_problema'],
-				'tipo_problema_movilidad'=>$values['tipo_problema_movilidad'],
-				'image'=>$values['image'],
-				'descripcion'=>$values['descripcion']
-		);
-		
-		$attributes['problema_social'] = $problema_social;
-		*/
 		$attributes['ack_message_subject'] = '[IDU-PQR #{0}] Su requerimiento ha sido recibido';
 		$attributes['ack_message_body'] = "Su requerimiento ha sido registrado en nuestro Sistema de Gestión de Problematicas Sociales y Cartografía Social con el identificador No {0}\n\nNuestra Oficina de Atención al Ciudadano procederá a atender su solicitud para darle respuesta tan pronto como sea posible.\n\nMuchas gracias por comunicarse con nosotros.\n\n------ Su Requerimiento ------\n{1}\n";
 		$problema_social_obj->attributes = $attributes;
 		$this->object = $problema_social_obj;
 		return $problema_social_obj;
 	}
+	
+	public function get_list_in_json_format(){
+		$c = $this -> getOpenErpConnection();
+		$problema_social_obj = new OpenErpProblemaSocialObject($c);
+		$items = $problema_social_obj -> fetch(array(),0,100);
+		$features = array();
+		foreach ($items as $i) {
+			if($feature = $i->getGeoJsonFeature(true)) {
+				$feature['properties']['image_url'] = $i->getImageUrl();
+				$feature['properties']['thumb_image_url'] = $i->getImageThumbUrl();
+				$features[] = $feature;
+			}
+		}
+		$feature = array(
+				'type' => 'FeatureCollection',
+				'features' => $features
+		);
+		return json_encode($feature);
+	}
+	
+	
 }

@@ -46,10 +46,11 @@ problema_social:
                 title: Seleccione el tipo de documento de identidad que posee
                 class: input-block-level
                 multiOptions:
-                  CC: 'Cédula de ciudadanía'
-                  TI: 'Tarjeta de identidad'
-                  Pasaporte: 'Pasaporte'
-                  CE: 'Cédula de extranjería'
+                  cc: 'Cédula de ciudadanía'
+                  ti: 'Tarjeta de identidad'
+                  pasaporte: 'Pasaporte'
+                  ce: 'Cédula de extranjería'
+                  nit: 'NIT'
         documento:
             type: text
             options:

@@ -22,9 +22,10 @@ class OpenErpProblemaSocialObject extends OpenErpObject {
 				'tipo_problema' => array('compulsory' => 1, 'references' => FALSE),
 				'tipo_problema_movilidad' => array('compulsory' => 1, 'references' => FALSE),
 				'ubicacion' => array('compulsory' => 0, 'references' => FALSE),
-				'image' => array('compulsory' => 0, 'references' => FALSE),
+				'imagen' => array('compulsory' => 0, 'references' => FALSE),
 				'descripcion' => array('compulsory' => 1, 'references' => FALSE),
 				'shape' => array('compulsory' => 1, 'references' => FALSE),
+				'create_date' => array('compulsory'=>0,'references'=>FALSE ),
 		);
 	}
 	protected function processAttributes() {
@@ -79,5 +80,29 @@ class OpenErpProblemaSocialObject extends OpenErpObject {
 		return 'http://placehold.it/64&text=Sin+imagen';
 	}
 	
+	public function getGeoJsonFeature($as_array = false) {
+		// { "type": "Feature",
+		//   "geometry": {"type": "Point", "coordinates": [102.0, 0.5]},
+		//   "properties": {"prop0": "value0"}
+		// }
+		if(empty($this->attributes['shape'])) return null;
+		$map = array('tipo_problema','tipo_problema_movilidad','ubicacion','create_date','descripcion');
+		$feature = array(
+				'type' => 'Feature',
+				'geometry' => json_decode($this->attributes['shape']),
+				'properties' => array(
+						'problema_id' => $this->id,
+						'tipo_problema' => $this->attributes['tipo_problema'][1],
+						'tipo_problema_movilidad' => $this->attributes['tipo_problema_movilidad'][1],
+				)
+		);
+		foreach($map as $field) {
+			$feature['properties'][$field] = $this->attributes[$field];
+		}
+		if($as_array) {
+			return $feature;
+		}
+		return json_encode($feature);
+	}
 }
 

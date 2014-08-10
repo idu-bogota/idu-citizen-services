@@ -98,22 +98,10 @@ class ProblemaSocialApp extends myGlueBase {
         @TODO: Listar limitando por BBOX
     */
     public function list_geojson() {
-        header('Content-Type: application/json; charset=utf-8');
-        $pqr = new myOpenErpPqr($this->getOpenErpConnection());
-        $items = $pqr->fetch(array(),0,100);
-        $features = array();
-        foreach ($items as $i) {
-            if($feature = $i->getGeoJsonFeature(true)) {
-                $feature['properties']['image_url'] = $i->getImageUrl();
-                $feature['properties']['thumb_image_url'] = $i->getImageThumbUrl();
-                $features[] = $feature;
-            }
-        }
-        $feature = array(
-          'type' => 'FeatureCollection',
-          'features' => $features
-        );
-        echo json_encode($feature);
+    	header('Content-Type: application/json; charset=utf-8');
+    	$form = new ProblemaSocialForm();
+    	$list = $form->get_list_in_json_format();
+        echo($list);
     }
 
     /**

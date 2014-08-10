@@ -55,4 +55,6 @@ class ProblemaSocialForm extends ProblemaSocialBaseForm {
             $thumb->save($thumb_fname);
         }
     }
+    
+    
 }
