@@ -91,18 +91,20 @@ class OpenErpInformeObra extends OpenErpObject {
         $result = $cache->load($cache_key);
         if($result === false) {
             $result = $this->client->execute($this->getClassName(), 'get_data_para_frente_id', $frente_id);
-            if(!empty($result) && $result['status'] == 'success' && isset($result['result']['attachment'])) {
-                $path = glue("config")->read('attachment_path');
-                $url_base = glue("config")->read('attachment_base_url');
-                $filename = $path.'reporte_obras/'.$result['result']['attachment']['name'];
-                if(!file_exists($filename))
-                {
-                    $attachment = $this->client->execute($this->getClassName(), 'get_attachment_para_frente_id', $frente_id);
-                    base64_to_file($attachment['result']['datas'], $filename);
+            if(!empty($result) && $result['status'] == 'success') {
+                if(isset($result['result']['attachment'])) {
+                    $path = glue("config")->read('attachment_path');
+                    $url_base = glue("config")->read('attachment_base_url');
+                    $filename = $path.'reporte_obras/'.$result['result']['attachment']['name'];
+                    if(!file_exists($filename))
+                    {
+                        $attachment = $this->client->execute($this->getClassName(), 'get_attachment_para_frente_id', $frente_id);
+                        base64_to_file($attachment['result']['datas'], $filename);
+                    }
+                    $result['result']['attachment']['url'] = $url_base."reporte_obras/".$result['result']['attachment']['name'];
                 }
-                $result['result']['attachment']['url'] = $url_base."reporte_obras/".$result['result']['attachment']['name'];
+                $cache->save($result, $cache_key);
             }
-            $cache->save($result, $cache_key);
         }
         return $result;
     }
