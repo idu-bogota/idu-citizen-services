@@ -97,22 +97,8 @@
                 $act = $informe_obra['frente_id']['actividad_semana_publico'];
                 if(!empty($act))
                 {
-                    echo "<strong>Últimas actividades realizadas</strong><br/>";
                     echo nl2br($act);
                 }
-                $act = $informe_obra['frente_id']['actividad_siguiente_publico'];
-                if(!empty($act))
-                {
-                    echo "<br><strong>Siguientes actividades planeadas</strong><br/>";
-                    echo nl2br($act);
-                }
-                $act = $informe_obra['estado_contrato_publico'];
-                if(!empty($act))
-                {
-                    echo "<br><strong>Avance general de la obra</strong><br/>";
-                    echo nl2br($act);
-                }
-
             ?>
         </div>
         <hr style="border-top: 1.5px dashed #0095FF;">

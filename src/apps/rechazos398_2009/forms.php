@@ -22,9 +22,7 @@ class RechazoForm extends Zend_Form {
             );
             $this->addElement($captcha);
             $captcha->setOrder(99);
-            if($this->add_submit_button_on_captcha) {
-                $this->getElement('submit')->setOrder(100);
-            }
+            $this->getElement('submit')->setOrder(100);
         }
     }
 }
