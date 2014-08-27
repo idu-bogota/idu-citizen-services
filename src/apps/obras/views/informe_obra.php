@@ -20,12 +20,17 @@
         <div class="midtitleText">
             <?php echo $informe_obra['proyecto_id']['nombre'] ?>
         </div>
-        <div class="pictureFrame">
-            <img src="<?php echo $informe_obra['frente_id']['link_photo1']?$informe_obra['frente_id']['link_photo1']:'http://placehold.it/264x170/000000/ffffff&text=Foto+1' ?>" />
-        </div>
-        <div class="pictureFrame">
-            <img src="<?php echo $informe_obra['frente_id']['link_photo2']?$informe_obra['frente_id']['link_photo2']:'http://placehold.it/264x170/000000/ffffff&text=Foto+2' ?>" />
-        </div>
+        <?php for($i = 0; $i < 2; $i++): ?>
+            <div class="pictureFrame">
+                <?php
+                    $img = 'http://placehold.it/264x170/000000/ffffff&text=Foto+'.($i+1);
+                    if (@$informe_obra['frente_id']['foto_ids'][$i]['url']) {
+                        $img = $informe_obra['frente_id']['foto_ids'][$i]['url'];
+                    }
+                ?>
+                <img src="<?php echo $img ?>" width="265" height="170"/>
+            </div>
+        <?php endfor ?>
     </div>
     <hr style="color: #0095FF; background-color: #0095FF; height: 3px;">
     <div class="leftDiv">
