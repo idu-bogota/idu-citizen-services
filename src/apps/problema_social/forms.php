@@ -18,6 +18,7 @@ class ProblemaSocialForm extends ProblemaSocialBaseForm {
     public function buildObject() {	
         $psocial = parent::buildObject();
         include(__DIR__.'/config.inc.php');
+        $config_map = array();
         //$config_map = array('categ_id','classification_id','sub_classification_id','csp_id','channel');
         foreach($config_map as $f) {
             $psocial->attributes[$f] = $$f;
