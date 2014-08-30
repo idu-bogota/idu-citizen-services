@@ -73,7 +73,7 @@ class ProblemaSocialApp extends myGlueBase {
                 else {
                     throw new Exception($result['message']);
                 }
-                $flash_id = $this->setFlash('success', 'PQR registrada exitosamente con número: '.$numero_radicado);
+                $flash_id = $this->setFlash('success', 'Problema Social registrado exitosamente con número: '.$numero_radicado);
                 try {
                     $form->saveImage();
                 }
@@ -84,7 +84,7 @@ class ProblemaSocialApp extends myGlueBase {
                 return;
             }
             catch(Exception $e) {
-                $data['error_message'] = 'Ha ocurrido un error al guardar su PQR, por favor intentelo de nuevo o envie un email a atnciudadano@idu.gov.co. <!-- '.$e->getMessage().' -->';
+                $data['error_message'] = 'Ha ocurrido un error al guardar su Problema Social, por favor intentelo de nuevo o envie un email a atnciudadano@idu.gov.co. <!-- '.$e->getMessage().' -->';
             }
         } else {
             $data['warning_message'] = 'El formulario no pudó ser validado correctamente, por favor revise los datos ingresados.';
