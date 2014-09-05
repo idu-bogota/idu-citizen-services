@@ -25,6 +25,7 @@
                 alert(mensajes.join("\n"));
                 return false;
             }
+            $('#submit').attr('disabled','disabled');
         });
     });
 </script>
